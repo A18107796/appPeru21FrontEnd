@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Especializacion } from 'src/app/models/especializacion';
+import { EspecializacionService } from 'src/app/services/especializacion.service';
 
 @Component({
   selector: 'app-especializaciones',
@@ -8,9 +10,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EspecializacionesComponent implements OnInit {
 
-  constructor() { }
+  especializaciones: Especializacion[] = [];
+  constructor(private especializacionService: EspecializacionService) { }
 
   ngOnInit(): void {
+    this.listar();
+  }
+
+  listar() {
+    this.especializacionService.getEspecializaciones().subscribe(res => {
+      this.especializaciones = res;
+      console.log(this.especializaciones);
+      
+      
+    })
   }
 
 }

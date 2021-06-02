@@ -1,7 +1,7 @@
 /* Modulos */
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 
 /* Components */
 import { NopagefoundComponent } from './nopagefound/nopagefound.component';
@@ -13,6 +13,7 @@ import { SharedModule } from '../shared/shared.module';
 import { AppRoutingModule } from '../app-routing.module';
 import { RouterModule } from '@angular/router';
 import { CursosComponent } from './gestionAcademica/cursos/cursos.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -32,12 +33,15 @@ import { CursosComponent } from './gestionAcademica/cursos/cursos.component';
     InicioComponent,
     EspecializacionesComponent,
     PagesComponent,
-    CursosComponent
+    CursosComponent,
   ],
   imports: [
     CommonModule,
     SharedModule,
     RouterModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class PagesModule { }

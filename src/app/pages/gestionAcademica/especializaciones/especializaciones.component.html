@@ -1,1 +1,36 @@
-<p>especializaciones works!</p>
+<div class="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card card-pink card-outline">
+                    <div class="card-header text-center">
+                        <h5 class="card-title m-0">Especializaciones</h5>
+                    </div>
+                    <div class="card-body">
+                        <h6 class="card-title">Special title treatment</h6>
+
+                        <table class="table table-head-fixed text-nowrap ">
+                            <thead class="text-center">
+                                <tr>
+                                    <th>COD</th>
+                                    <th>Nombre Especializacion</th>
+                                    <th>Tipo</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let especializacion of especializaciones">
+                                    <td class="text-center">{{ especializacion.id }}</td>
+                                    <td>{{ especializacion.nombre}}</td>
+                                    <td class="text-center">{{ especializacion.tipo_especializacion.nombre}}</td>
+                                    <td class="text-center">{{ especializacion.estado }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
