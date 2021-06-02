@@ -4,6 +4,7 @@ import { BreadcrumsComponent } from './breadcrums/breadcrums.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { HeaderComponent } from './header/header.component';
 import { ControlSidebarComponent } from './control-sidebar/control-sidebar.component';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -21,7 +22,8 @@ import { ControlSidebarComponent } from './control-sidebar/control-sidebar.compo
     ControlSidebarComponent,
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule
   ]
 })
 export class SharedModule { }

@@ -12,6 +12,7 @@ import { PagesComponent } from './pages.component';
 import { SharedModule } from '../shared/shared.module';
 import { AppRoutingModule } from '../app-routing.module';
 import { RouterModule } from '@angular/router';
+import { CursosComponent } from './gestionAcademica/cursos/cursos.component';
 
 
 
@@ -22,19 +23,21 @@ import { RouterModule } from '@angular/router';
     DashboardComponent,
     InicioComponent,
     EspecializacionesComponent,
-    PagesComponent
+    PagesComponent,
+    CursosComponent
   ],
   exports: [
     NopagefoundComponent,
     DashboardComponent,
     InicioComponent,
     EspecializacionesComponent,
-    PagesComponent
+    PagesComponent,
+    CursosComponent
   ],
   imports: [
     CommonModule,
     SharedModule,
-    RouterModule
+    RouterModule,
   ]
 })
 export class PagesModule { }

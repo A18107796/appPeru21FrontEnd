@@ -4,6 +4,7 @@ import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { EspecializacionesComponent } from './gestionAcademica/especializaciones/especializaciones.component';
 import { InicioComponent } from './inicio/inicio.component';
+import { CursosComponent } from './gestionAcademica/cursos/cursos.component';
 
 
 export const routes: Routes = [
@@ -12,8 +13,9 @@ export const routes: Routes = [
         component: PagesComponent,
         children: [
             { path: 'dashboard', component: DashboardComponent },
-            { path: 'especializacions', component: EspecializacionesComponent },
+            { path: 'especializaciones', component: EspecializacionesComponent },
             { path: 'inicio', component: InicioComponent },
+            { path: 'cursos', component: CursosComponent },
             { path: '', redirectTo: '/sistema/dashboard', pathMatch: 'full' },
         ]
     }

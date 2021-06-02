@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-
+import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { ThemeService } from 'src/app/services/theme.service';
+import { Theme } from '../../enums/theme'
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  theme: Theme = Theme.Light;
+  public classTheme = document.querySelector('#div-mode-selector');
+  constructor(public themeService: ThemeService) {
+
+  }
 
   ngOnInit(): void {
+    this.theme = this.themeService.globalTheme;
+  }
+
+
+  changeTheme() {
+    this.themeService.changeTheme();
   }
 
 }
