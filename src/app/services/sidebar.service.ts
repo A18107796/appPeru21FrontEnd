@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+declare var jQuery: any;
+declare var $: any;
 
 @Injectable({
   providedIn: 'root'
@@ -21,4 +23,25 @@ export class SidebarService {
     }
   ];
   constructor() { }
+
+  static iniciarMenu() {
+    setTimeout(() => {
+      var events = jQuery._data(document, 'events')["click"];
+      console.log(events);
+      $(document).off('click', '[data-widget=\"treeview\"] .nav-link');
+      events = jQuery._data(document, 'events')["click"];
+      console.log(events);
+      $('[data-widget="treeview"]').Treeview('init');
+      events = jQuery._data(document, 'events')["click"];
+      console.log(events);
+    }, 1500);
+
+  }
+
+  /*   const navs = document.getElementsByClassName("nav-link nav-event");
+  for (let index = 0; index < navs.length; index++) {
+    console.log(navs[index]);
+    console.log(navs[index].eventListeners?.bind);
+ 
+  } */
 }

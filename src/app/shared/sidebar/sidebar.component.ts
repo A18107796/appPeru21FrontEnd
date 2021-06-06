@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { timer } from 'rxjs';
 import { SidebarService } from 'src/app/services/sidebar.service';
 declare var jQuery: any;
 declare var $: any;
@@ -11,14 +12,10 @@ export class SidebarComponent implements OnInit {
   menu: any[];
   constructor(sidebarService: SidebarService) {
     this.menu = sidebarService.menu;
-    this.menu.forEach((m: any) => {
-      console.log(m.submenu.length);
-      
-    })
-
   }
 
   ngOnInit(): void {
+    SidebarService.iniciarMenu();
   }
 
 }

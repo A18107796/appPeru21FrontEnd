@@ -1,4 +1,6 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { routes } from 'src/app/pages/pages.routing';
 import { ThemeService } from 'src/app/services/theme.service';
 import { Theme } from '../../enums/theme'
 @Component({
@@ -10,7 +12,7 @@ export class HeaderComponent implements OnInit {
 
   theme: Theme = Theme.Light;
   public classTheme = document.querySelector('#div-mode-selector');
-  constructor(public themeService: ThemeService) {
+  constructor(public themeService: ThemeService, private router: Router) {
 
   }
 
@@ -21,6 +23,10 @@ export class HeaderComponent implements OnInit {
 
   changeTheme() {
     this.themeService.changeTheme();
+  }
+
+  logout() {
+    this.router.navigate(['login']);
   }
 
 }

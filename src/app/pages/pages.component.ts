@@ -1,7 +1,7 @@
 import { AfterViewChecked, AfterViewInit, Component, OnInit } from '@angular/core';
 import { ThemeService } from '../services/theme.service';
-declare var jQuery: any;
 declare var $: any;
+declare var jQuery: any;
 
 @Component({
   selector: 'app-pages',
@@ -15,12 +15,9 @@ export class PagesComponent implements OnInit {
 
   ngOnInit(): void {
     this.themeService.setLocalTheme();
-    const asd = document.querySelector('#followClick');
-    console.log("asd");
-  
-
-
   }
+
+  
 
 }
 
