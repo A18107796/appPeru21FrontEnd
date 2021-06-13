@@ -4,33 +4,65 @@
             <div class="col-lg-12">
                 <div class="card card-pink card-outline">
                     <div class="card-header text-center">
-                        <h5 class="card-title m-0">Especializaciones</h5>
+                        <h5 class="card-title m-0">Lista de Especializaciones</h5>
                     </div>
                     <div class="card-body">
-                        <h6 class="card-title">Special title treatment</h6>
+                        <div class="row">
+                            <div class="col-lg-10">
+                                <table id="example1" class="table  table-striped">
+                                    <thead>
+                                        <tr class="text-center bg-pink">
+                                            <th>CODIGO</th>
+                                            <th>ESPECIALIZACION</th>
+                                            <th>TIPO</th>
+                                            <th>ESTADO</th>
+                                            <th>ACCIONES</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let especializacion of especializaciones">
+                                            <td class="text-center">
+                                                {{ especializacion.id }}
+                                            </td>
+                                            <td>
+                                                {{ especializacion.nombre}}
+                                            </td>
+                                            <td class="text-center">
+                                                {{ especializacion.tipo_especializacion.nombre}}
+                                            </td>
+                                            <td class="text-center">
+                                                <span class="badge"
+                                                    [ngClass]="especializacion.estado === 'ACTIVO'?'bg-success':'badge-danger'">
+                                                    {{especializacion.estado}}
+                                                </span>
+                                            </td>
+                                            <td class="text-center ">
+                                                <button type="button" class="btn bg-orange btn-xs  mr-2"
+                                                [routerLink]="['edit', especializacion.id]"> <i
+                                                        class="fas fa-edit mr-1"></i>
+                                                    Editar</button>
+                                                <button type="button" class="btn bg-danger btn-xs"
+                                                    (click)="delete(especializacion.id)"> <i
+                                                        class="fas fa-trash-alt mr-1"></i> Eliminar</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="text-left pr-2">
 
-                        <table class="table table-head-fixed text-nowrap ">
-                            <thead class="text-center">
-                                <tr>
-                                    <th>COD</th>
-                                    <th>Nombre Especializacion</th>
-                                    <th>Tipo</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let especializacion of especializaciones">
-                                    <td class="text-center">{{ especializacion.id }}</td>
-                                    <td>{{ especializacion.nombre}}</td>
-                                    <td class="text-center">{{ especializacion.tipo_especializacion.nombre}}</td>
-                                    <td class="text-center">{{ especializacion.estado }}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                                    <button class="btn btn-app bg-green" (click)="abrirModal()">
+                                        <i class="fas fa-plus"></i> Nuevo
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<app-modal-especializacion (myEvent)="updateList($event)"></app-modal-especializacion>

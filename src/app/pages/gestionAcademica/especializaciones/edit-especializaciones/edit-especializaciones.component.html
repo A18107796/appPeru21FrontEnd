@@ -1,0 +1,55 @@
+<div class="content">
+    <div class="container">
+        <form id="formEspecializacion" autocomplete="off" [formGroup]="especializacionForm">
+            <div class="card card-pink ">
+                <div class="card-header text-center">
+                    <h5 class="card-title m-0"><strong>Modificar Especializacion</strong></h5>
+                </div>
+                <div class="card-body">
+                    <div class="form-group row">
+                        <div class="col-8">
+                            <label>Especialización:</label>
+                            <input type="text" class="form-control"
+                                [ngClass]="{'is-invalid': this._fs.campoNoValido('especializacion', especializacionForm, true)}"
+                                id="nombre_especializacion" placeholder="Especialización" name="nombre_especializacion"
+                                formControlName=especializacion>
+                            <span class="error invalid-feedback">Por favor ingrese nombre de especializacion.</span>
+                        </div>
+                        <div class="col-4">
+                            <label>Tipo:</label>
+                            <select type="text" class="form-control"
+                                [ngClass]="{'is-invalid': this._fs.campoNoValido('tipo', especializacionForm, true)}"
+                                id="tipo_especializacion" name="tipo_especializacion" formControlName="tipo"
+                                [compareWith]="compareTipo">
+                                <option [ngValue]="null">
+                                    <-- SELECCIONE TIPO DE ESPECIALIZACION -->
+                                </option>
+                                <option *ngFor="let tipo of tipos" [ngValue]="tipo">
+                                    {{ tipo.nombre }}
+                                </option>
+                            </select>
+                            <span class="error invalid-feedback">Por favor seleccione un tipo de especializacion.</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header text-center">
+                    <h5 class="card-title"><i class="fas fa-book"></i> <strong> Cursos</strong> </h5>
+                    <div class="text-right">
+                        <button type="button" class="btn btn-success btn-flat"> <i class="fas fa-plus mr-2"></i> Añadir Curso</button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="form-group row">
+                        <div class="col-5">
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

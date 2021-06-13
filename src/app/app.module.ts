@@ -6,6 +6,8 @@ import { AuthModule } from './auth/auth.module';
 
 
 import { AppComponent } from './app.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptor } from './auth/interceptors/token.interceptor';
 
 
 @NgModule({
@@ -19,7 +21,7 @@ import { AppComponent } from './app.component';
     AuthModule,
     PagesModule
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

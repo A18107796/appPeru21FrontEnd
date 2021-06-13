@@ -27,13 +27,10 @@ export class SidebarService {
   static iniciarMenu() {
     setTimeout(() => {
       var events = jQuery._data(document, 'events')["click"];
-      console.log(events);
       $(document).off('click', '[data-widget=\"treeview\"] .nav-link');
       events = jQuery._data(document, 'events')["click"];
-      console.log(events);
       $('[data-widget="treeview"]').Treeview('init');
       events = jQuery._data(document, 'events')["click"];
-      console.log(events);
     }, 1500);
 
   }

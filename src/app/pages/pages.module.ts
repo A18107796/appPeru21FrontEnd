@@ -14,6 +14,10 @@ import { AppRoutingModule } from '../app-routing.module';
 import { RouterModule } from '@angular/router';
 import { CursosComponent } from './gestionAcademica/cursos/cursos.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ModalEspecializacionComponent } from './gestionAcademica/especializaciones/modal-especializacion/modal-especializacion.component';
+import { EditEspecializacionesComponent } from './gestionAcademica/especializaciones/edit-especializaciones/edit-especializaciones.component';
+import { ToastNoAnimationModule, ToastrModule } from 'ngx-toastr';
+
 
 
 
@@ -25,7 +29,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     InicioComponent,
     EspecializacionesComponent,
     PagesComponent,
-    CursosComponent
+    CursosComponent,
+    ModalEspecializacionComponent,
+    EditEspecializacionesComponent
   ],
   exports: [
     NopagefoundComponent,
@@ -41,7 +47,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     RouterModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ToastrModule.forRoot(),
+    ToastNoAnimationModule,
+    
   ]
 })
 export class PagesModule { }

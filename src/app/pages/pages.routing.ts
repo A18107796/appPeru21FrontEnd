@@ -5,6 +5,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { EspecializacionesComponent } from './gestionAcademica/especializaciones/especializaciones.component';
 import { InicioComponent } from './inicio/inicio.component';
 import { CursosComponent } from './gestionAcademica/cursos/cursos.component';
+import { EditEspecializacionesComponent } from './gestionAcademica/especializaciones/edit-especializaciones/edit-especializaciones.component';
 
 
 export const routes: Routes = [
@@ -14,6 +15,7 @@ export const routes: Routes = [
         children: [
             { path: 'dashboard', component: DashboardComponent },
             { path: 'especializaciones', component: EspecializacionesComponent },
+            { path: 'especializaciones/edit/:id', component: EditEspecializacionesComponent },
             { path: 'inicio', component: InicioComponent },
             { path: 'cursos', component: CursosComponent },
             { path: '', redirectTo: '/sistema/dashboard', pathMatch: 'full' },
