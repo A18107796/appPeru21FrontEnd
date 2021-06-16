@@ -1,0 +1,36 @@
+<div class="content">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <form id="formEspecializacion" autocomplete="off" (ngSubmit)="submit()" [formGroup]="formCurso">
+                    <div class="card card-pink ">
+                        <div class="card-header text-center">
+                            <h5 class="card-title m-0"><strong>{{ titulo }}</strong></h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group row">
+                                <div class="col-8">
+                                    <label>Curso</label>
+                                    <input type="text" class="form-control" id="nombre_curso"
+                                        placeholder="Nombre del Curso" name="nombre_curso" (input)="submited($event)"
+                                        [ngClass]="{'is-invalid': _fs.campoNoValido('curso', formCurso, formSubmited)}"
+                                        formControlName="curso">
+                                    <span class="error invalid-feedback">Por favor ingrese nombre del curso.</span>
+                                </div>
+                                <div class="col-4" *ngIf="curso && curso.estado">
+                                    <label>Estado</label>
+                                    <input type="text" class="form-control" id="estado" placeholder="Estado del Curso"
+                                        name="estado" [value]="curso.estado" disabled>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-block btn-success btn-sm">Guardar</button>
+                            <button type="button" class="btn btn-block btn-danger btn-sm"
+                                routerLink="/sistema/cursos">Volver</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>

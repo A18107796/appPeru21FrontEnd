@@ -38,13 +38,25 @@
                 <div class="card-header text-center">
                     <h5 class="card-title"><i class="fas fa-book"></i> <strong> Cursos</strong> </h5>
                     <div class="text-right">
-                        <button type="button" class="btn btn-success btn-flat"> <i class="fas fa-plus mr-2"></i> Añadir Curso</button>
+                        <button type="button" class="btn btn-success btn-flat" (click)="this.modalService.abrirModal()">
+                            <i class="fas fa-plus mr-2"></i> Añadir Curso</button>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="form-group row">
-                        <div class="col-5">
+                        <div class="col-12">
+                            <table id="example1" class="table  table-striped">
+                                <thead>
+                                    <tr class="text-center bg-cyan">
+                                        <th>CODIGO</th>
+                                        <th>ESPECIALIZACION</th>
+                                        <th>ACCIONES</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
 
+                                </tbody>
+                            </table>
                         </div>
                     </div>
 
@@ -53,3 +65,5 @@
         </form>
     </div>
 </div>
+
+<app-modal-cursos-especializaciones></app-modal-cursos-especializaciones>

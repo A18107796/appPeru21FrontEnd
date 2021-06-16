@@ -17,6 +17,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModalEspecializacionComponent } from './gestionAcademica/especializaciones/modal-especializacion/modal-especializacion.component';
 import { EditEspecializacionesComponent } from './gestionAcademica/especializaciones/edit-especializaciones/edit-especializaciones.component';
 import { ToastNoAnimationModule, ToastrModule } from 'ngx-toastr';
+import { FormCursosComponent } from './gestionAcademica/cursos/form-cursos/form-cursos.component';
+import { ModalCursosEspecializacionesComponent } from './gestionAcademica/especializaciones/edit-especializaciones/modal-cursos-especializaciones/modal-cursos-especializaciones.component';
 
 
 
@@ -31,7 +33,9 @@ import { ToastNoAnimationModule, ToastrModule } from 'ngx-toastr';
     PagesComponent,
     CursosComponent,
     ModalEspecializacionComponent,
-    EditEspecializacionesComponent
+    EditEspecializacionesComponent,
+    FormCursosComponent,
+    ModalCursosEspecializacionesComponent
   ],
   exports: [
     NopagefoundComponent,

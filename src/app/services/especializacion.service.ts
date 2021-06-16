@@ -35,6 +35,14 @@ export class EspecializacionService {
     );
   }
 
+  update(especializacion: Especializacion): Observable<any> {
+    return this.http.put(this.url + '/edit/' + especializacion.id, especializacion).pipe(
+      catchError(e => {
+        return throwError(e);
+      })
+    );
+  }
+
   delete(id: Number): Observable<any> {
     return this.http.delete(this.url + '/' + id).pipe(
       catchError(e => {
@@ -45,6 +53,14 @@ export class EspecializacionService {
 
   getEspecializacion(id: any): Observable<any> {
     return this.http.get(this.url + "/" + id).pipe(
+      catchError(e => {
+        return throwError(e);
+      })
+    );
+  }
+
+  saveChanges(especializacion: Especializacion): Observable<any> {
+    return this.http.put(this.url + '/' + especializacion.id + '/save-changes', especializacion).pipe(
       catchError(e => {
         return throwError(e);
       })

@@ -6,6 +6,7 @@ import { Especializacion } from 'src/app/models/especializacion';
 import { EspecializacionTipo } from 'src/app/models/especializacion-tipo';
 import { EspecializacionService } from 'src/app/services/especializacion.service';
 import { FormsService } from 'src/app/services/forms.service';
+import { ModalService } from 'src/app/services/modal.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -24,7 +25,8 @@ export class EditEspecializacionesComponent implements OnInit {
     private a_router: ActivatedRoute,
     private router: Router,
     private formB: FormBuilder,
-    public _fs: FormsService) { }
+    public _fs: FormsService,
+    public modalService: ModalService) { }
 
   ngOnInit(): void {
     this.listarTipos();
@@ -35,7 +37,7 @@ export class EditEspecializacionesComponent implements OnInit {
   getEspecializacion() {
     this.a_router.params.subscribe(param => {
       let id = param['id'] as number;
-      if (id) {
+      if (id && id > 0) {
         this._espService.getEspecializacion(id).subscribe(
           res => {
             this.especializacionBD = res.especializacion;
