@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit } from '@angular/core';
 import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Curso } from 'src/app/models/curso';
 import { Especializacion } from 'src/app/models/especializacion';
 import { EspecializacionTipo } from 'src/app/models/especializacion-tipo';
+import { CursoService } from 'src/app/services/curso.service';
 import { EspecializacionService } from 'src/app/services/especializacion.service';
 import { FormsService } from 'src/app/services/forms.service';
 import { ModalService } from 'src/app/services/modal.service';
@@ -19,14 +21,18 @@ export class EditEspecializacionesComponent implements OnInit {
   especializacionForm!: FormGroup;
   especializacionBD!: Especializacion;
   tipos: EspecializacionTipo[] = [];
+  myEvent = new EventEmitter<Curso[]>();
+  cursosToModal!: Curso[];
   constructor(
     private _espService: EspecializacionService,
     private toast: ToastrService,
     private a_router: ActivatedRoute,
     private router: Router,
     private formB: FormBuilder,
+    public modalService: ModalService,
     public _fs: FormsService,
-    public modalService: ModalService) { }
+    private _cursoService: CursoService
+  ) { }
 
   ngOnInit(): void {
     this.listarTipos();
@@ -71,8 +77,25 @@ export class EditEspecializacionesComponent implements OnInit {
     })
   }
 
+  listarCursos() {
+    this._cursoService.getCursos().subscribe(res => {
+      this.cursosToModal = res;
+      this._cursoService.emitCursos.emit(this.cursosToModal);
+    })
+  }
+
   compareTipo(t1: EspecializacionTipo, t2: EspecializacionTipo): boolean {
     return t1 && t2 ? t1.id === t2.id : t1 === t2;
+  }
+
+  setSeleccionado(event: any) {
+    console.log(event);
+    this.especializacionBD.cursos.push(event);
+  }
+
+  abrirModal() {
+    this.modalService.abrirModal();
+    this.listarCursos();
   }
 
 }

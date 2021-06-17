@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { url_spring } from 'src/environments/environment';
@@ -11,8 +11,9 @@ import { Curso } from '../models/curso';
 })
 export class CursoService {
   private url: string = url_spring + 'cursos'
-  constructor(private http: HttpClient) { }
 
+  public emitCursos: EventEmitter<Curso[]> = new EventEmitter();
+  constructor(private http: HttpClient) { }
 
   getCursos(): Observable<Curso[]> {
     return this.http.get<Curso[]>(this.url);
