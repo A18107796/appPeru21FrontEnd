@@ -4,27 +4,34 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">Cursos:</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"
-                    (click)="this.modalService.cerrarModal()">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="cerrarModal()">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
             <div class="modal-body">
                 <div class="card-body table-responsive p-0" style="height: 300px;">
-                    <table class="table table-head-fixed text-nowrap">
+                    <table class="table table-head-fixed text-nowrap table-bordered">
                         <thead>
                             <tr>
-                                <th>#</th>
+                                <th class="text-center">#</th>
                                 <th>Curso</th>
-                                <th>Acción</th>
+                                <th class="text-center">Acción</th>
                             </tr>
                         </thead>
                         <tbody *ngIf="cursos && cursos.length > 0">
                             <tr *ngFor="let curso of cursos">
                                 <td class="text-center">{{curso.id}}</td>
                                 <td>{{curso.nombre}}</td>
-                                <td class="text-center"><button type="button"
-                                        class="btn btn-sm btn-info" (click)="enviarCurso(curso)">Enviar</button> </td>
+                                <td class="text-center">
+                                    <div class="icheck-success">
+                                        <input type="checkbox" (change)="setOption(curso,$event)" [value]="curso.id"
+                                            [id]="curso.id">
+                                        <label [for]="curso.id"></label>
+                                    </div>
+                                </td>
+                                <!-- 
+                                <td class="text-center"><button type="button" class="btn btn-sm btn-info"
+                                        (click)="enviarCurso(curso)">Enviar</button> </td> -->
                             </tr>
                         </tbody>
                     </table>
@@ -32,7 +39,9 @@
             </div>
             <div class="modal-footer justify-content-between">
                 <button type="button" class="btn btn-default" data-dismiss="modal"
-                    (click)="this.modalService.cerrarModal()">Salir</button>
+                    (click)="cerrarModal()">Salir</button>
+                <button type="submit" class="btn bg-navy" (click)="enviarLista()"><i class="fas fa-save mr-2"></i>
+                    Guardar</button>
             </div>
 
 
