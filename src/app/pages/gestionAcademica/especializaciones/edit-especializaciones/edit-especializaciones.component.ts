@@ -80,22 +80,50 @@ export class EditEspecializacionesComponent implements OnInit {
   listarCursos() {
     this._cursoService.getCursos().subscribe(res => {
       this.cursosToModal = res;
+      if (this.cursosToModal.length > 0) {
+        this.especializacionBD.cursos.forEach(c => {
+          this.cursosToModal = this.cursosToModal.filter(curso => {
+            return c.id !== curso.id;
+          })
+        })
+      }
       this._cursoService.emitCursos.emit(this.cursosToModal);
     })
+  }
+
+  removeCurso(idCurso: number) {
+    console.log(idCurso);
+    this.especializacionBD.cursos = this.especializacionBD.cursos.filter(c => {
+      return idCurso !== c.id
+    });
   }
 
   compareTipo(t1: EspecializacionTipo, t2: EspecializacionTipo): boolean {
     return t1 && t2 ? t1.id === t2.id : t1 === t2;
   }
 
-  setSeleccionado(event: any) {
-    console.log(event);
-    this.especializacionBD.cursos.push(event);
+  setSeleccionado(event: any[]) {
+    event.forEach(curso => {
+      this.especializacionBD.cursos.push(curso);
+    })
   }
 
   abrirModal() {
     this.modalService.abrirModal();
     this.listarCursos();
+  }
+
+  guardar() {
+    this._espService.saveChanges(this.especializacionBD).subscribe(
+      res => {
+        console.log(res);
+        this.toast.success('Datos guardados correctamente');
+      },
+      err => {
+        console.log(err);
+        this.toast.error('Error, intentelo denuevo.');
+      }
+    );
   }
 
 }

@@ -19,7 +19,8 @@ import { EditEspecializacionesComponent } from './gestionAcademica/especializaci
 import { ToastNoAnimationModule, ToastrModule } from 'ngx-toastr';
 import { FormCursosComponent } from './gestionAcademica/cursos/form-cursos/form-cursos.component';
 import { ModalCursosEspecializacionesComponent } from './gestionAcademica/especializaciones/edit-especializaciones/modal-cursos-especializaciones/modal-cursos-especializaciones.component';
-
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -49,11 +50,13 @@ import { ModalCursosEspecializacionesComponent } from './gestionAcademica/especi
     CommonModule,
     SharedModule,
     RouterModule,
+    BrowserModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     ToastrModule.forRoot(),
     ToastNoAnimationModule,
+    BrowserAnimationsModule
     
   ]
 })

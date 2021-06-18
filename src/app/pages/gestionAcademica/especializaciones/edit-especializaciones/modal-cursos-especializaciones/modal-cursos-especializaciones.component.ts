@@ -9,11 +9,11 @@ import { ModalService } from 'src/app/services/modal.service';
   styleUrls: ['./modal-cursos-especializaciones.component.css']
 })
 export class ModalCursosEspecializacionesComponent implements OnInit {
-  @Output('cursoSeleccionado') cursoSeleccionado = new EventEmitter();
+  @Output('cursoSeleccionado') cursoSeleccionado = new EventEmitter<Curso[]>();
   constructor(public modalService: ModalService, private sC: CursoService) { }
   cursos: Curso[] = [];
   key: Map<number, Curso> = new Map();
-  
+
 
   ngOnInit(): void {
     this.sC.emitCursos.subscribe(listaCursos => {
@@ -23,12 +23,15 @@ export class ModalCursosEspecializacionesComponent implements OnInit {
   }
 
 
-  enviarCurso(curso: Curso) {
-    this.cursoSeleccionado.emit(curso);
-  }
+
 
   enviarLista() {
-    console.log(this.key);
+    let cursosLista: Curso[] = [];
+    this.key.forEach((value, key) => {
+      cursosLista.push(value);
+    })
+    this.cursoSeleccionado.emit(cursosLista);
+    this.cerrarModal();
 
   }
 

@@ -7,6 +7,7 @@ import { EspecializacionTipo } from '../models/especializacion-tipo';
 import { map, catchError, tap } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { Estado } from '../enums/estado';
+import { Curso } from '../models/curso';
 
 @Injectable({
   providedIn: 'root'
@@ -60,7 +61,7 @@ export class EspecializacionService {
   }
 
   saveChanges(especializacion: Especializacion): Observable<any> {
-    return this.http.put(this.url + '/' + especializacion.id + '/save-changes', especializacion).pipe(
+    return this.http.put(this.url + '/' + especializacion.id + '/save-changes', especializacion.cursos).pipe(
       catchError(e => {
         return throwError(e);
       })
