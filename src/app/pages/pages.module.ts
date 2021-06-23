@@ -21,6 +21,7 @@ import { FormCursosComponent } from './gestionAcademica/cursos/form-cursos/form-
 import { ModalCursosEspecializacionesComponent } from './gestionAcademica/especializaciones/edit-especializaciones/modal-cursos-especializaciones/modal-cursos-especializaciones.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { EmpleadosComponent } from './mantenimientos/empleados/empleados.component';
 
 
 
@@ -36,7 +37,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ModalEspecializacionComponent,
     EditEspecializacionesComponent,
     FormCursosComponent,
-    ModalCursosEspecializacionesComponent
+    ModalCursosEspecializacionesComponent,
+    EmpleadosComponent
   ],
   exports: [
     NopagefoundComponent,

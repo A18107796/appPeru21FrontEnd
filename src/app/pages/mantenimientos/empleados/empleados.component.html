@@ -1,0 +1,49 @@
+<div class="content">
+    <div class="container">
+
+        <div class="card card-pink card-outline">
+            <div class="card-header text-center">
+                <h5 class="card-title m-0">Lista de Especializaciones</h5>
+            </div>
+            <div class="card-body">
+
+                <table id="example1" class="table  table-striped">
+                    <thead>
+                        <tr class="text-center bg-pink">
+                            <th>ID</th>
+                            <th>NOMBRES</th>
+                            <th>NUM DOC</th>
+                            <th>DISTRITO</th>
+                            <th>ACCIONES</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let empleado of empleados">
+                            <td class="text-center">
+                                {{ empleado.id }}
+                            </td>
+                            <td>
+                                {{ empleado.nombres + ' ' + empleado.apellidos}}
+                            </td>
+                            <td class="text-center">
+                                {{ empleado.num_doc}}
+                            </td>
+                            <td class="text-center">
+                                {{ empleado.distrito.nombre}}
+                            </td> 
+                            <td class="text-center ">
+                                <button type="button" class="btn bg-orange btn-xs  mr-2"> <i
+                                        class="fas fa-edit mr-1"></i>
+                                    Editar</button>
+                                <button type="button" class="btn bg-danger btn-xs"> <i
+                                        class="fas fa-trash-alt mr-1"></i> Eliminar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+
+        </div>
+    </div>
+</div>

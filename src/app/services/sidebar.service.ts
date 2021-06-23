@@ -20,6 +20,13 @@ export class SidebarService {
         { titulo: 'Especializaciones', url: 'especializaciones' },
         { titulo: 'Cursos', url: 'cursos' }
       ]
+    },
+    {
+      titulo: 'Mantenimientos',
+      icono: 'fas fa-user-friends',
+      submenu: [
+        { titulo: 'Empleados', url: 'empleados' }
+      ]
     }
   ];
   constructor() { }
