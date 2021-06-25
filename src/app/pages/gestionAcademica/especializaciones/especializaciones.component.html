@@ -9,12 +9,13 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-lg-10">
-                                <table id="example1" class="table  table-striped">
+                                <table id="example1" class="table table-hover border">
                                     <thead>
                                         <tr class="text-center bg-pink">
                                             <th>CODIGO</th>
                                             <th>ESPECIALIZACION</th>
                                             <th>TIPO</th>
+                                            <th>CURSOS</th>
                                             <th>ESTADO</th>
                                             <th>ACCIONES</th>
                                         </tr>
@@ -29,6 +30,11 @@
                                             </td>
                                             <td class="text-center">
                                                 {{ especializacion.tipo_especializacion.nombre}}
+                                            </td>
+                                            <td class="text-center">
+                                                <button type="button" class="btn btn-outline-info btn-xs pl-4 pr-4">
+                                                    <strong> {{ especializacion.cursos.length}}</strong>
+                                                </button>
                                             </td>
                                             <td class="text-center">
                                                 <span class="badge"

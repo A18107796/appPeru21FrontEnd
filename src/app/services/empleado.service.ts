@@ -3,17 +3,19 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { url_spring } from 'src/environments/environment';
 import { Empleado } from '../models/empleado';
+import { CommonService } from './common.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class EmpleadoService {
-  private url: string = url_spring + 'empleados';
-  constructor(private http: HttpClient) { }
+export class EmpleadoService extends CommonService<Empleado>{
+  protected baseEndPoint = url_spring + 'empleados';
 
-  getEmpleados(): Observable<Empleado[]> {
-    return this.http.get<Empleado[]>(this.url);
+  constructor(private http: HttpClient) {
+    super(http);
   }
+
+
 
 
 }

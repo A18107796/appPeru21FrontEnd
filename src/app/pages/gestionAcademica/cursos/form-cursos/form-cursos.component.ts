@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Estado } from 'src/app/enums/estado';
 import { Curso } from 'src/app/models/curso';
 import { CursoService } from 'src/app/services/curso.service';
 import { FormsService } from 'src/app/services/forms.service';
@@ -41,7 +42,7 @@ export class FormCursosComponent implements OnInit {
       let id: number = params['id'] as number;
       if (id && id > 0) {
         this.titulo = "Modificar Curso"
-        this._cService.getCurso(id).subscribe(
+        this._cService.getEntity(id).subscribe(
           res => {
             this.curso = res.curso;
             this.formCurso.get('curso')?.setValue(this.curso.nombre);
@@ -84,6 +85,7 @@ export class FormCursosComponent implements OnInit {
     } else {
       this.curso = new Curso();
       this.mapCurso();
+      this.curso.estado = Estado.ACTIVO;
       this._cService.create(this.curso).subscribe(
         res => {
           Swal.fire('Alerta', 'Curso registrado correctamente.', 'success')

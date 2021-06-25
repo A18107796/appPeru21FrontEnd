@@ -1,15 +1,18 @@
-<div class="content">
-    <div class="container">
-
+<section class="content">
+    <div class="container-fluid">
         <div class="card card-pink card-outline">
             <div class="card-header text-center">
-                <h5 class="card-title m-0">Lista de Especializaciones</h5>
+                <h5 class="card-title m-0">Empleados</h5>
             </div>
             <div class="card-body">
-
-                <table id="example1" class="table  table-striped">
+                <div class="text-right pr-2">
+                    <button class="btn btn-app bg-green" routerLink="form">
+                        <i class="fas fa-plus"></i> NUEVO
+                    </button>
+                </div>
+                <table id="example1" class="table mt-2 table-hover border">
                     <thead>
-                        <tr class="text-center bg-pink">
+                        <tr class="text-center bg-purple">
                             <th>ID</th>
                             <th>NOMBRES</th>
                             <th>NUM DOC</th>
@@ -30,7 +33,7 @@
                             </td>
                             <td class="text-center">
                                 {{ empleado.distrito.nombre}}
-                            </td> 
+                            </td>
                             <td class="text-center ">
                                 <button type="button" class="btn bg-orange btn-xs  mr-2"> <i
                                         class="fas fa-edit mr-1"></i>
@@ -46,4 +49,4 @@
 
         </div>
     </div>
-</div>
+</section>

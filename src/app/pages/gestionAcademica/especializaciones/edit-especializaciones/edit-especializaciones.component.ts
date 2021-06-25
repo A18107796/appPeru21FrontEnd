@@ -44,7 +44,7 @@ export class EditEspecializacionesComponent implements OnInit {
     this.a_router.params.subscribe(param => {
       let id = param['id'] as number;
       if (id && id > 0) {
-        this._espService.getEspecializacion(id).subscribe(
+        this._espService.getEntity(id).subscribe(
           res => {
             this.especializacionBD = res.especializacion;
             this.especializacionForm.get('especializacion')?.setValue(this.especializacionBD.nombre);
@@ -78,7 +78,7 @@ export class EditEspecializacionesComponent implements OnInit {
   }
 
   listarCursos() {
-    this._cursoService.getCursos().subscribe(res => {
+    this._cursoService.listar().subscribe(res => {
       this.cursosToModal = res;
       if (this.cursosToModal.length > 0) {
         this.especializacionBD.cursos.forEach(c => {

@@ -8,6 +8,7 @@ import { CursosComponent } from './gestionAcademica/cursos/cursos.component';
 import { EditEspecializacionesComponent } from './gestionAcademica/especializaciones/edit-especializaciones/edit-especializaciones.component';
 import { FormCursosComponent } from './gestionAcademica/cursos/form-cursos/form-cursos.component';
 import { EmpleadosComponent } from './mantenimientos/empleados/empleados.component';
+import { FormEmpleadoComponent } from './mantenimientos/empleados/form-empleado/form-empleado.component';
 
 
 export const routes: Routes = [
@@ -21,6 +22,8 @@ export const routes: Routes = [
             { path: 'cursos/edit', component: FormCursosComponent },
             { path: 'cursos/edit/:id', component: FormCursosComponent },
             { path: 'empleados', component: EmpleadosComponent },
+            { path: 'empleados/form', component: FormEmpleadoComponent },
+            { path: 'empleados/form/.id', component: FormEmpleadoComponent },
             { path: 'inicio', component: InicioComponent },
             { path: 'cursos', component: CursosComponent },
             { path: '', redirectTo: '/sistema/dashboard', pathMatch: 'full' },

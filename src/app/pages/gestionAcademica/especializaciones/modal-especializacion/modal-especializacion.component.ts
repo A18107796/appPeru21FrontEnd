@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { sample } from 'rxjs/operators';
+import { Estado } from 'src/app/enums/estado';
 import { Especializacion } from 'src/app/models/especializacion';
 import { EspecializacionTipo } from 'src/app/models/especializacion-tipo';
 import { EspecializacionService } from 'src/app/services/especializacion.service';
@@ -71,6 +72,7 @@ export class ModalEspecializacionComponent implements OnInit {
 
   registrarEspecializacion() {
     if (this.especializacion != null) {
+      this.especializacion.estado = Estado.ACTIVO;
       this.especializacionService.create(this.especializacion).subscribe(
         res => {
           Swal.fire({

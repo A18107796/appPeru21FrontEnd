@@ -19,7 +19,7 @@ export class EmpleadosComponent implements OnInit {
   }
 
   listar() {
-    this.empService.getEmpleados().subscribe(res => {
+    this.empService.listar().subscribe(res => {
       this.empleados = res;
       this.createDataTable();
     })

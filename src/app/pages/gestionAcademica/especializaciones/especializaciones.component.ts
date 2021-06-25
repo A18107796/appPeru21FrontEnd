@@ -26,7 +26,7 @@ export class EspecializacionesComponent implements OnInit {
   }
 
   listar() {
-    this.especializacionService.getEspecializaciones().subscribe(res => {
+    this.especializacionService.listar().subscribe(res => {
       this.especializaciones = res;
       this.createDataTable();
 

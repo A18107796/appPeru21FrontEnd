@@ -27,7 +27,7 @@ export class CursosComponent implements OnInit {
   }
 
   listar() {
-    this._sCursos.getCursos().subscribe(res => {
+    this._sCursos.listar().subscribe(res => {
       this.cursos = res;
       this.createDataTable();
     });
