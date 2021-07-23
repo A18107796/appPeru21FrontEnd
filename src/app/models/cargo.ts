@@ -1,6 +1,4 @@
-export class TipoDocumento {
-
+export class Cargo {
     id!: number;
     nombre!: string;
-    
 }

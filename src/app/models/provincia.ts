@@ -1,7 +1,7 @@
 import { Departamento } from "./departamento";
 
 export class Provincia {
-    id_provincias!: number;
+    id!: number;
     nombre!: string;
     departamento: Departamento;
 

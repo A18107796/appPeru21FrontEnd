@@ -9,15 +9,14 @@ export class Persona implements GenericEntity{
     nombres!: string;
     apellidos!: string;
     num_doc!: string;
-    estado_civil!: string;
+    estado_civil!: CharacterData;
     genero!: string;
     fecha_nac!: Date;
     email!: string;
     direccion!: string;
+    telefono!: string;
     estado!: Estado;
-    tipo_documento!: TipoDocumento;
-    distrito!: Distrito;
-
-
+    tipo_documento: TipoDocumento = new TipoDocumento();
+    distrito: Distrito = new Distrito();
 
 }

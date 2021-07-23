@@ -23,7 +23,7 @@ export const routes: Routes = [
             { path: 'cursos/edit/:id', component: FormCursosComponent },
             { path: 'empleados', component: EmpleadosComponent },
             { path: 'empleados/form', component: FormEmpleadoComponent },
-            { path: 'empleados/form/.id', component: FormEmpleadoComponent },
+            { path: 'empleados/form/:id', component: FormEmpleadoComponent },
             { path: 'inicio', component: InicioComponent },
             { path: 'cursos', component: CursosComponent },
             { path: '', redirectTo: '/sistema/dashboard', pathMatch: 'full' },

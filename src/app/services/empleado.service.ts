@@ -15,6 +15,20 @@ export class EmpleadoService extends CommonService<Empleado>{
     super(http);
   }
 
+  verifyDNI(dni: string): Observable<any> {
+    return this.http.get(this.baseEndPoint + "/dni/" + dni);
+  }
+
+  verifyEmail(email: string): Observable<any> {
+    return this.http.get(this.baseEndPoint + "/email/" + email);
+  }
+
+  getCargos(): Observable<any> {
+    return this.http.get(this.baseEndPoint + "/cargos");
+  }
+
+
+
 
 
 
