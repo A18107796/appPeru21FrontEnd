@@ -1,9 +1,10 @@
 import { Estado } from "../enums/estado";
 import { Distrito } from "./distrito";
 import { GenericEntity } from "./generic-entity";
+import { GenericEntityStatus } from "./generic-entity-status";
 import { TipoDocumento } from "./tipo-documento";
 
-export class Persona implements GenericEntity{
+export class Persona implements GenericEntity, GenericEntityStatus{
     id!: number;
     nombre!: string;
     nombres!: string;

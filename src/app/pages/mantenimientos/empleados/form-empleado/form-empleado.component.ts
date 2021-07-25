@@ -135,6 +135,7 @@ export class FormEmpleadoComponent implements OnInit {
   }
 
   mapForm() {
+    this.titulo =  "Modificar Empleado";
     if (this.empleado.id) {
       this.formEmpleado.get('nombres')?.setValue(this.empleado.nombres);
       this.formEmpleado.get('apellidos')?.setValue(this.empleado.apellidos);
@@ -157,6 +158,7 @@ export class FormEmpleadoComponent implements OnInit {
 
       this.formEmpleado.get('direccion')?.setValue(this.empleado.direccion);
       this.formEmpleado.get('cargo')?.setValue(this.empleado.cargo);
+      this.formEmpleado.get('cargo')?.disable();
 
 
     }
@@ -183,11 +185,13 @@ export class FormEmpleadoComponent implements OnInit {
       let email = this.empleado.email;
       let tipo_doc = this.empleado.tipo_documento;
       let dni = this.empleado.num_doc;
+      let cargo = this.empleado.cargo;
       this.mapEmpleado();
       this.empleado.id = id;  
       this.empleado.email = email;
       this.empleado.tipo_documento = tipo_doc;
       this.empleado.num_doc = dni;
+      this.empleado.cargo = cargo;
       this._empS.update(this.empleado).subscribe(
         res => {
           console.log(res);
@@ -262,6 +266,7 @@ export class FormEmpleadoComponent implements OnInit {
         const value = this.formEmpleado.get('departamento')?.value;
         this.formEmpleado.get(campo)?.enable();
         this.getProvinciasById(value.id);
+        this.formEmpleado.get('provincia')?.setValue(null);
       } else {
         this.formEmpleado.get(campo)?.setValue(null);
         this.formEmpleado.get(campo)?.disable();
@@ -272,6 +277,7 @@ export class FormEmpleadoComponent implements OnInit {
       if (value) {
         this.formEmpleado.get(campo)?.enable();
         this.getDistritosById(value.id);
+        this.formEmpleado.get('distrito')?.setValue(null);
       } else {
         this.formEmpleado.get(campo)?.setValue(null);
         this.formEmpleado.get(campo)?.disable();

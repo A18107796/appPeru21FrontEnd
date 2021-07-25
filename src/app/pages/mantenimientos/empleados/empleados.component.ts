@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { Estado } from 'src/app/enums/estado';
 import { Empleado } from 'src/app/models/empleado';
 import { EmpleadoService } from 'src/app/services/empleado.service';
+import Swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
@@ -12,7 +15,7 @@ export class EmpleadosComponent implements OnInit {
   empleados: Empleado[] = [];
 
 
-  constructor(private empService: EmpleadoService) { }
+  constructor(private empService: EmpleadoService, private toast: ToastrService) { }
 
   ngOnInit(): void {
     this.listar();
@@ -23,6 +26,30 @@ export class EmpleadosComponent implements OnInit {
       this.empleados = res;
       this.createDataTable();
     })
+  }
+
+  inactive(emp: any) {
+    Swal.fire({
+      title: '¿Estas seguro que deseas desactivar a este empleado?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'SI'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.empService.changeStatus(emp, Estado.INACTIVO).subscribe(
+          res => {
+            this.toast.success('Empleado inactivado', 'Listo');
+            window.location.reload();
+          },
+          err => {
+            this.toast.success('Ocurrio un error, intentelo denuevo.', 'Listo');
+          }
+        )
+      }
+    })
+   
   }
 
   createDataTable() {

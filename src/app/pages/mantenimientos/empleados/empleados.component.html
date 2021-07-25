@@ -1,22 +1,27 @@
 <section class="content">
-    <div class="container-fluid">
+    <div class="container-fluid animate__animated animate__fadeInUp">
         <div class="card card-pink card-outline">
             <div class="card-header text-center">
                 <h5 class="card-title m-0">Empleados</h5>
             </div>
             <div class="card-body">
                 <div class="text-right pr-2">
-                    <button class="btn btn-app bg-green" routerLink="form">
+                    <button class="btn btn-app bg-green animate__animated animate__fadeInLeft" routerLink="form">
                         <i class="fas fa-plus"></i> NUEVO
                     </button>
+                    <button class="btn btn-app bg-cyan animate__animated animate__fadeInRight" routerLink="form">
+                        <i class="fas fa-eye"></i> DETALLES
+                    </button>
                 </div>
-                <table id="example1" class="table mt-2 table-hover border">
+                <table id="example1" class="table mt-2 table-hover table-bordered border animate__animated animate__fadeInUp">
                     <thead>
                         <tr class="text-center bg-purple">
-                            <th>ID</th>
+                            <th>COD</th>
                             <th>NOMBRES</th>
                             <th>NUM DOC</th>
                             <th>DISTRITO</th>
+                            <th>Cargo</th>
+                            <th>ESTADO</th>
                             <th>ACCIONES</th>
                         </tr>
                     </thead>
@@ -29,17 +34,26 @@
                                 {{ empleado.nombres + ' ' + empleado.apellidos}}
                             </td>
                             <td class="text-center">
-                                {{ empleado.num_doc}}
+                                <strong>{{ empleado.num_doc}}</strong>
                             </td>
-                            <td class="text-center">
+                            <td class="text-left">
                                 {{ empleado.distrito.nombre}}
                             </td>
-                            <td class="text-center ">
-                                <button type="button" class="btn bg-orange btn-xs  mr-2"
-                                    [routerLink]="['form',empleado.id]"> <i class="fas fa-edit mr-1"></i>
-                                    Editar</button>
-                                <button type="button" class="btn bg-danger btn-xs"> <i
-                                        class="fas fa-trash-alt mr-1"></i> Eliminar</button>
+                            <td class="text-left">
+                                {{ empleado.cargo.nombre}}
+                            </td>
+                            <td class="text-center">
+                                <span class="badge"
+                                    [ngClass]="empleado.estado === 'ACTIVO'?'bg-success':'badge-danger'">
+                                    {{empleado.estado}}
+                                </span>
+                            </td>
+                            <td class="text-center">
+                                <button type="button" class="btn bg-primary btn-xs  mr-2"
+                                    [routerLink]="['form',empleado.id]"><i class="fas fa-edit fa-2x"></i> Modificar
+                                </button>
+                                <button type="button" class="btn bg-danger btn-xs" (click)="inactive(empleado)" *ngIf="empleado.estado === 'ACTIVO'"> <i
+                                        class="fas fa-trash-alt fa-2x mr-1"></i> Eliminar</button>
                             </td>
                         </tr>
                     </tbody>

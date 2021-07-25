@@ -1,3 +1,7 @@
 {
-    "window.zoomLevel": 0
+    "window.zoomLevel": 0,
+    "terminal.integrated.fontFamily": "FuraMono Nerd Font",
+    "terminal.integrated.fontWeight": "600",
+    "terminal.external.osxExec": "iTerm.app",
+
 }
