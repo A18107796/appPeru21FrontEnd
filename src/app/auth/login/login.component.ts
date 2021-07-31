@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     private formBuild: FormBuilder
   ) {
+    document.title = "Login Educación Peru 21";
     this.usuario = new Usuario();
   }
 
@@ -29,6 +30,7 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['sistema']);
     }
     this.createFormLogin();
+   
   }
 
 
@@ -58,5 +60,7 @@ export class LoginComponent implements OnInit {
 
     }
   }
+
+  
 
 }

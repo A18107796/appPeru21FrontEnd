@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { GenericEntity } from '../models/generic-entity';
 
 @Injectable({
@@ -13,7 +13,8 @@ export class CommonService<E extends GenericEntity> {
   constructor(protected httpClient: HttpClient) { }
 
   public listar(): Observable<E[]> {
-    return this.httpClient.get<E[]>(this.baseEndPoint);
+    return this.httpClient.get<E[]>(this.baseEndPoint).pipe(
+      map((res: any) => res.sort((a: any, b: any) => b.id - a.id )));
   }
 
   public getEntity(id: any): Observable<any> {

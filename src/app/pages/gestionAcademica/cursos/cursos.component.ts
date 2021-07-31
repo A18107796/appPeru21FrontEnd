@@ -1,8 +1,10 @@
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Curso } from 'src/app/models/curso';
 import { CursoService } from 'src/app/services/curso.service';
 import { ModalService } from 'src/app/services/modal.service';
+import Swal from 'sweetalert2';
 declare var jQuery: any;
 declare var $: any;
 
@@ -31,6 +33,17 @@ export class CursosComponent implements OnInit {
       this.cursos = res;
       this.createDataTable();
     });
+  }
+
+  eliminar(curso: Curso) {
+    this._sCursos.delete(curso.id).subscribe(
+      res => {
+        Swal.fire('Eliminado','','success');
+      },
+      err => {
+        Swal.fire('Error:',err.error.message,'error')
+      }
+    )
   }
 
   abrirForm() {

@@ -33,7 +33,7 @@
               <!-- text input -->
               <div class="form-group">
                 <label>Tipo Documento</label>
-                <select class="form-control animate__animated animate__fadeInUp animate__faster" formControlName="tipo_documento" (change)="activeNumDoc()"
+                <select class="custom-select rounded-2 animate__animated animate__fadeInUp animate__faster" formControlName="tipo_documento" (change)="activeNumDoc()"
                   [ngClass]="{'is-invalid': this._fs.campoNoValido('tipo_documento', formEmpleado, formSubmited)}"
                   [compareWith]="compareTipo">
                   <option [ngValue]="null">
@@ -69,7 +69,7 @@
               <!-- text input -->
               <div class="form-group">
                 <label>Genero:</label>
-                <select class="form-control animate__animated animate__fadeInUp animate__faster" formControlName="genero"
+                <select class="custom-select rounded-2 animate__animated animate__fadeInUp animate__faster" formControlName="genero"
                   [ngClass]="{'is-invalid': this._fs.campoNoValido('genero', formEmpleado, formSubmited)}">
                   <option [ngValue]="null">
                     <-- SELECCIONE GENERO -->
@@ -83,7 +83,7 @@
             <div class="col-sm-4">
               <div class="form-group">
                 <label>Estado Civil</label>
-                <select class="form-control animate__animated animate__fadeInUp animate__faster" formControlName="estado_civil"
+                <select class="custom-select rounded-2 animate__animated animate__fadeInUp animate__faster" formControlName="estado_civil"
                   [ngClass]="{'is-invalid': this._fs.campoNoValido('estado_civil', formEmpleado, formSubmited)}">
                   <option [ngValue]="null">
                     <-- SELECCIONE ESTADO CIVIL -->
@@ -138,7 +138,7 @@
               <!-- text input -->
               <div class="form-group">
                 <label>Departamento:</label>
-                <select class="form-control animate__animated animate__fadeInUp animate__faster"
+                <select class="custom-select rounded-2 animate__animated animate__fadeInUp animate__faster"
                   [ngClass]="{'is-invalid': this._fs.campoNoValido('departamento', formEmpleado, formSubmited)}"
                   formControlName="departamento" (change)="activeUbicacion('provincia')" [compareWith]="compareTipo">
                   <option [ngValue]="null">
@@ -154,7 +154,7 @@
             <div class="col-sm-4">
               <div class="form-group">
                 <label>Provincia</label>
-                <select class="form-control animate__animated animate__fadeInUp animate__faster" formControlName="provincia"
+                <select class="custom-select rounded-2 animate__animated animate__fadeInUp animate__faster" formControlName="provincia"
                   [ngClass]="{'is-invalid': this._fs.campoNoValido('provincia', formEmpleado, formSubmited)}"
                   (change)="activeUbicacion('distrito')" [compareWith]="compareTipo">
                   <option [ngValue]="null">
@@ -168,7 +168,7 @@
             <div class="col-sm-4">
               <div class="form-group">
                 <label>Distrito</label>
-                <select class="form-control animate__animated animate__fadeInUp animate__faster" formControlName="distrito"
+                <select class="custom-select rounded-2 animate__animated animate__fadeInUp animate__faster" formControlName="distrito"
                   [ngClass]="{'is-invalid': this._fs.campoNoValido('distrito', formEmpleado, formSubmited)}"
                   [compareWith]="compareTipo">
                   >
@@ -196,7 +196,7 @@
 
               <div class="form-group">
                 <label>Cargo</label>
-                <select class="form-control animate__animated animate__fadeInUp animate__faster" formControlName="cargo"
+                <select class="custom-select rounded-2 animate__animated animate__fadeInUp animate__faster" formControlName="cargo"
                   [ngClass]="{'is-invalid': this._fs.campoNoValido('cargo', formEmpleado, formSubmited)}"
                   [compareWith]="compareTipo">
                   <option [ngValue]="null">

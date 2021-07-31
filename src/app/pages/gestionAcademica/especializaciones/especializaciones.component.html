@@ -4,8 +4,9 @@
             <div class="col-lg-12">
                 <div class="card card-pink card-outline">
                     <div class="card-header text-center">
-                        <h5 class="card-title m-0">Lista de Especializaciones</h5>
+                        <h5 class="card-title m-0">Especializaciones</h5>
                     </div>
+
                     <div class="card-body">
                         <div class="row">
                             <div class="col-lg-10">
@@ -21,6 +22,13 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+
+                                        <tr class="text-center" *ngIf="especializaciones.length <= 0">
+                                            <th colspan="6">
+                                                <i class="fas fa-2x fa-sync-alt fa-spin"></i>
+                                            </th>
+                                        </tr>
+
                                         <tr *ngFor="let especializacion of especializaciones">
                                             <td class="text-center">
                                                 {{ especializacion.id }}
@@ -63,6 +71,7 @@
                                     </button>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>

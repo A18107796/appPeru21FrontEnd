@@ -5,11 +5,10 @@ export class Usuario {
     email!: string;
     password!: string;
     enabled!: boolean;
-    empleado!: Empleado;
+    empleado: Empleado = new Empleado();
     roles!: string[];
 
     constructor() {
-        this.empleado = new Empleado();
         this.roles = [];
     }
 }

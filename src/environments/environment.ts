@@ -8,6 +8,8 @@ export const environment = {
 
 export const url_spring = "http://localhost:9078/peru21/api/"
 
+export const url_check_token = "http://localhost:9078/oauth/check_token"
+
 export const url = "http://localhost:9078/oauth/token"
 
 /*

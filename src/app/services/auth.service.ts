@@ -1,15 +1,19 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Empleado } from '../models/empleado';
 import { Usuario } from '../models/usuario';
-import { url } from 'src/environments/environment';
+import { url, url_check_token } from 'src/environments/environment';
 import { Observable } from 'rxjs';
+import { param } from 'jquery';
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+
+  private url = url_check_token;
+
   private _usuario!: Usuario;
-  private _token!: string;
+  private _token!: string | null;
   private urlAuth: string = url;
 
   constructor(private http: HttpClient) { }
@@ -63,7 +67,7 @@ export class AuthService {
     this._usuario.roles = payload.authorities;
     this._usuario.empleado.nombres = payload.nombres;
     this._usuario.empleado.id = payload.id_empleado;
-    this._usuario.empleado.genero = payload.email;
+    this._usuario.empleado.email = payload.email;
     localStorage.setItem("usuario", JSON.stringify(this._usuario));
   }
 
@@ -104,5 +108,24 @@ export class AuthService {
     localStorage.removeItem('token');
   }
 
+
+  checkToken(token: string) {
+    this._token = null;
+    const credenciales = btoa('angularapp' + ':' + '1234');
+    const httpHeaders = new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Authorization': 'Basic ' + credenciales
+    });
+
+    let params = new URLSearchParams();
+    params.set('grant_type', 'password');
+    params.set('username', 'admin');
+    params.set('password', '1234');
+
+    return this.http.post<any>(this.urlAuth, params.toString(), { headers: httpHeaders });
+  }
+
+
+ 
 
 }

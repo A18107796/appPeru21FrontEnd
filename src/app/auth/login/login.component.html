@@ -1,63 +1,35 @@
-<div class="login-page">
-  <div class="login-box">
-    <div class="card card-outline card-pink">
-      <div class="card-header text-center">
-        <a class="h1"><b>Educación </b>Peru 21</a>
-      </div>
-      <div class="card-body">
-        <p class="login-box-msg">Ingreso al sistema PERU 21</p>
+<section>
+  <div class="imgbx animate__animated animate__fadeInLeft">
+    <img src="/assets/dist/img/fondo2.jpg" alt="">
+  </div>
+  <div class="contentbox">
+    <div class="formbox animate__animated animate__fadeInUp">
+      <h2>INGRESO AL SISTEMA</h2>
+      <form id="loginForm" (ngSubmit)="login()" autocomplete="off" [formGroup]="formLogin">
+        <div class="inputbox"  [ngClass]="{'has-errors': formService.campoNoValido('email', formLogin, formSubmited)}">
+          <span>E-mail</span>
+          <input type="email" name="email" class="" placeholder="E-mail"
+            [ngClass]="{'is-invalid': formService.campoNoValido('email', formLogin, formSubmited)}" id="email"
+            formControlName="email">
+          <label class="error invalid-feedback"> Ingrese E-mail</label>
+        </div>
 
-        <form id="loginForm" (ngSubmit)="login()" autocomplete="off" [formGroup]="formLogin">
-          <div class="input-group mb-3">
-            <input type="email" class="form-control"
-              [ngClass]="{'is-invalid': formService.campoNoValido('email', formLogin, formSubmited)}" id="email"
-              placeholder="Email" formControlName="email">
-            <div class="input-group-append">
-              <div class="input-group-text">
-                <span class="fas fa-envelope"></span>
-              </div>
-            </div>
-            <span class="error invalid-feedback"
-              *ngIf="formService.campoNoValido('email', formLogin, formSubmited)">Porfavor ingrese
-              su email y que sea valido.</span>
-          </div>
-          <div class="input-group mb-3">
-            <input type="password" class="form-control"
-              [ngClass]="{'is-invalid': formService.campoNoValido('password', formLogin, formSubmited)}" id="password"
-              placeholder="Contraseña" formControlName="password">
-            <div class="input-group-append">
-              <div class="input-group-text">
-                <span class="fas fa-lock"></span>
-              </div>
-            </div>
-            <span class="error invalid-feedback"
-              *ngIf="formService.campoNoValido('password', formLogin, formSubmited)">Porfavor
-              ingrese una contraseña</span>
-          </div>
-          <div class="row">
-            <div class="col-8">
-              <div class="icheck-primary">
-                <input type="checkbox" id="remember">
-                <label for="remember">
-                  Recordar
-                </label>
-              </div>
-            </div>
-            <!-- /.col -->
-            <div class="col-4">
-              <button type="submit" class="btn bg-pink btn-block">INGRESAR</button>
-            </div>
-            <!-- /.col -->
-          </div>
-        </form>
-        <!-- /.social-auth-links -->
+        <div class="inputbox"  [ngClass]="{'has-errors': formService.campoNoValido('password', formLogin, formSubmited)}">
+          <span>Password</span>
+          <input type="password" name="email" placeholder="Contraseña"
+            [ngClass]="{'is-invalid': formService.campoNoValido('password', formLogin, formSubmited)}" id="password"
+            formControlName="password">
+          <label class="error invalid-feedback"> Ingrese Contraseña</label>
 
-        <p class="mb-1">
-          <a href="forgot-password.html">Olvide mi contraseña</a>
-        </p>
-      </div>
-      <!-- /.card-body -->
+        </div>
+        <div class="remember">
+          <label><input type="checkbox" name=""> Remember me</label>
+        </div>
+        <div class="inputbox">
+          <input type="submit" value="INGRESAR" name="ingresar">
+        </div>
+
+      </form>
     </div>
   </div>
-  <!-- /.login-box -->
-</div>
+</section>

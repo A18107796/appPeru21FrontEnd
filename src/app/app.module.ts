@@ -8,11 +8,13 @@ import { AuthModule } from './auth/auth.module';
 import { AppComponent } from './app.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './auth/interceptors/token.interceptor';
+import { FiltroPipe } from './pipes/filtro.pipe';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    
 
   ],
   imports: [

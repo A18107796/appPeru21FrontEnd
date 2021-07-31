@@ -3,6 +3,7 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { filter, map } from 'rxjs/operators';
 import { Cargo } from 'src/app/models/cargo';
 import { Departamento } from 'src/app/models/departamento';
 import { Distrito } from 'src/app/models/distrito';
@@ -108,8 +109,17 @@ export class FormEmpleadoComponent implements OnInit {
   }
 
   getCargos() {
-    this._empS.getCargos().subscribe(
+    this._empS.getCargos().pipe(
+      map(res => {
+        let filtrado = res.filter((res: any) => {
+          return res.id !== 5;
+        });
+        return filtrado;
+      })
+    ).subscribe(
       res => {
+        console.log(res);
+        
         this.cargos = res;
       }
     )
@@ -135,7 +145,7 @@ export class FormEmpleadoComponent implements OnInit {
   }
 
   mapForm() {
-    this.titulo =  "Modificar Empleado";
+    this.titulo = "Modificar Empleado";
     if (this.empleado.id) {
       this.formEmpleado.get('nombres')?.setValue(this.empleado.nombres);
       this.formEmpleado.get('apellidos')?.setValue(this.empleado.apellidos);
@@ -187,7 +197,7 @@ export class FormEmpleadoComponent implements OnInit {
       let dni = this.empleado.num_doc;
       let cargo = this.empleado.cargo;
       this.mapEmpleado();
-      this.empleado.id = id;  
+      this.empleado.id = id;
       this.empleado.email = email;
       this.empleado.tipo_documento = tipo_doc;
       this.empleado.num_doc = dni;
@@ -195,7 +205,7 @@ export class FormEmpleadoComponent implements OnInit {
       this._empS.update(this.empleado).subscribe(
         res => {
           console.log(res);
-          
+
           Swal.fire('Listo', 'Empleado Actualizado Correctamente', 'success');
           this.location.back();
         },
@@ -245,19 +255,32 @@ export class FormEmpleadoComponent implements OnInit {
   }
 
   save() {
-    this._empS.create(this.empleado).subscribe(
-      res => {
-        console.log(res);
-        Swal.fire('Listo', 'Empleado creado correctamente, informe al nuevo empleado de sus datos para acceder al sistema.', 'success');
-        this.location.back();
-      },
-      err => {
-        Swal.fire('Error', 'Parece que ocurrio un error interno, intenedelo de nuevo.', 'error');
-        console.log(err);
-        window.location.reload();
+    Swal.fire({
+      title: '¿Los datos son correctos?',
+      text: "Verifique los datos antes de proceder, recuerda que los campos DNI, E-MAIL, CARGO no se podrá modificar.",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Continuar',
+      cancelButtonText: 'Verificar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this._empS.create(this.empleado).subscribe(
+          res => {
+            console.log(res);
+            Swal.fire('Listo', 'Empleado creado correctamente, informe al nuevo empleado de sus datos para acceder al sistema.', 'success');
+            this.location.back();
+          },
+          err => {
+            Swal.fire('Error', 'Parece que ocurrio un error interno, intenedelo de nuevo.', 'error');
+            window.location.reload();
 
+          }
+        )
       }
-    )
+    });
+
   }
 
   activeUbicacion(campo: string) {

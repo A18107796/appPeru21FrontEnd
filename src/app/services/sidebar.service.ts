@@ -18,14 +18,23 @@ export class SidebarService {
       icono: 'fas fa-university',
       submenu: [
         { titulo: 'Especializaciones', url: 'especializaciones' },
-        { titulo: 'Cursos', url: 'cursos' }
+        { titulo: 'Cursos', url: 'cursos' },
+        { titulo: 'Periodos', url: 'periodos' }
       ]
     },
     {
       titulo: 'Mantenimientos',
       icono: 'fas fa-user-friends',
       submenu: [
-        { titulo: 'Empleados', url: 'empleados' }
+        { titulo: 'Empleados', url: 'empleados' },
+        { titulo: 'Estudiantes', url: 'estudiantes' }
+      ]
+    },
+    {
+      titulo: 'Operaciones',
+      icono: 'fas fa-book',
+      submenu: [
+        { titulo: 'Matricular', url: 'matricular' },
       ]
     }
   ];

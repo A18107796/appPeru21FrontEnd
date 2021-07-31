@@ -49,16 +49,17 @@ export class EmpleadosComponent implements OnInit {
         )
       }
     })
-   
+
   }
 
   createDataTable() {
 
     $(function () {
-      $("#example1").DataTable({
+      $("#ex1").DataTable({
         "responsive": true, "lengthChange": false, "autoWidth": false,
-        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-      }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+        "order": [[0,'desc']]
+      }).buttons().container().appendTo('#ex1_wrapper .col-md-6:eq(0)');
       /*    
          $('#example1').dataTable().fnClearTable();
          $('#example1').dataTable().fnDestroy(); */
@@ -68,7 +69,7 @@ export class EmpleadosComponent implements OnInit {
   }
 
   deleteTable() {
-    $('#example1').dataTable().fnDestroy();
+    $('#ex1').dataTable().fnDestroy();
   }
 
 }

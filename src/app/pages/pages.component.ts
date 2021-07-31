@@ -13,17 +13,22 @@ declare var jQuery: any;
 })
 export class PagesComponent implements OnInit {
 
-  constructor(private themeService: ThemeService, private authService: AuthService, private router: Router) { 
-    if(!authService.isAuthenticated()){
+  constructor(private themeService: ThemeService, private authService: AuthService, private router: Router) {
+    if (!authService.isAuthenticated()) {
       this.router.navigate(['login']);
     }
+
+    console.log(new Date().getTime());
+    
+
+ 
   }
 
   ngOnInit(): void {
     this.themeService.setLocalTheme();
   }
 
-  
+
 
 }
 
