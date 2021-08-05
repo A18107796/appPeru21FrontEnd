@@ -9,11 +9,12 @@ import { throwError } from 'rxjs';
 import { Estado } from '../enums/estado';
 import { Curso } from '../models/curso';
 import { CommonService } from './common.service';
+import { CommonServiceStatusService } from './common-service-status.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class EspecializacionService extends CommonService<Especializacion> {
+export class EspecializacionService extends CommonServiceStatusService<Especializacion> {
 
 
   protected baseEndPoint = url_spring + 'especializaciones';

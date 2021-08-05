@@ -4,22 +4,25 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { url, url_spring } from 'src/environments/environment';
 import { Matricula } from '../models/matricula';
+import { CommonServiceStatusService } from './common-service-status.service';
 import { CommonService } from './common.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class MatriculaService {
-  private endpoint = url_spring + "matriculas";
-  constructor(private httpClient: HttpClient) {
+export class MatriculaService extends CommonServiceStatusService<Matricula>{
+   baseEndPoint = url_spring + "matriculas";
+
+  constructor(httpClient: HttpClient) {
+    super(httpClient);
   }
 
   matricular(matricula: Matricula): Observable<any> {
-    return this.httpClient.post<any>(`${this.endpoint}/matricular`, matricula);
+    return this.httpClient.post<any>(`${this.baseEndPoint}/matricular`, matricula);
   }
 
   getMatricula(id: number): Observable<any> {
-    return this.httpClient.get<any>(`${this.endpoint}/` + id).pipe(
+    return this.httpClient.get<any>(`${this.baseEndPoint}/` + id).pipe(
       catchError(err => {
         return throwError(err);
       })
@@ -27,7 +30,7 @@ export class MatriculaService {
   }
 
   getMatriculas(): Observable<any> {
-    return this.httpClient.get<any>(this.endpoint).pipe(
+    return this.httpClient.get<any>(this.baseEndPoint).pipe(
       map(res => res.sort((a: any, b: any) => a - b))
     );
   }

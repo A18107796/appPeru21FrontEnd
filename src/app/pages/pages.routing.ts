@@ -13,6 +13,9 @@ import { EstudiantesComponent } from './mantenimientos/estudiantes/estudiantes.c
 import { FormEstudiantesComponent } from './mantenimientos/estudiantes/form-estudiantes/form-estudiantes.component';
 import { PeriodosComponent } from './gestionAcademica/periodos/periodos.component';
 import { MatriculasComponent } from './operaciones/matriculas/matriculas.component';
+import { DetallePeriodoComponent } from './gestionAcademica/periodos/detalle-periodo/detalle-periodo.component';
+import { ListaMatriculasComponent } from './operaciones/lista-matriculas/lista-matriculas.component';
+import { DetalleMatriculaComponent } from './operaciones/lista-matriculas/detalle-matricula/detalle-matricula.component';
 
 
 export const routes: Routes = [
@@ -23,10 +26,13 @@ export const routes: Routes = [
             { path: 'dashboard', component: DashboardComponent, data: { titulo: 'Dashboard' } },
             { path: 'especializaciones', component: EspecializacionesComponent, data: { titulo: 'Especializaciones' } },
             { path: 'matricular', component: MatriculasComponent, data: { titulo: 'Matricular Estudiante' } },
+            { path: 'matriculas', component: ListaMatriculasComponent, data: { titulo: 'Matriculas' } },
+            { path: 'matriculas/detalle/:id', component: DetalleMatriculaComponent, data: { titulo: 'Detalle Matricula' } },
             { path: 'especializaciones/edit/:id', component: EditEspecializacionesComponent, data: { titulo: 'Formulario Especializaciones' } },
             { path: 'cursos/edit', component: FormCursosComponent, data: { titulo: 'Formulario Cursos' } },
             { path: 'cursos/edit/:id', component: FormCursosComponent, data: { titulo: 'Formulario Cursos' } },
             { path: 'periodos', component: PeriodosComponent, data: { titulo: 'Periodos' } },
+            { path: 'periodos/detalle/:id', component: DetallePeriodoComponent, data: { titulo: 'Detalle de Periodo' } },
             { path: 'empleados', component: EmpleadosComponent, data: { titulo: 'Empleados' } },
             { path: 'empleados/form', component: FormEmpleadoComponent, data: { titulo: 'Formulario Empleados' } },
             { path: 'empleados/form/:id', component: FormEmpleadoComponent, data: { titulo: 'Formulario Empleados' } },

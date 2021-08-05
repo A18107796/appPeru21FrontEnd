@@ -15,7 +15,7 @@ export class ReportsService {
 
 
   getLogo(): Observable<Blob> {
-    return this.http.get('assets/dist/img/peru21logo.png', { responseType: 'blob' });
+    return this.http.get('assets/dist/img/peru21logo.jpg', { responseType: 'blob' });
   }
 
   getImage() {

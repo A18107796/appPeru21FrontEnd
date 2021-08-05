@@ -32,10 +32,13 @@
                         <span class="error invalid-feedback">Por favor seleccione un tipo de especializacion.</span>
                     </div>
                 </div>
+                <div class="overlay" *ngIf="cargando">
+                    <i class="fas fa-2x fa-sync fa-spin"></i>
+                </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-default" data-dismiss="modal"
                         (click)="cerrarModal()">Salir</button>
-                    <button type="submit" class="btn bg-navy"><i class="fas fa-save mr-2"></i> Guardar</button>
+                    <button type="submit" class="btn bg-indigo"><i class="fas fa-save mr-2"></i> Guardar</button>
                 </div>
             </form>
         </div>

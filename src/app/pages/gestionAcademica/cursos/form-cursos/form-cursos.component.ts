@@ -14,6 +14,7 @@ import Swal from 'sweetalert2';
 })
 export class FormCursosComponent implements OnInit {
   formSubmited = false;
+  public cargando = false;
   titulo: string = "Crear Curso";
   formCurso!: FormGroup;
   curso!: Curso;
@@ -73,10 +74,26 @@ export class FormCursosComponent implements OnInit {
   guardarCurso() {
     if (this.curso && this.curso.id) {
       this.mapCurso();
+      this.cargando = true
       this._cService.update(this.curso).subscribe(
         res => {
-          Swal.fire('Alerta', 'Curso Actualizado correctamente.', 'success')
-          this.router.navigate(['sistema/cursos'])
+          setTimeout(() => {
+            this.cargando = false;
+            Swal.fire({
+              title: 'Correcto',
+              text: "Curso actualizado correctamente",
+              icon: 'success',
+              showCancelButton: false,
+              showConfirmButton: true,
+              confirmButtonColor: '#3085d6',
+              confirmButtonText: 'ok'
+            }).then((result) => {
+              if (result.isConfirmed) {
+                this.router.navigate(['sistema/cursos'])
+              }
+            })
+          }, 1500);
+
         },
         err => {
           console.log(err);
@@ -85,11 +102,26 @@ export class FormCursosComponent implements OnInit {
     } else {
       this.curso = new Curso();
       this.mapCurso();
+      this.cargando = true
       this.curso.estado = Estado.ACTIVO;
       this._cService.create(this.curso).subscribe(
         res => {
-          Swal.fire('Alerta', 'Curso registrado correctamente.', 'success')
-          this.router.navigate(['sistema/cursos'])
+          setTimeout(() => {
+            this.cargando = false;
+            Swal.fire({
+              title: 'Correcto',
+              text: "Curso creado correctamente.",
+              icon: 'success',
+              showCancelButton: false,
+              showConfirmButton: true,
+              confirmButtonColor: '#3085d6',
+              confirmButtonText: 'OK'
+            }).then((result) => {
+              if (result.isConfirmed) {
+                this.router.navigate(['sistema/cursos'])
+              }
+            })
+          }, 1500);
         },
         err => {
           console.log(err);

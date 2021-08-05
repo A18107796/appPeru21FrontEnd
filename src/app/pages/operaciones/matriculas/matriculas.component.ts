@@ -127,7 +127,7 @@ export class MatriculasComponent implements OnInit {
   }
 
   listarPeriodos() {
-    this._periodoS.listar().subscribe(res => this.periodos = res);
+    this._periodoS.getByStatus(Estado.INSCRIPCION_ABIERTA).subscribe(res => this.periodos = res);
   }
 
 
@@ -158,7 +158,7 @@ export class MatriculasComponent implements OnInit {
 
   submit() {
     this.formSubmited = true;
-    if (!this.formMatricula.valid) {
+    if (this.formMatricula.valid) {
       if (this._authService.isAuthenticated()) {
 
         this.mapMatricula();
@@ -173,7 +173,7 @@ export class MatriculasComponent implements OnInit {
           confirmButtonText: 'Si, continuar'
         }).then((result) => {
           if (result.isConfirmed) {
-     /*        this._mS.matricular(this.matricula).subscribe(
+            this._mS.matricular(this.matricula).subscribe(
               res => {
                 Swal.fire(
                   'Registrado',
@@ -192,11 +192,11 @@ export class MatriculasComponent implements OnInit {
                   'error'
                 )
               }
-            ) */
-            this._mS.getMatricula(10).subscribe(matricula => {
-              this.generatePDF(matricula.matricula);
-              this.location.back();
-            })
+            )
+            /*            this._mS.getMatricula(10).subscribe(matricula => {
+                         this.generatePDF(matricula.matricula);
+                         this.location.back();
+                       }) */
           }
         })
       }

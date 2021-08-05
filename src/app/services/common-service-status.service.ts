@@ -15,10 +15,14 @@ export class CommonServiceStatusService<T extends GenericEntityStatus> extends C
   }
 
 
-  changeStatus(entity: T, estado: Estado): Observable<any>{
+  changeStatus(entity: T, estado: Estado): Observable<any> {
     return this.httpClient.put(this.baseEndPoint + "/estado/" + entity.id + "?estado=" + estado, null);
   }
 
-  
+  getByStatus(estado: Estado): Observable<any> {
+    return this.httpClient.get(this.baseEndPoint + "/?estado=" + estado);
+  }
+
+
 
 }

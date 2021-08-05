@@ -5,12 +5,13 @@ import { catchError } from 'rxjs/operators';
 import { url_spring } from 'src/environments/environment';
 import { Estado } from '../enums/estado';
 import { Curso } from '../models/curso';
+import { CommonServiceStatusService } from './common-service-status.service';
 import { CommonService } from './common.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CursoService extends CommonService<Curso>{
+export class CursoService extends CommonServiceStatusService<Curso>{
   protected baseEndPoint = url_spring + 'cursos'
 
   public emitCursos: EventEmitter<Curso[]> = new EventEmitter();

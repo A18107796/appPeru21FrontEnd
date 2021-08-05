@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit } from '@angular/core';
 import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Estado } from 'src/app/enums/estado';
 import { Curso } from 'src/app/models/curso';
 import { Especializacion } from 'src/app/models/especializacion';
 import { EspecializacionTipo } from 'src/app/models/especializacion-tipo';
@@ -62,6 +63,7 @@ export class EditEspecializacionesComponent implements OnInit {
   }
 
 
+  
   listarTipos() {
     this._espService.getTipoEspecializaciones().subscribe(
       res => {
@@ -78,7 +80,7 @@ export class EditEspecializacionesComponent implements OnInit {
   }
 
   listarCursos() {
-    this._cursoService.listar().subscribe(res => {
+    this._cursoService.getByStatus(Estado.ACTIVO).subscribe(res => {
       this.cursosToModal = res;
       if (this.cursosToModal.length > 0) {
         this.especializacionBD.cursos.forEach(c => {

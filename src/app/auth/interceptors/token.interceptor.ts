@@ -31,6 +31,11 @@ export class TokenInterceptor implements HttpInterceptor {
           if(status === 503){
             Swal.fire('Sin Conexión', err.error.message, 'error');
           }
+          if(status === 0){
+            Swal.fire('Sin Conexion','El servidor no se encuentra activo, intentelo despues', 'error')
+            this.authService.logout();
+            this.router.navigateByUrl('/login')
+          }
           
           if(no_permiso === "access_denied"){
             Swal.fire('No tienes permisos','No tienes permisos suficientes','error');

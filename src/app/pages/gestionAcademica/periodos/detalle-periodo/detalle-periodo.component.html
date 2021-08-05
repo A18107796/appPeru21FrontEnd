@@ -1,0 +1,60 @@
+<section class="content ml-3 mr-3">
+    <div class="container-fluid animate__animated">
+        <form id="formMatricula">
+            <div class="card card-indigo border">
+                <div class="card-header text-center">
+                    <h5 class="card-title m-0">Detalle de Periodo</h5>
+                </div>
+
+                <div class="card-body">
+
+                    <div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label>Periodo:</label>
+                                    <input type="text"
+                                        class="form-control animate__animated animate__fadeInUp animate__faster"
+                                        placeholder="Periodo" disabled [value]="periodo.nombre">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Fecha Inicio:</label>
+                                    <input type="text"
+                                        class="form-control animate__animated animate__fadeInUp animate__faster"
+                                        placeholder="Fecha de Inicio" disabled [value]="periodo.fecha_inicio">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Fecha Fin:</label>
+                                    <input type="text"
+                                        class="form-control animate__animated animate__fadeInUp animate__faster"
+                                        placeholder="Fecha de Fin" disabled [value]="periodo.fecha_fin">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Estado:</label>
+                                    <input type="text"
+                                        class="form-control animate__animated animate__fadeInUp animate__faster"
+                                        placeholder="Estado" disabled [value]="periodo.estado">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row ">
+                            <div class="col-sm-12">
+                                <div class="text-center">
+                                    <button class="btn btn-danger pl-4 pr-4" routerLink="/sistema/periodos">Volver <- </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>

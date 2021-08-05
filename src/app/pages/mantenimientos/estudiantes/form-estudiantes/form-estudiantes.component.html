@@ -1,6 +1,6 @@
 <section class="content">
     <div class="container-fluid ">
-        <div class="card card-dark card-outline">
+        <div class="card card-indigo card-outline">
             <div class="card-header text-center">
                 <h5 class="card-title m-0"><strong>{{ titulo }} <i class="fas fa-user-alt"></i></strong></h5>
             </div>
@@ -12,7 +12,7 @@
                         <div class="col-sm-6">
                             <!-- text input -->
                             <div class="form-group">
-                                <label>Nombres</label>
+                                <label>Nombres: <strong class="text-danger">*</strong></label>
                                 <input type="text"
                                     class="form-control animate__animated animate__fadeInUp animate__faster"
                                     placeholder="Ingrese Nombres" formControlName="nombres"
@@ -22,7 +22,7 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label>Apellidos</label>
+                                <label>Apellidos: <strong class="text-danger">*</strong></label>
                                 <input type="text"
                                     class="form-control animate__animated animate__fadeInUp animate__faster"
                                     placeholder="Ingrese Apellidos" formControlName="apellidos"
@@ -36,7 +36,7 @@
                         <div class="col-sm-6">
                             <!-- text input -->
                             <div class="form-group">
-                                <label>Tipo Documento</label>
+                                <label>Tipo Documento: <strong class="text-danger">*</strong></label>
                                 <select class="custom-select rounded-2 animate__animated animate__fadeInUp animate__faster"
                                     formControlName="tipo_documento" (change)="activeNumDoc()"
                                     [ngClass]="{'is-invalid': this._fs.campoNoValido('tipo_documento', formEstudiante, formSubmited)}"
@@ -53,7 +53,7 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label>Num Documento</label>
+                                <label>Num Documento: <strong class="text-danger">*</strong></label>
                                 <div class="spinner-border spinner-border-sm" role="status" *ngIf="spinnerDNI">
                                     <span class="sr-only">Loading...</span>
                                 </div>
@@ -77,7 +77,7 @@
                         <div class="col-sm-4">
                             <!-- text input -->
                             <div class="form-group">
-                                <label>Genero:</label>
+                                <label>Genero: <strong class="text-danger">*</strong></label>
                                 <select class="custom-select rounded-2 animate__animated animate__fadeInUp animate__faster"
                                     formControlName="genero"
                                     [ngClass]="{'is-invalid': this._fs.campoNoValido('genero', formEstudiante, formSubmited)}">
@@ -92,7 +92,7 @@
                         </div>
                         <div class="col-sm-4">
                             <div class="form-group">
-                                <label>Estado Civil</label>
+                                <label>Estado Civil: <strong class="text-danger">*</strong></label>
                                 <select class="custom-select rounded-2 animate__animated animate__fadeInUp animate__faster"
                                     formControlName="estado_civil"
                                     [ngClass]="{'is-invalid': this._fs.campoNoValido('estado_civil', formEstudiante, formSubmited)}">
@@ -109,7 +109,7 @@
                         </div>
                         <div class="col-sm-4">
                             <div class="form-group">
-                                <label>Fecha Nacimiento</label>
+                                <label>Fecha Nacimiento: <strong class="text-danger">*</strong></label>
                                 <input type="date"
                                     class="form-control animate__animated animate__fadeInUp animate__faster"
                                     placeholder="Fecha Nacimiento" formControlName="fecha_nac"
@@ -122,7 +122,7 @@
                         <div class="col-sm-6">
                             <!-- text input -->
                             <div class="form-group">
-                                <label>Telefono:</label>
+                                <label>Telefono: <strong class="text-danger">*</strong></label>
                                 <input type="text"
                                     class="form-control animate__animated animate__fadeInUp animate__faster"
                                     placeholder="Ingrese Telefono" formControlName="telefono"
@@ -136,7 +136,7 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label>Email</label>
+                                <label>Email: <strong class="text-danger">*</strong></label>
                                 <input type="text"
                                     class="form-control animate__animated animate__fadeInUp animate__faster"
                                     placeholder="Ingrese Email" formControlName="email"
@@ -155,7 +155,7 @@
                         <div class="col-sm-4">
                             <!-- text input -->
                             <div class="form-group">
-                                <label>Departamento:</label>
+                                <label>Departamento: <strong class="text-danger">*</strong></label>
                                 <select class="custom-select rounded-2 animate__animated animate__fadeInUp animate__faster"
                                     [ngClass]="{'is-invalid': this._fs.campoNoValido('departamento', formEstudiante, formSubmited)}"
                                     formControlName="departamento" (change)="activeUbicacion('provincia')"
@@ -172,7 +172,7 @@
                         </div>
                         <div class="col-sm-4">
                             <div class="form-group">
-                                <label>Provincia</label>
+                                <label>Provincia: <strong class="text-danger">*</strong></label>
                                 <select class="custom-select rounded-2 animate__animated animate__fadeInUp animate__faster"
                                     formControlName="provincia"
                                     [ngClass]="{'is-invalid': this._fs.campoNoValido('provincia', formEstudiante, formSubmited)}"
@@ -187,7 +187,7 @@
                         </div>
                         <div class="col-sm-4">
                             <div class="form-group">
-                                <label>Distrito</label>
+                                <label>Distrito: <strong class="text-danger">*</strong></label>
                                 <select class="custom-select rounded-2 animate__animated animate__fadeInUp animate__faster"
                                     formControlName="distrito"
                                     [ngClass]="{'is-invalid': this._fs.campoNoValido('distrito', formEstudiante, formSubmited)}"
@@ -206,7 +206,7 @@
                         <div class="col-sm-8">
                             <!-- text input -->
                             <div class="form-group">
-                                <label>Dirección</label>
+                                <label>Dirección: <strong class="text-danger">*</strong></label>
                                 <input type="text"
                                     class="form-control animate__animated animate__fadeInUp animate__faster"
                                     placeholder="Ingrese Nombres" formControlName="direccion"
@@ -219,7 +219,7 @@
                             <!-- text input -->
 
                             <div class="form-group">
-                                <label>Sede</label>
+                                <label>Sede: <strong class="text-danger">*</strong></label>
                                 <select class="custom-select rounded-2 animate__animated animate__fadeInUp animate__faster"
                                     formControlName="sede"
                                     [ngClass]="{'is-invalid': this._fs.campoNoValido('sede', formEstudiante, formSubmited)}"

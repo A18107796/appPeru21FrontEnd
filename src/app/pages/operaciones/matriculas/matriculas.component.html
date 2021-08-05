@@ -1,7 +1,7 @@
 <section class="content ml-3 mr-3">
     <div class="container-fluid animate__animated">
         <form id="formMatricula" (ngSubmit)="submit()" [formGroup]="formMatricula">
-            <div class="card card-cyan border">
+            <div class="card card-indigo border">
                 <div class="card-header text-center">
                     <h5 class="card-title m-0">Registro de Matricula</h5>
                     <small class="float-right">Fecha: {{ hoy | date:'dd-MM-yyyy'}}</small>
@@ -14,7 +14,7 @@
                         <div class="row">
                             <div class="col-sm-7">
                                 <div class="form-group">
-                                    <label>Estudiante</label>
+                                    <label>Estudiante:</label>
                                     <input type="text"
                                         class="form-control animate__animated animate__fadeInUp animate__faster"
                                         [ngClass]="{'is-invalid': this.formService.campoNoValido('estudiante.nombres', formMatricula, formSubmited)}"
@@ -24,7 +24,7 @@
                             </div>
                             <div class="col-sm-5">
                                 <div class="form-group">
-                                    <label>DNI</label>
+                                    <label>DNI: <strong class="text-danger">*</strong></label>
                                     <div class="spinner-border spinner-border-sm ml-2 mb-1" role="status"
                                         *ngIf="spinnerDNI">
                                         <span class="sr-only">Loading...</span>
@@ -36,10 +36,10 @@
                                             placeholder="Ingrese DNI" (input)="setDNI($event)" formControlName="dni"
                                             maxlength="12">
                                         <div class="input-group-prepend">
-                                            <button type="button" class="btn btn-info" (click)="buscar()"
+                                            <button type="button" class="btn bg-indigo" (click)="buscar()"
                                                 [disabled]="disabled()">BUSCAR <i
                                                     class="fas fa-search ml-1"></i></button>
-                                            <button type="button" class="btn btn-primary"
+                                            <button type="button" class="btn bg-purple"
                                                 (click)="abrirModal()">SELECCIONAR
                                                 <i class="fas fa-eye ml-1"></i></button>
                                         </div>
@@ -52,7 +52,7 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label>Telefono</label>
+                                    <label>Telefono:</label>
                                     <input type="text"
                                         class="form-control animate__animated animate__fadeInUp animate__faster"
                                         placeholder="Telefono" formControlName="telefono">
@@ -61,7 +61,7 @@
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label>E-mail</label>
+                                    <label>E-mail:</label>
                                     <input type="text"
                                         class="form-control animate__animated animate__fadeInUp animate__faster"
                                         placeholder="Email" formControlName="email">
@@ -76,7 +76,7 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label>Especialización:</label>
+                                <label>Especialización: <strong class="text-danger">*</strong></label>
                                 <select class="custom-select rounded-2" formControlName="especializacion"
                                     [ngClass]="{'is-invalid': this.formService.campoNoValido('especializacion', formMatricula, formSubmited)}">
                                     <option [ngValue]="null">
@@ -91,7 +91,7 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label>Sede:</label>
+                                <label>Sede: <strong class="text-danger">*</strong></label>
                                 <select class="custom-select rounded-2" formControlName="sede"
                                 [ngClass]="{'is-invalid': this.formService.campoNoValido('sede', formMatricula, formSubmited)}">
                                     <option [ngValue]="null">
@@ -108,7 +108,7 @@
                     <div class="row">
                         <div class="col-sm-4">
                             <div class="form-group">
-                                <label>Turno:</label>
+                                <label>Turno: <strong class="text-danger">*</strong></label>
                                 <select class="custom-select rounded-2" formControlName="turno"
                                 [ngClass]="{'is-invalid': this.formService.campoNoValido('turno', formMatricula, formSubmited)}">
                                     <option [ngValue]="null">
@@ -122,22 +122,23 @@
                         </div>
                         <div class="col-sm-4">
                             <div class="form-group">
-                                <label>Numero de Cuotas:</label>
+                                <label>Numero de Cuotas: <strong class="text-danger">*</strong></label>
                                 <select class="custom-select rounded-2" formControlName="num_cuotas"
                                 [ngClass]="{'is-invalid': this.formService.campoNoValido('num_cuotas', formMatricula, formSubmited)}">
                                     <option [ngValue]="null">
                                         <-- SELECCIONE NUMERO DE CUOTAS -->
                                     </option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
+                                    <option value="6">12</option>
+                                    <option value="6">11</option>
+                                    <option value="6">10</option>
+                                    <option value="6">9</option>
                                 </select>
                                 <span class="error invalid-feedback">Por favor seleccione numero de cuotas.</span>
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="form-group">
-                                <label>Periodo:</label>
+                                <label>Periodo: <strong class="text-danger">*</strong></label>
                                 <select class="custom-select rounded-2" formControlName="periodo"
                                 [ngClass]="{'is-invalid': this.formService.campoNoValido('periodo', formMatricula, formSubmited)}">
                                     <option [ngValue]="null">
@@ -154,7 +155,7 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="form-group">
-                                <label>Detalles:</label>
+                                <label>Detalles: <strong class="text-danger">*</strong></label>
                                 <input type="text"
                                     class="form-control animate__animated animate__fadeInUp animate__faster"
                                     placeholder="Detalles de matricula" formControlName="detalles">

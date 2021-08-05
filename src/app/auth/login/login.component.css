@@ -25,7 +25,7 @@ section .imgbx::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(225deg, #e91e63, #03a9f4);
+    background: linear-gradient(225deg, #5806F0, #6c56fe7b);
     z-index: 1;
     mix-blend-mode: screen;
 }
@@ -57,7 +57,7 @@ section .contentbox .formbox h2 {
     font-size: 1.5em;
     text-transform: uppercase;
     margin-bottom: 20px;
-    border-bottom: 4px solid #ff4584;
+    border-bottom: 4px solid #5806F0;
     display: inline-block;
     letter-spacing: 1px;
 }
@@ -90,7 +90,7 @@ section .contentbox .formbox .inputbox input {
 }
 
 section .contentbox .formbox .has-errors input {
-    border: 1px solid #e91e1e;
+    border: 1px solid #5806F0;
 }
 
 section .contentbox .formbox .has-errors label{
@@ -101,7 +101,7 @@ section .contentbox .formbox .has-errors label{
 
 
 section .contentbox .formbox .inputbox input[type="submit"] {
-    background: #ff4584;
+    background: #5806F0;
     color: #fff;
     outline: none;
     border: none;
@@ -110,7 +110,7 @@ section .contentbox .formbox .inputbox input[type="submit"] {
 }
 
 section .contentbox .formbox .inputbox input[type="submit"]:hover {
-    background: #f53677;
+    background: #5806F0;
 }
 
 section .contentbox .formbox .remember {

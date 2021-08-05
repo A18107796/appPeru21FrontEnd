@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { filter, map } from 'rxjs/operators';
+import { Estado } from 'src/app/enums/estado';
 import { Cargo } from 'src/app/models/cargo';
 import { Departamento } from 'src/app/models/departamento';
 import { Distrito } from 'src/app/models/distrito';
@@ -266,6 +267,7 @@ export class FormEmpleadoComponent implements OnInit {
       cancelButtonText: 'Verificar'
     }).then((result) => {
       if (result.isConfirmed) {
+        this.empleado.estado = Estado.INACTIVO;
         this._empS.create(this.empleado).subscribe(
           res => {
             console.log(res);

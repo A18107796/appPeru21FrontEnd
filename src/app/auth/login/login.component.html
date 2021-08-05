@@ -3,7 +3,7 @@
     <img src="/assets/dist/img/fondo2.jpg" alt="">
   </div>
   <div class="contentbox">
-    <div class="formbox animate__animated animate__fadeInUp">
+    <div class="formbox animate__animated animate__fadeInUp border p-5">
       <h2>INGRESO AL SISTEMA</h2>
       <form id="loginForm" (ngSubmit)="login()" autocomplete="off" [formGroup]="formLogin">
         <div class="inputbox"  [ngClass]="{'has-errors': formService.campoNoValido('email', formLogin, formSubmited)}">
@@ -23,7 +23,7 @@
 
         </div>
         <div class="remember">
-          <label><input type="checkbox" name=""> Remember me</label>
+          <label><input type="checkbox" name=""> Recordarme</label>
         </div>
         <div class="inputbox">
           <input type="submit" value="INGRESAR" name="ingresar">

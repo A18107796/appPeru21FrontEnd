@@ -1,0 +1,58 @@
+<div class="modal fondo-modal" [ngClass]="modalService.getOcultarModal()?'':'modal-display-block'" id="modal-lg"
+    style="padding-right: 17px; " aria-modal="true" role="dialog">
+    <div class="modal-dialog  modal-xl animate__animated animate__fadeInDown">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">ALERTAS</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="cerrar()">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <span>Hoy es <strong class="text-danger">{{fecha_hoy |date:'yyyy-MM-dd' }}</strong> y existen periodos
+                    con fechas atrasadas <strong>ACTUALIZAR INFORMACION</strong></span>
+                <div class="card-body table-responsive p-0" style="height: 120px;">
+                    <table class="table table-head-fixed text-nowrap table-bordered mt-2">
+                        <thead>
+                            <tr>
+                                <th class="text-center">#</th>
+                                <th>Periodo</th>
+                                <th>Fecha Inicio</th>
+                                <th>Fecha Fin</th>
+                                <th>Año Fin</th>
+                                <th>Estado</th>
+                                <th class="text-center">Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let p of periodos" class="text-danger">
+                                <td class="text-center">{{p.id}}</td>
+                                <td>{{p.nombre}}</td>
+                                <td>{{p.fecha_inicio}}</td>
+                                <td>{{p.fecha_fin}}</td>
+                                <td>{{p.anio}}</td>
+                                <td class="text-center bg-dark">{{p.estado}}</td>
+                                <td class="text-center">
+                                    <button type="button" class="btn btn-sm bg-indigo pl-3 pr-3"
+                                        (click)="actualizarInformacion(p.id,activo)">Actualizar<i
+                                            class="fas fa-circle-notch ml-2"></i></button>
+                                </td>
+                                <!-- 
+                                <td class="text-center"><button type="button" class="btn btn-sm btn-info"
+                                        (click)="enviarCurso(curso)">Enviar</button> </td> -->
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <hr>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="cerrar()">Salir</button>
+
+            </div>
+
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

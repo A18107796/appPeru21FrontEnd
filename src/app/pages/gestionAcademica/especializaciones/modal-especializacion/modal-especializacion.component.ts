@@ -18,6 +18,7 @@ import Swal from 'sweetalert2';
 export class ModalEspecializacionComponent implements OnInit {
   @Output() myEvent = new EventEmitter();
   public formSubmited = false;
+  public cargando = false;
   especializacion!: Especializacion;
   selectEspecializaciones: EspecializacionTipo[] = [];
   formEspecializacion!: FormGroup;
@@ -73,24 +74,27 @@ export class ModalEspecializacionComponent implements OnInit {
   registrarEspecializacion() {
     if (this.especializacion != null) {
       this.especializacion.estado = Estado.ACTIVO;
+      this.cargando = true;
       this.especializacionService.create(this.especializacion).subscribe(
         res => {
-          Swal.fire({
-            title: 'Guardado',
-            text: "¿Desea agregar cursos a la especializacion registrada?",
-            icon: 'success',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Si'
-          }).then((result) => {
-            if (result.isConfirmed) {
-              this.router.navigate(['sistema/especializaciones/edit', res.id])
-            }
-          })
-          this.cerrarModal();
-          this.myEvent.emit(null);
-
+          setTimeout(() => {
+            this.cargando = false;
+            Swal.fire({
+              title: 'Guardado',
+              text: "¿Desea agregar cursos a la especializacion registrada?",
+              icon: 'success',
+              showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: 'Si'
+            }).then((result) => {
+              if (result.isConfirmed) {
+                this.router.navigate(['sistema/especializaciones/edit', res.id])
+              }
+            })
+            this.cerrarModal();
+            this.myEvent.emit(null);  
+          }, 1000);
         },
         err => {
           console.log(err);

@@ -1,9 +1,10 @@
 <!-- Main Sidebar Container -->
-<aside class="main-sidebar sidebar-dark-cyan elevation-4">
+<aside class="main-sidebar sidebar-dark-indigo elevation-4">
   <!-- Brand Logo -->
   <a class="brand-link">
-    <img src="/assets/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-      style="opacity: 0.8" />
+    <!-- <img src="/assets/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+      style="opacity: 0.8" /> -->
+      <img src="/assets/dist/img/peru21logo.ico" alt="PERU21 Logo" class="brand-image img-circle elevation-3"/>
     <span class="brand-text font-weight-light"> <strong>P E R U 2 1</strong></span>
 
   </a>
@@ -13,7 +14,7 @@
     <!-- Sidebar user (optional) -->
     <div class="user-panel mt-3 pb-3 mb-3 d-flex" *ngIf="authService.usuario">
      
-      <div class="border rounded-circle pl-3 pr-3 text-center text-light bg-primary ml-2">
+      <div class="border rounded-circle pl-3 pr-3 text-center text-light bg-indigo ml-2">
         <h4 class="mt-2">{{ authService.usuario.empleado.nombres.charAt(0) }}</h4>
       </div>
       <div class="info mt-2">
@@ -42,7 +43,7 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item" *ngFor="let subMenu of itemMenu.submenu">
-              <a [routerLink]="subMenu.url" class="nav-link " routerLinkActive="active bg-cyan">
+              <a [routerLink]="subMenu.url" class="nav-link " routerLinkActive="active bg-indigo">
                 <i class="far fa-circle nav-icon"></i>
                 <p>{{subMenu.titulo}}</p>
               </a>

@@ -2,61 +2,79 @@
     <div class="row">
         <div class="col-md-12">
             <div class="container-fluid animate__animated">
-                <div class="card card-info card-outline">
+                <div class="card card-indigo card-outline">
                     <div class="card-header text-center">
                         <h5 class="card-title m-0"><i class="fas fa-clock"></i> Periodos</h5>
                     </div>
                     <div class="card-body">
                         <div class="text-right pr-2">
+                            <button class="btn btn-app bg-info animate__animated animate__fadeInLeft"
+                                (click)="sincronizar()">
+                                <i class="fas fa-circle-notch"></i> SINCRONIZAR
+                            </button>
+                            <button class="btn btn-app bg-danger animate__animated animate__fadeInLeft"
+                                (click)="abrirModalAlerts()">
+                                <i class="fas fa-exclamation-circle"></i> ALERTAS
+                            </button>
                             <button class="btn btn-app bg-green animate__animated animate__fadeInLeft"
                                 (click)="abrirModal()">
                                 <i class="fas fa-plus"></i> NUEVO
                             </button>
                         </div>
-                    <div class="table-responsive">
-                        <table id="example1" class="table table-hover border">
-                            <thead>
-                                <tr class="text-center bg-navy">
-                                    <th>ID</th>
-                                    <th>DESCRIPCIÓN</th>
-                                    <th>FECHA INICIO</th>
-                                    <th>FECHA FIN</th>
-                                    <th>ESTADO</th>
-                                </tr>
-                            </thead>
-                            <tbody>
+                        <div class="table-responsive">
+                            <table id="example1" class="table table-hover border">
+                                <thead>
+                                    <tr class="text-center bg-indigo">
+                                        <th>ID</th>
+                                        <th>DESCRIPCIÓN</th>
+                                        <th>FECHA INICIO</th>
+                                        <th>FECHA FIN</th>
+                                        <th>AÑO</th>
+                                        <th>ESTADO</th>
+                                        <th>Ver</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
 
-                                <tr class="text-center" *ngIf="periodos.length <= 0">
-                                    <th colspan="6">
-                                        <i class="fas fa-2x fa-sync-alt fa-spin"></i>
-                                    </th>
-                                </tr>
+                                    <tr class="text-center" *ngIf="periodos.length <= 0">
+                                        <th colspan="6">
+                                            <i class="fas fa-2x fa-sync-alt fa-spin"></i>
+                                        </th>
+                                    </tr>
 
-                                <tr *ngFor="let p of periodos">
-                                    <td class="text-center">
-                                        {{ p.id }}
-                                    </td>
-                                    <td>
-                                        {{ p.nombre}}
-                                    </td>
-                                    <td class="text-center">
-                                        {{ p.fecha_inicio}}
-                                    </td>
-                                    <td class="text-center">
-                                        {{ p.fecha_fin}}
-                                    </td>
-                                    <td class="text-center">
-                                        <span class="badge"
-                                            [ngClass]="getEstado(p.fecha_fin) === 'EN PROCESO'?'bg-yellow':'badge-success'">
-                                            {{ getEstado(p.fecha_fin)}}
-                                        </span>
+                                    <tr *ngFor="let p of periodos">
+                                        <td class="text-center">
+                                            {{ p.id }}
+                                        </td>
+                                        <td>
+                                            {{ p.nombre}}
+                                        </td>
+                                        <td class="text-center">
+                                            {{ p.fecha_inicio}}
+                                        </td>
+                                        <td class="text-center">
+                                            {{ p.fecha_fin}}
+                                        </td>
+                                        <td class="text-center">
+                                            {{ p.anio}}
+                                        </td>
+                                        <td class="text-center">
+                                            <span class="badge" [ngClass]="
+                                                [p.estado === 'ACTIVO'?'bg-success':'',
+                                                p.estado === 'INSCRIPCION_ABIERTA'?'bg-info':'',
+                                                p.estado === 'PENDIENTE'?'bg-warning':'']">
+                                                {{p.estado}}
+                                            </span>
+                                        </td>
+                                        <td class="text-center">
+                                            <a [routerLink]="['detalle',p.id]"><i class="fa fa-eye"></i></a>
+                                        </td>
 
-                                    </td>
-                                </tr>
-                            </tbody>
+                                    </tr>
+                                </tbody>
 
-                        </table>
-                    </div>
+                            </table>
+                        </div>
 
 
                     </div>
@@ -67,3 +85,4 @@
     </div>
 </section>
 <app-modal-create-periodo></app-modal-create-periodo>
+<app-modal-alerta-periodos></app-modal-alerta-periodos>

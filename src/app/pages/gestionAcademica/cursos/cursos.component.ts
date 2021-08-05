@@ -1,6 +1,7 @@
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Estado } from 'src/app/enums/estado';
 import { Curso } from 'src/app/models/curso';
 import { CursoService } from 'src/app/services/curso.service';
 import { ModalService } from 'src/app/services/modal.service';
@@ -15,7 +16,9 @@ declare var $: any;
   styleUrls: ['./cursos.component.css']
 })
 export class CursosComponent implements OnInit {
-
+  public cargando = false;
+  public activo = Estado.ACTIVO;
+  public inactivo = Estado.INACTIVO;
   cursos: Curso[] = [];
   constructor(
     private router: Router,
@@ -25,25 +28,68 @@ export class CursosComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.listar();
+    this.listar(this.activo);
   }
 
-  listar() {
-    this._sCursos.listar().subscribe(res => {
+  listar(estado: Estado) {
+    this._sCursos.getByStatus(estado).subscribe(res => {
+      this.cursos = [];
+      this.deleteTable()
+      this.cargando = true;
+
+      setTimeout(() => {
       this.cursos = res;
+      this.cargando = false;
       this.createDataTable();
+      }, 200);
     });
   }
 
   eliminar(curso: Curso) {
-    this._sCursos.delete(curso.id).subscribe(
+    this._sCursos.changeStatus(curso, Estado.INACTIVO).subscribe(
       res => {
         Swal.fire('Eliminado','','success');
+        window.location.reload();
       },
       err => {
         Swal.fire('Error:',err.error.message,'error')
       }
     )
+  }
+
+  activar(curso: Curso){
+    this._sCursos.changeStatus(curso, Estado.ACTIVO).subscribe(
+      res => {
+        window.location.reload();
+      },
+      err => {
+        Swal.fire('Error:',err.error.message,'error')
+      }
+    )
+  }
+
+  
+
+
+  inactive(curso: Curso) {
+    Swal.fire({
+      title: 'ELIMINAR',
+      text: "¿Desea inactivar el Curso?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this._sCursos.changeStatus(curso, Estado.INACTIVO).subscribe(
+          res => {
+            window.location.reload();
+          }
+        )
+      }
+    })
+  
   }
 
   abrirForm() {
@@ -64,4 +110,9 @@ export class CursosComponent implements OnInit {
     });
 
   }
+
+  deleteTable() {
+    $('#example1').dataTable().fnDestroy();
+  }
+
 }

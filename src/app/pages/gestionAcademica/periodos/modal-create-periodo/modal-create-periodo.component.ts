@@ -38,20 +38,25 @@ export class ModalCreatePeriodoComponent implements OnInit {
     this.formPeriodo = this._fb.group({
       nombre: [null, [Validators.required]],
       fecha_inicio: [null, [Validators.required, MyValidation.dateMinimun(res?.toString())]],
-      fecha_fin: [null, [Validators.required, MyValidation.dateMinimun(res?.toString())]]
+      cada: [null, [Validators.required]],
+      duracion: [null, [Validators.required]]
     })
   }
 
   submit() {
     this.formSubmited = true;
     if (this.formPeriodo.valid) {
-      this.periodo = this.formPeriodo.value;
-      this._pService.create(this.periodo).subscribe(
+      const nombre = this.formPeriodo.get('nombre')?.value
+      const fecha_inicio = this.formPeriodo.get('fecha_inicio')?.value
+      const cada = this.formPeriodo.get('cada')?.value
+      const duracion = this.formPeriodo.get('duracion')?.value
+      this._pService.createYearAcademic(fecha_inicio, cada, duracion).subscribe(
         res => {
           this.cerrarModal();
+          console.log(res);
           Swal.fire({
             title: 'Correcto',
-            text: "Periodo Academico creado correctamente",
+            text: "Se registraron",
             icon: 'success',
             showCancelButton: false,
             showConfirmButton: true,
@@ -60,7 +65,7 @@ export class ModalCreatePeriodoComponent implements OnInit {
             confirmButtonText: 'OK'
           }).then((result) => {
             if (result.isConfirmed) {
-              
+
               window.location.reload();
             }
           })

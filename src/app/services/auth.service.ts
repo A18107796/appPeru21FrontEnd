@@ -3,8 +3,9 @@ import { Injectable } from '@angular/core';
 import { Empleado } from '../models/empleado';
 import { Usuario } from '../models/usuario';
 import { url, url_check_token } from 'src/environments/environment';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { param } from 'jquery';
+import { catchError } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
@@ -51,7 +52,17 @@ export class AuthService {
     params.set('username', usuario.email);
     params.set('password', usuario.password);
 
-    return this.http.post<any>(this.urlAuth, params.toString(), { headers: httpHeaders });
+    return this.http.post<any>(this.urlAuth, params.toString(), { headers: httpHeaders }).pipe(
+      catchError(
+        err => {
+          if (err.error.error === "invalid_grant") {
+            return throwError({ error: { error: 'Incorrecto', error_description: 'Clave o Contraseña Erronea' } })
+          } else {
+            return throwError(err);
+          }
+        }
+      )
+    );
   }
 
   guardarToken(accessToken: string): void {
@@ -126,6 +137,6 @@ export class AuthService {
   }
 
 
- 
+
 
 }

@@ -1,66 +1,77 @@
-<div class="content">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="card card-pink card-outline">
-                    <div class="card-header text-center">
-                        <h5 class="card-title m-0">Cursos</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-lg-10">
-                                <table id="example1" class="table table-hover border">
-                                    <thead>
-                                        <tr class="text-center bg-cyan">
-                                            <th>CODIGO</th>
-                                            <th>ESPECIALIZACION</th>
-                                            <th>ESTADO</th>
-                                            <th>ACCIONES</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr class="text-center" *ngIf="cursos.length <= 0">
-                                            <th colspan="6">
-                                                <i class="fas fa-2x fa-sync-alt fa-spin"></i>
-                                            </th>
-                                        </tr>
-                                        <tr *ngFor="let curso of cursos">
-                                            <td class="text-center">
-                                                {{ curso.id }}
-                                            </td>
-                                            <td>
-                                                {{ curso.nombre}}
-                                            </td>
-                                            <td class="text-center">
-                                                <span class="badge"
-                                                    [ngClass]="curso.estado === 'ACTIVO'?'bg-success':'badge-danger'">
-                                                    {{curso.estado}}
-                                                </span>
-                                            </td>
-                                            <td class="text-center ">
-                                                <button type="button" class="btn bg-orange btn-xs  mr-2"
-                                                    [routerLink]="['edit', curso.id]"> <i class="fas fa-edit mr-1"></i>
-                                                    Editar</button>
-                                                <button type="button" class="btn bg-danger btn-xs"
-                                                    (click)="eliminar(curso)">
-                                                    <i class="fas fa-trash-alt mr-1"></i> Eliminar</button>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="col-lg-2">
-                                <div class="text-left pr-2">
+<section class="content ml-3 mr-3">
+    <div class="container-fluid animate__animated animate__fadeIn animate__faster">
 
-                                    <button class="btn btn-app bg-green" (click)="abrirForm()">
-                                        <i class="fas fa-plus"></i> Nuevo
-                                    </button>
-                                </div>
-                            </div>
+
+        <div class="card card-indigo card-outline">
+            <div class="card-header text-center">
+                <h5 class="card-title m-0"><strong>Cursos</strong></h5>
+                <p class="float-right"><i class="fas fa-book"></i></p>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-10">
+                        <table id="example1" class="table table-hover border">
+                            <thead>
+                                <tr class="text-center bg-indigo">
+                                    <th>CODIGO</th>
+                                    <th>ESPECIALIZACION</th>
+                                    <th>ESTADO</th>
+                                    <th>ACCIONES</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="text-center" *ngIf="cargando">
+                                    <th colspan="6">
+                                        <i class="fas fa-2x fa-sync-alt fa-spin"></i>
+                                    </th>
+                                </tr>
+                                <tr *ngFor="let curso of cursos"
+                                    class="animate__animated animate__fadeIn animate__faster">
+                                    <td class="text-center">
+                                        {{ curso.id }}
+                                    </td>
+                                    <td>
+                                        {{ curso.nombre}}
+                                    </td>
+                                    <td class="text-center">
+                                        <span class="badge pl-4 pr-4"
+                                            [ngClass]="curso.estado === 'ACTIVO'?'bg-success':'badge-danger'">
+                                            {{curso.estado}}
+                                        </span>
+                                    </td>
+                                    <td class="text-center ">
+                                        <button type="button" class="btn bg-purple btn-xs  mr-2 pl-4 pr-4 "
+                                            [routerLink]="['edit', curso.id]"> <i class="fas fa-edit mr-1"></i>
+                                            Editar</button>
+                                        <button type="button" class="btn bg-danger btn-xs pl-4 pr-4 "
+                                            *ngIf="curso.estado == 'ACTIVO'" (click)="eliminar(curso)">
+                                            <i class="fas fa-trash-alt mr-1"></i> Eliminar</button>
+                                        <button type="button" class="btn bg-success btn-xs pl-4 pr-4"
+                                            *ngIf="curso.estado == 'INACTIVO'" (click)="activar(curso)">
+                                            <i class="fas fa-check-circle mr-1"></i> Activar</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="text-left pr-2">
+
+                            <button class="btn btn-app bg-green" (click)="abrirForm()">
+                                <i class="fas fa-plus"></i> Nuevo
+                            </button>
+                            <button class="btn btn-app bg-indigo" (click)="listar(activo)">
+                                <i class="fas fa-check-circle"></i> ACTIVOS
+                            </button>
+                            <button class="btn btn-app bg-danger" (click)="listar(inactivo)">
+                                <i class="fas fa-times-circle"></i> INACTIVOS
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+
     </div>
-</div>
+</section>

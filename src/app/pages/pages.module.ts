@@ -30,6 +30,10 @@ import { ModalCreatePeriodoComponent } from './gestionAcademica/periodos/modal-c
 import { MatriculasComponent } from './operaciones/matriculas/matriculas.component';
 import { ModalEstudiantesComponent } from './operaciones/matriculas/modal-estudiantes/modal-estudiantes.component';
 import { FiltroPipe } from '../pipes/filtro.pipe';
+import { ModalAlertaPeriodosComponent } from './gestionAcademica/periodos/modal-alerta-periodos/modal-alerta-periodos.component';
+import { DetallePeriodoComponent } from './gestionAcademica/periodos/detalle-periodo/detalle-periodo.component';
+import { ListaMatriculasComponent } from './operaciones/lista-matriculas/lista-matriculas.component';
+import { DetalleMatriculaComponent } from './operaciones/lista-matriculas/detalle-matricula/detalle-matricula.component';
 
 
 
@@ -54,7 +58,11 @@ import { FiltroPipe } from '../pipes/filtro.pipe';
     ModalCreatePeriodoComponent,
     MatriculasComponent,
     ModalEstudiantesComponent,
-    FiltroPipe
+    FiltroPipe,
+    ModalAlertaPeriodosComponent,
+    DetallePeriodoComponent,
+    ListaMatriculasComponent,
+    DetalleMatriculaComponent,
   ],
   exports: [
     NopagefoundComponent,
