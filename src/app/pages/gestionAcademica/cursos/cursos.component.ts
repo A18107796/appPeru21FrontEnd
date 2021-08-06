@@ -32,15 +32,15 @@ export class CursosComponent implements OnInit {
   }
 
   listar(estado: Estado) {
+    this.cursos = [];
+    this.deleteTable();
+    this.cargando = true;
     this._sCursos.getByStatus(estado).subscribe(res => {
-      this.cursos = [];
-      this.deleteTable()
-      this.cargando = true;
 
       setTimeout(() => {
-      this.cursos = res;
-      this.cargando = false;
-      this.createDataTable();
+        this.cursos = res;
+        this.cargando = false;
+        this.createDataTable();
       }, 200);
     });
   }
@@ -48,27 +48,27 @@ export class CursosComponent implements OnInit {
   eliminar(curso: Curso) {
     this._sCursos.changeStatus(curso, Estado.INACTIVO).subscribe(
       res => {
-        Swal.fire('Eliminado','','success');
+        Swal.fire('Eliminado', '', 'success');
         window.location.reload();
       },
       err => {
-        Swal.fire('Error:',err.error.message,'error')
+        Swal.fire('Error:', err.error.message, 'error')
       }
     )
   }
 
-  activar(curso: Curso){
+  activar(curso: Curso) {
     this._sCursos.changeStatus(curso, Estado.ACTIVO).subscribe(
       res => {
         window.location.reload();
       },
       err => {
-        Swal.fire('Error:',err.error.message,'error')
+        Swal.fire('Error:', err.error.message, 'error')
       }
     )
   }
 
-  
+
 
 
   inactive(curso: Curso) {
@@ -89,7 +89,7 @@ export class CursosComponent implements OnInit {
         )
       }
     })
-  
+
   }
 
   abrirForm() {
