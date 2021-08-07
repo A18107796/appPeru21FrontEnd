@@ -1,0 +1,130 @@
+<section class="content ml-3 mr-3">
+    <div class="container-fluid animate__animated">
+        <div class="row">
+            <div class="col-lg-7">
+                <div class="card card-indigo border">
+                    <div class="card-header text-center">
+                        <h5 class="card-title m-0">Cronograma de Pagos</h5>
+                    </div>
+                    <div class="card-header border border-secondary ">
+                        <select class="custom-select rounded-2" (change)="$event">
+                            <option *ngFor="let m of matriculas" [ngValue]="m.periodo.id">{{m.periodo.nombre}}</option>
+                        </select>
+                    </div>
+                    <div class="card-body">
+                        <!-- title row -->
+                        <h4>Detalle de Matricula</h4>
+                        <hr>
+                        <!-- info row -->
+                        <div class="row invoice-info">
+                            <div class="col-sm-4 invoice-col">
+                                <strong>Empleado: </strong>
+                                {{matriculaSelected.empleado.nombres + ' ' +
+                                matriculaSelected.empleado.apellidos}}<br>
+                                <strong>DNI: </strong>{{matriculaSelected.empleado.num_doc}}<br>
+
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-sm-4 invoice-col">
+                                <strong>Estudiante:</strong>
+                                <address>
+                                    <strong>{{matriculaSelected.estudiante.nombres + ' ' +
+                                        matriculaSelected.estudiante.apellidos}}</strong><br>
+                                    {{matriculaSelected.estudiante.num_doc}}<br>
+                                    {{matriculaSelected.estudiante.distrito.nombre}} |
+                                    {{matriculaSelected.estudiante.distrito.provincia.nombre}} |
+                                    {{matriculaSelected.estudiante.distrito.provincia.departamento.nombre}}<br>
+                                    {{matriculaSelected.estudiante.direccion}}<br>
+                                    <strong>Telefono/Celular:</strong> {{matriculaSelected.estudiante.telefono}}<br>
+                                    <strong>Email:</strong> {{matriculaSelected.estudiante.email}}
+                                </address>
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-sm-4 invoice-col">
+                                <b>Especializacion:</b> {{matriculaSelected.especializacion.nombre}}<br>
+                                <b>Turno:</b> {{matriculaSelected.turno}}<br>
+                                <b>Sede:</b> {{matriculaSelected.sede.nombre}}<br>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <hr>
+                        <div class="text-center mb-4">
+                            <h4>Cronograma de Pagos:</h4>
+                        </div>
+                        <div class="card-body table-responsive p-0" style="height: 300px;">
+                            <table class="table table-head-fixed text-nowrap">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th>COD</th>
+                                        <th class="text-left">DETALLE:</th>
+                                        <th>FECHA PAGO</th>
+                                        <th>FECHA VENCIMIENTO</th>
+                                        <th>ESTADO</th>
+                                        <th>MONTO</th>
+                                        <th>ACCION</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let p of matriculaSelected.pagos; let i = index">
+                                        <td class="text-center">{{p.id}}</td>
+                                        <td>{{p.pension.descripcion}}</td>
+                                        <td class="text-center">{{p.fecha_pago}}</td>
+                                        <td class="text-center">{{p.fecha_venc}}</td>
+                                        <td class="text-center">
+                                            <span class="badge" [ngClass]="
+                                                [p.estado === 'PAGADO'?'bg-success':'',
+                                                p.estado === 'VENCIDO'?'bg-warning':'',
+                                                p.estado === 'PENDIENTE'?'bg-warning':'']">
+                                                {{p.estado}}
+                                            </span>
+                                        </td>
+                                        <td class="text-center text-success">
+                                            <strong>S/. {{p.pension.monto | number:'1.2-2'}}</strong>
+                                        </td>
+                                        <td class="text-center">
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="custom-control-input" type="checkbox" [id]="p.id"
+                                                    [value]="p.id" (change)="changeSelected($event, p)"
+                                                    [disabled]="enabled(i, p.id) ">
+                                                <label [for]="p.id" class="custom-control-label"></label>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer justify-content-center">
+
+                        <button type="submit" class="btn bg-success"><i class="fas fa-save mr-2"></i>
+                            Enviar a Factura</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div class="card card-indigo border">
+                    <div class="card-header text-center">
+                        <h5 class="card-title m-0">Información Adicional</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row justify-content-center">
+                            <div class="col-md-8">
+                                <div class="info-box">
+                                    <span class="info-box-icon bg-success pl-5 pr-5"><i class="far fa-envelope"></i></span>
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">TOTAL</span>
+                                        <span class="info-box-number">S/. 1,410</span>
+                                    </div>
+                                    <!-- /.info-box-content -->
+                                </div>
+                                <!-- /.info-box -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

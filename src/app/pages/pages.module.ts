@@ -34,6 +34,8 @@ import { ModalAlertaPeriodosComponent } from './gestionAcademica/periodos/modal-
 import { DetallePeriodoComponent } from './gestionAcademica/periodos/detalle-periodo/detalle-periodo.component';
 import { ListaMatriculasComponent } from './operaciones/lista-matriculas/lista-matriculas.component';
 import { DetalleMatriculaComponent } from './operaciones/lista-matriculas/detalle-matricula/detalle-matricula.component';
+import { PagosComponent } from './operaciones/pagos/pagos.component';
+import { CronogramaPagosEstudianteComponent } from './operaciones/pagos/cronograma-pagos-estudiante/cronograma-pagos-estudiante.component';
 
 
 
@@ -63,6 +65,8 @@ import { DetalleMatriculaComponent } from './operaciones/lista-matriculas/detall
     DetallePeriodoComponent,
     ListaMatriculasComponent,
     DetalleMatriculaComponent,
+    PagosComponent,
+    CronogramaPagosEstudianteComponent,
   ],
   exports: [
     NopagefoundComponent,

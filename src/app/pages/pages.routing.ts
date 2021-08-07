@@ -16,6 +16,8 @@ import { MatriculasComponent } from './operaciones/matriculas/matriculas.compone
 import { DetallePeriodoComponent } from './gestionAcademica/periodos/detalle-periodo/detalle-periodo.component';
 import { ListaMatriculasComponent } from './operaciones/lista-matriculas/lista-matriculas.component';
 import { DetalleMatriculaComponent } from './operaciones/lista-matriculas/detalle-matricula/detalle-matricula.component';
+import { PagosComponent } from './operaciones/pagos/pagos.component';
+import { CronogramaPagosEstudianteComponent } from './operaciones/pagos/cronograma-pagos-estudiante/cronograma-pagos-estudiante.component';
 
 
 export const routes: Routes = [
@@ -27,6 +29,8 @@ export const routes: Routes = [
             { path: 'especializaciones', component: EspecializacionesComponent, data: { titulo: 'Especializaciones' } },
             { path: 'matricular', component: MatriculasComponent, data: { titulo: 'Matricular Estudiante' } },
             { path: 'matriculas', component: ListaMatriculasComponent, data: { titulo: 'Matriculas' } },
+            { path: 'pagos-inicio', component: PagosComponent, data: { titulo: 'Pagos - Inicio' } },
+            { path: 'pagos-inicio/cronograma-pagos-estudiante/:dni', component: CronogramaPagosEstudianteComponent, data: { titulo: 'Cronograma de Pagos' } },
             { path: 'matriculas/detalle/:id', component: DetalleMatriculaComponent, data: { titulo: 'Detalle Matricula' } },
             { path: 'especializaciones/edit/:id', component: EditEspecializacionesComponent, data: { titulo: 'Formulario Especializaciones' } },
             { path: 'cursos/edit', component: FormCursosComponent, data: { titulo: 'Formulario Cursos' } },

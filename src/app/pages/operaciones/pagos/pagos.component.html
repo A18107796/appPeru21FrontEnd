@@ -1,0 +1,80 @@
+<section class="content ml-3 mr-3">
+    <div class="container-fluid animate__animated">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card card-indigo border">
+                    <div class="card-header text-center">
+                        <h5 class="card-title m-0">Busqueda de Pagos</h5>
+                        <!-- <small class="float-right">Fecha: {{ hoy | date:'dd-MM-yyyy'}}</small> -->
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <label>DNI</label>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" placeholder="Ingrese Num. Documento" name="dni"
+                                     [(ngModel)]="dni" maxlength="11" minlength="8">
+                                <div class="input-group-append">
+                                    <button class="input-group-text bg-indigo" type="submit" (click)="submit()"><i class="fas fa-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="card card-indigo border">
+                    <div class="card-header text-center">
+                        <h5 class="card-title m-0">Últimas Matrículas Registradas</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="ex1" class="table mt-2 table-hover table-bordered border">
+                                <thead>
+                                    <tr class="text-center bg-purple">
+                                        <th>COD</th>
+                                        <th>EST. N# DOC</th>
+                                        <th>ESPECIALIZACION</th>
+                                        <th>TURNO</th>
+                                        <th>PERIODO</th>
+                                        <th>FECHA</th>
+                                        <th>ESTADO</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let m of recentMatriculas">
+                                        <td class="text-center align-middle">
+                                            <button type="button" class="btn btn-sm bg-primary btn-block">
+                                                <strong> {{ m.id }}</strong>
+                                            </button>
+                                        </td>
+                                        <td class="text-center align-middle">
+                                            <strong>{{ m.estudiante.num_doc}}</strong>
+                                        </td>
+                                        <td class="text-left align-middle">
+                                            {{ m.especializacion.nombre}}
+                                        </td>
+                                        <td class="text-left align-middle">
+                                            {{ m.turno}}
+                                        </td>
+                                        <td class="text-left align-middle">
+                                            {{ m.periodo.nombre}}
+                                        </td>
+                                        <td class="text-left align-middle">
+                                            {{ m.fecha_reg | date:'yyyy-MM-dd HH:mm'}}
+                                        </td>
+                                        <td class="text-center align-middle">
+                                            <span class="badge"
+                                                [ngClass]="m.estado === 'ACTIVO'?'bg-success':'badge-warning'">
+                                                {{m.estado}}
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

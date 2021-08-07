@@ -11,7 +11,7 @@ import { CommonService } from './common.service';
   providedIn: 'root'
 })
 export class MatriculaService extends CommonServiceStatusService<Matricula>{
-   baseEndPoint = url_spring + "matriculas";
+  baseEndPoint = url_spring + "matriculas";
 
   constructor(httpClient: HttpClient) {
     super(httpClient);
@@ -23,6 +23,14 @@ export class MatriculaService extends CommonServiceStatusService<Matricula>{
 
   getMatricula(id: number): Observable<any> {
     return this.httpClient.get<any>(`${this.baseEndPoint}/` + id).pipe(
+      catchError(err => {
+        return throwError(err);
+      })
+    );
+  }
+
+  getMatriculaByStudentDNI(dni: string): Observable<any> {
+    return this.httpClient.get<any>(`${this.baseEndPoint}/filter/dni/${dni}`).pipe(
       catchError(err => {
         return throwError(err);
       })

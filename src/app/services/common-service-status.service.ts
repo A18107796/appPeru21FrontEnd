@@ -20,7 +20,7 @@ export class CommonServiceStatusService<T extends GenericEntityStatus> extends C
   }
 
   getByStatus(estado: Estado): Observable<any> {
-    return this.httpClient.get(this.baseEndPoint + "/?estado=" + estado);
+    return this.httpClient.get<T>(this.baseEndPoint + "/?estado=" + estado);
   }
 
 

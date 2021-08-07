@@ -35,6 +35,7 @@ export class SidebarService {
       icono: 'fas fa-book',
       submenu: [
         { titulo: 'Matricular', url: 'matricular' },
+        { titulo: 'Pagos', url: 'pagos-inicio' },
      
       ]
     },
