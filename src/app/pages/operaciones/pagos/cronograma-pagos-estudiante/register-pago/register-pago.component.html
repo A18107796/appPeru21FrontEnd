@@ -1,0 +1,183 @@
+<section class="content ml-3 mr-3 mb-5">
+    <div class="container-fluid animate__animated">
+        <form id="formPago" (ngSubmit)="submit()" [formGroup]="formFactura">
+            <div class="card card-indigo border pb-5">
+                <div class="card-header text-center">
+                    <h5 class="card-title m-0"><strong>Registro de Pagos</strong></h5>
+                </div>
+
+                <div class="card-body">
+                    <div class="invoice p-3 mb-3">
+                        <!-- title row -->
+                        <div class="row">
+                            <div class="col-12">
+                                <h4>
+                                    <img src="/assets/dist/img/peru21logo.jpg" class="border mr-2" width="120px"
+                                        height="120px">CORPORACIÓN EDUCATIVA PERÚ 21
+                                    <small class="float-right mt-2"><strong
+                                            class="bg-indigo pr-3 pl-3">#{{pagoService.getNumRuc((maxID + 1))}}</strong>
+                                    </small>
+                                    <br>
+                                    <small class="float-right"><strong>Fecha:</strong> {{ fechaHoy |
+                                        date:'yyyy-MM-dd'}}</small>
+
+                                </h4>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <hr>
+                        <!-- info row -->
+                        <div class="row" formGroupName="estudiante">
+                            <div class="col-sm-9">
+                                <!-- text input -->
+                                <div class="form-group">
+                                    <label>Estudiante:</label>
+                                    <input type="text"
+                                        class="form-control animate__animated animate__fadeInUp animate__faster"
+                                        placeholder="Estudiante" formControlName="nombres">
+                                    <span class="error invalid-feedback">Por favor complete este campo.</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>Num Doc: </label>
+                                    <input type="text"
+                                        class="form-control animate__animated animate__fadeInUp animate__faster"
+                                        placeholder="DNI" formControlName="dni">
+                                    <span class="error invalid-feedback">Por favor complete este campo.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <!-- text input -->
+                                <div class="form-group">
+                                    <label>Moneda: <strong class="text-danger">*</strong></label>
+                                    <select
+                                        class="custom-select rounded-2 animate__animated animate__fadeInUp animate__faster"
+                                        formControlName="moneda"
+                                        [ngClass]="{'is-invalid': this.formService.campoNoValido('moneda', formFactura, formSubmited)}">
+                                        <option [ngValue]="null">
+                                            <-- SELECCIONE MONEDA -->
+                                        </option>
+                                        <option *ngFor="let moneda of monedas" [ngValue]="moneda">{{moneda.nombre}}
+                                        </option>
+                                    </select>
+                                    <span class="error invalid-feedback">Por favor complete este campo.</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Tipo Pago: <strong class="text-danger">*</strong></label>
+                                    <select
+                                        class="custom-select rounded-2 animate__animated animate__fadeInUp animate__faster"
+                                        formControlName="tipoPago"
+                                        [ngClass]="{'is-invalid': this.formService.campoNoValido('tipoPago', formFactura, formSubmited)}">
+                                        <option [ngValue]="null">
+                                            <-- SELECCIONE TIPO PAGO -->
+                                        </option>
+                                        <option *ngFor="let tp of tiposPago" [ngValue]="tp">{{tp.nombre}}</option>
+                                    </select>
+                                    <span class="error invalid-feedback">Por favor complete este campo.</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Tipo Comprobante: <strong class="text-danger">*</strong></label>
+                                    <select
+                                        class="custom-select rounded-2 animate__animated animate__fadeInUp animate__faster"
+                                        formControlName="tipoComprobante"
+                                        [ngClass]="{'is-invalid': this.formService.campoNoValido('tipoComprobante', formFactura, formSubmited)}">
+                                        <option [ngValue]="null">
+                                            <-- SELECCIONE TIPO COMPROBANTE -->
+                                        </option>
+                                        <option *ngFor="let c of tipoComprobante" [ngValue]="c">{{c.nombre}}</option>
+                                    </select>
+                                    <span class="error invalid-feedback">Por favor complete este campo.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.row -->
+                        <hr>
+                        <div class="text-center mb-4">
+                            <h3>Detalle Pago:</h3>
+                        </div>
+                        <!-- Table row -->
+                        <div class="row">
+                            <div class="col-12 table-responsive">
+                                <table class="table table-bordered table-hover">
+                                    <thead class="bg-purple">
+                                        <tr>
+                                            <th>COD</th>
+                                            <th>DESCRIPCION</th>
+                                            <th>CANTIDAD</th>
+                                            <th>SUB TOTAL</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let p of matricula.pagos">
+                                            <td>{{p.id}}</td>
+                                            <td>{{p.pension.descripcion}}</td>
+                                            <td>1</td>
+                                            <td><strong class="text-success">S./ {{p.pension.monto |
+                                                    number:'1.2-2'}}</strong></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+
+                        <div class="row">
+                            <!-- accepted payments column -->
+                            <div class="col-6">
+
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-6">
+                                <p class="lead border-bottom"><strong>Detalles de Pago:</strong></p>
+
+                                <div class="table-responsive  mb-2">
+                                    <table class="table border border-black">
+                                        <tbody>
+                                            <tr>
+                                                <th class="bg-indigo" style="width:30%">Subtotal:</th>
+                                                <td class="text-right">S/. {{totalPago | number:'1.2-2'}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="bg-indigo">Total:</th>
+                                                <td class="text-right"><strong>S/. {{totalPago |
+                                                        number:'1.2-2'}}</strong></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+                        <hr>
+                        <!-- this row will not appear when printing -->
+                        <div class="row no-print">
+                            <div class="col-12">
+                                <a rel="noopener" target="_blank" class="btn btn-danger pl-2 pr-2"><i
+                                        class="fas fa-print"></i> Volver</a>
+                                <button type="submit" class="btn btn-success float-right pl-5 pr-5"><i
+                                        class="far fa-credit-card"></i>
+                                    REALIZAR PAGO
+                                </button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="overlay" *ngIf="cargando">
+                    <i class="fas fa-2x fa-sync fa-spin"></i>
+                    <strong class="ml-2">Registrando Pago</strong>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</section>

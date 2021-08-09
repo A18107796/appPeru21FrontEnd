@@ -36,6 +36,7 @@ import { ListaMatriculasComponent } from './operaciones/lista-matriculas/lista-m
 import { DetalleMatriculaComponent } from './operaciones/lista-matriculas/detalle-matricula/detalle-matricula.component';
 import { PagosComponent } from './operaciones/pagos/pagos.component';
 import { CronogramaPagosEstudianteComponent } from './operaciones/pagos/cronograma-pagos-estudiante/cronograma-pagos-estudiante.component';
+import { RegisterPagoComponent } from './operaciones/pagos/cronograma-pagos-estudiante/register-pago/register-pago.component';
 
 
 
@@ -67,6 +68,7 @@ import { CronogramaPagosEstudianteComponent } from './operaciones/pagos/cronogra
     DetalleMatriculaComponent,
     PagosComponent,
     CronogramaPagosEstudianteComponent,
+    RegisterPagoComponent,
   ],
   exports: [
     NopagefoundComponent,

@@ -1,7 +1,7 @@
 <section class="content ml-3 mr-3">
     <div class="container-fluid animate__animated">
         <div class="row">
-            <div class="col-lg-7">
+            <div class="col-lg-9">
                 <div class="card card-indigo border">
                     <div class="card-header text-center">
                         <h5 class="card-title m-0">Cronograma de Pagos</h5>
@@ -82,7 +82,8 @@
                                             <strong>S/. {{p.pension.monto | number:'1.2-2'}}</strong>
                                         </td>
                                         <td class="text-center">
-                                            <div class="custom-control custom-checkbox">
+                                            <div class="custom-control custom-checkbox"
+                                                *ngIf="p.estado === 'PENDIENTE'">
                                                 <input class="custom-control-input" type="checkbox" [id]="p.id"
                                                     [value]="p.id" (change)="changeSelected($event, p)"
                                                     [disabled]="enabled(i, p.id) ">
@@ -98,28 +99,54 @@
                     </div>
                     <div class="modal-footer justify-content-center">
 
-                        <button type="submit" class="btn bg-success"><i class="fas fa-save mr-2"></i>
-                            Enviar a Factura</button>
+                        <button type="submit" class="btn bg-success" (click)="enviar()" [disabled]="enviarDisabled()"><i
+                                class="fas fa-save mr-2"></i>
+                            Enviar a Pagar</button>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-5">
+            <div class="col-lg-3">
                 <div class="card card-indigo border">
                     <div class="card-header text-center">
                         <h5 class="card-title m-0">Información Adicional</h5>
                     </div>
                     <div class="card-body">
                         <div class="row justify-content-center">
-                            <div class="col-md-8">
-                                <div class="info-box">
-                                    <span class="info-box-icon bg-success pl-5 pr-5"><i class="far fa-envelope"></i></span>
-                                    <div class="info-box-content">
-                                        <span class="info-box-text">TOTAL</span>
-                                        <span class="info-box-number">S/. 1,410</span>
+
+                            <div class="info-box bg-success">
+                                <span class="info-box-icon"><i class="fas fa-money-bill fa-lg"></i></span>
+
+                                <div class="info-box-content">
+                                    <span class="info-box-text">COSTO TOTAL:</span>
+                                    <span class="info-box-number">S/. {{ this.total | number:'2.2-2'}}</span>
+
+                                    <div class="progress">
+                                        <div class="progress-bar" [ngStyle]="{'width': [this.percent] + '%'}"></div>
                                     </div>
-                                    <!-- /.info-box-content -->
+                                    <span class="progress-description">
+                                        Progreso
+                                    </span>
                                 </div>
-                                <!-- /.info-box -->
+
+                                <!-- /.info-box-content -->
+                            </div>
+                            <div class="info-box shadow-sm border">
+                                <span class="info-box-icon bg-teal"><i class="fa fa-dollar-sign"></i></span>
+
+                                <div class="info-box-content">
+                                    <span class="info-box-text">Total Pendiente:</span>
+                                    <span class="info-box-number" *ngIf="date">S/. {{ this.totalPendiente | number:'1.2-2' }}</span>
+                                </div>
+                                <!-- /.info-box-content -->
+                            </div>
+                            <div class="info-box shadow-sm border">
+                                <span class="info-box-icon bg-indigo"><i class="fa fa-calendar-day"></i></span>
+
+                                <div class="info-box-content" *ngIf="date">
+                                    <span class="info-box-text">Proxima Cuota</span>
+                                    <span class="info-box-number">{{ date }}</span>
+                                </div>
+                                <!-- /.info-box-content -->
                             </div>
                         </div>
                     </div>

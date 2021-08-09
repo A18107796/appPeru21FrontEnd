@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Matricula } from '../models/matricula';
+import { Pago } from '../models/pago';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ import { Matricula } from '../models/matricula';
 export class ReportsService {
 
   imageToShow: any;
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient) {
     this.getImage()
   }
 
@@ -24,7 +25,7 @@ export class ReportsService {
         console.log("IMG");
         console.log(res);
         this.createImageFromBlob(res);
-        
+
       }, err => {
         console.log(err);
       }
@@ -168,5 +169,123 @@ export class ReportsService {
         ]
       }
     }
+  }
+
+  getFacturaPDF(factura: Pago): any {
+    console.log(factura.fecha_reg);
+    console.log(factura.tipo_comprobante);
+    console.log(factura);
+    
+    if (factura) {
+      return {
+        pageSize: 'A4',
+        pageOrientation: 'landscape',
+        content: [
+          {
+            columns: [
+              [
+                {
+                  text: 'CORPORACIÓN EDUCATIVA \n PERU 21',
+                  fontSize: 25,
+                  bold: true,
+                  color: '#900C3F',
+                  characterSpacing: 5,
+                  margin: [0, 0, 0, 0]
+                }
+              ],
+              [
+                {
+                  margin: [180, 0, 0, 0], //350 - 160
+                  table: {
+                    widths: ['auto'],
+                    body: [
+                      [{ text: 'RUC: ' + factura.ruc, fontSize: 14, bold: true, alignment: 'center' }],
+                      [{ text: 'COMPROBANTE DE PAGO', fontSize: 16, bold: true, alignment: 'center', fillColor: '#000000', color: '#FFFFFF' }],
+                      [{ text: 'N° ' + this.getNumRuc(factura.npago), fontSize: 14, bold: true, alignment: 'center' }],
+
+                    ]
+                  }
+                }
+              ]
+            ]
+          },
+          {
+            text: 'Datos del Estudiante',
+            style: 'sectionHeader',
+            bold: true,
+            decoration: 'underline',
+            margin: [0, 30, 0, 15]
+          },
+          {
+            columns: [
+              [
+                {
+                  text: factura.estudiante.nombres + ' ' + factura.estudiante.apellidos,
+                  bold: true
+                },
+                { text: factura.estudiante.num_doc, bold: true },
+                { text: factura.estudiante.telefono },
+                { text: factura.estudiante.direccion }
+              ],
+              [
+                {
+                  text: [{ text: 'Fecha: ', bold: true }, factura.fecha_reg ],
+                  alignment: 'right'
+                },
+                {
+                  text: [{ text: 'Moneda: ', bold: true }, factura.moneda.nombre],
+                  alignment: 'right'
+                }
+              ]
+            ]
+          },
+          ,
+          {
+            text: 'Detalle de Comprobante',
+            style: 'sectionHeader',
+            bold: true,
+            decoration: 'underline',
+            alignment: 'center',
+            margin: [0, 15, 0, 15]
+          },
+          {
+            table: {
+              headerRows: 1,
+              widths: ['auto', '*', 'auto', 'auto'],
+              body: [
+                [
+                  //Columnas
+                  { text: 'COD', alignment: 'center', fillColor: '#000000', color: '#FFFFFF' },
+                  { text: 'Descripción', alignment: 'center', fillColor: '#000000', color: '#FFFFFF' },
+                  { text: 'Cantidad', alignment: 'center', fillColor: '#000000', color: '#FFFFFF' },
+                  { text: 'Subtotal', alignment: 'center', fillColor: '#000000', color: '#FFFFFF' }
+                ],
+                ...factura.pagoDetalles.map(p => ([{ text: p.pago.id, alignment: 'center' }, p.pago.pension.descripcion, { text: p.cantidad, alignment: 'center' }, 'S/. ' + p.subtotal.toFixed(2)])),
+                [
+                  { text: 'Total', colSpan: 3, alignment: 'right' },
+                  {},
+                  {},
+                  { text: 'S/. ' + factura.pagoDetalles.reduce((sum, p) => sum + p.subtotal, 0).toFixed(2), fillColor: '#FBFF01' }]
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+
+  getNumRuc(number: number): string {
+    let retNumber = number.toString();
+    let vecesBucle = 7 - retNumber.length;
+
+    if (retNumber.length > 7) {
+      return "9999999";
+    }
+
+    for (let index = 0; index < vecesBucle; index++) {
+      retNumber = "0" + retNumber;
+    }
+
+    return retNumber;
   }
 }
