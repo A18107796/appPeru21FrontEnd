@@ -10,8 +10,14 @@
                     <button class="btn btn-app bg-green animate__animated animate__fadeInLeft" routerLink="form">
                         <i class="fas fa-plus"></i> NUEVO
                     </button>
-                    <button class="btn btn-app bg-cyan animate__animated animate__fadeInRight" routerLink="form">
-                        <i class="fas fa-eye"></i> DETALLES
+                    <button class="btn btn-app bg-indigo" (click)="listar(activo)">
+                        <i class="fas fa-check-circle"></i> ACTIVOS
+                    </button>
+                    <button class="btn btn-app bg-danger" (click)="listar(inactivo)">
+                        <i class="fas fa-times-circle"></i> INACTIVOS
+                    </button>
+                    <button class="btn btn-app bg-primary" (click)="listar(ALL)">
+                        <i class="fab fa-canadian-maple-leaf"></i> TODO
                     </button>
                 </div>
                 <table id="estudiantes"
@@ -28,7 +34,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="text-center" *ngIf="estudiantes.length <= 0">
+                        <tr class="text-center" *ngIf="cargando">
                             <th colspan="6">
                                 <i class="fas fa-2x fa-sync-alt fa-spin"></i>
                             </th>
@@ -50,17 +56,23 @@
                                 {{ estudiante.sede.nombre}}
                             </td>
                             <td class="text-center">
-                                <span class="badge"
-                                    [ngClass]="estudiante.estado === 'ACTIVO'?'bg-success':'badge-danger'">
+                                <span class="badge" [ngClass]="
+                                [estudiante.estado === 'ACTIVO' || estudiante.estado === 'MATRICULADO' ?'bg-success':'',
+                                estudiante.estado === 'INACTIVO'?'bg-danger':'',
+                                estudiante.estado === 'PENDIENTE'?'bg-warning':'']">
                                     {{estudiante.estado}}
                                 </span>
                             </td>
                             <td class="text-center">
-                                <button type="button" class="btn bg-primary btn-xs  mr-2"
-                                    [routerLink]="['form',estudiante.id]"><i class="fas fa-edit fa-2x"></i> Modificar
+                                <button type="button" class="btn bg-primary btn-xs  mr-2 pl-4 pr-4" 
+                                    [routerLink]="['form',estudiante.id]"><i class="fas fa-edit"></i> Modificar
                                 </button>
-                                <!--                <button type="button" class="btn bg-danger btn-xs" (click)="inactive(empleado)" *ngIf="empleado.estado === 'ACTIVO'"> <i
-                                        class="fas fa-trash-alt fa-2x mr-1"></i> Eliminar</button> -->
+                                <button type="button" class="btn bg-danger btn-xs pl-4 pr-4 "
+                                    *ngIf="estudiante.estado == 'PENDIENTE'" (click)="delete(true,estudiante)">
+                                    <i class="fas fa-trash-alt mr-1"></i> Eliminar</button>
+                                <button type="button" class="btn bg-success btn-xs pl-4 pr-4"
+                                    *ngIf="estudiante.estado == 'INACTIVO'" (click)="delete(false, estudiante)">
+                                    <i class="fas fa-check-circle mr-1"></i> Activar</button>
                             </td>
                         </tr>
                     </tbody>

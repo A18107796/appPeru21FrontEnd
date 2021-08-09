@@ -133,11 +133,13 @@ export class CronogramaPagosEstudianteComponent implements OnInit {
               this.getDate();
             },
             err => {
+              Swal.fire('Error', err.error.message, 'error');
               this.router.navigateByUrl("/sistema/pagos-inicio");
             }
           )
         } else {
-          this.location.back();
+          Swal.fire('Error', "El parametro de busqueda no es valido.", 'error');
+          this.router.navigateByUrl("/sistema/pagos-inicio");
         }
       }
     )

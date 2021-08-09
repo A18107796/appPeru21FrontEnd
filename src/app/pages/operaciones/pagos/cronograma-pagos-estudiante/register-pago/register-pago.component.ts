@@ -140,9 +140,9 @@ export class RegisterPagoComponent implements OnInit {
             this.pagoService.create(this.pago).subscribe(
               res => {
                 this.pagoService.getEntity(res.id).subscribe(
-                  res => {
+                  pago => {
                     this.cargando = false;
-                    this.generatePDF(res.pago);
+                    this.generatePDF(pago.pago);
                     Swal.fire({
                       title: 'Registrado',
                       text: "Pago Registrado Correctamente",

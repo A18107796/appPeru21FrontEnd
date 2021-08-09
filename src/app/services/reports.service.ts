@@ -199,7 +199,7 @@ export class ReportsService {
                   table: {
                     widths: ['auto'],
                     body: [
-                      [{ text: 'RUC: ' + factura.ruc, fontSize: 14, bold: true, alignment: 'center' }],
+                      [{ text: 'RUC: ' + 20548343900, fontSize: 14, bold: true, alignment: 'center' }],
                       [{ text: 'COMPROBANTE DE PAGO', fontSize: 16, bold: true, alignment: 'center', fillColor: '#000000', color: '#FFFFFF' }],
                       [{ text: 'N° ' + this.getNumRuc(factura.npago), fontSize: 14, bold: true, alignment: 'center' }],
 
