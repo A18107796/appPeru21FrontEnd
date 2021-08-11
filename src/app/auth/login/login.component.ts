@@ -36,8 +36,10 @@ export class LoginComponent implements OnInit {
 
   createFormLogin(): void {
     this.formLogin = this.formBuild.group({
-      email: ['cerron_campos@hotmail.com', [Validators.required, Validators.email]],
-      password: ['1234', Validators.required]
+      /* email: ['cerron_campos@hotmail.com', [Validators.required, Validators.email]],
+      password: ['1234', Validators.required] */
+      email: [null, [Validators.required, Validators.email]],
+      password: [null, Validators.required]
     });
   }
 
@@ -54,6 +56,7 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['sistema']);
         },
         err => {
+          console.log(err);
           Swal.fire(err.error.error, err.error.error_description, 'error');
         }
       )

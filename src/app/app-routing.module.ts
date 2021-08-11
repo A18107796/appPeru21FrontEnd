@@ -18,7 +18,7 @@ const routes: Routes = [
   declarations: [],
   imports: [
     /* RouterModule.forRoot(routes, {scrollPositionRestoration: 'enabled'}), */
-    RouterModule.forRoot(routes, {scrollPositionRestoration: 'enabled'}),
+    RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' }),
     PagesRoutingModule,
     AuthRoutingModule
   ],

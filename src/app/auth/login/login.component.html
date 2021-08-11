@@ -5,7 +5,7 @@
   <div class="contentbox">
     <div class="formbox animate__animated animate__fadeInUp border p-5">
       <h2>INGRESO AL SISTEMA</h2>
-      <form id="loginForm" (ngSubmit)="login()" autocomplete="off" [formGroup]="formLogin">
+      <form id="loginForm" (ngSubmit)="login()" autocomplete="on" [formGroup]="formLogin">
         <div class="inputbox"  [ngClass]="{'has-errors': formService.campoNoValido('email', formLogin, formSubmited)}">
           <span>E-mail</span>
           <input type="email" name="email" class="" placeholder="E-mail"

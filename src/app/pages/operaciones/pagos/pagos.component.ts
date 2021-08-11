@@ -35,14 +35,6 @@ export class PagosComponent implements OnInit {
   ngOnInit(): void {
     this.getRecentMatriculas();
     this.getPagos();
-    this.pagoService.getEntity(1).subscribe(
-      res => {
-        let pago: Pago = new Pago();
-        console.log(res);
-        pago = res.pago;
-        console.log(pago);
-      }
-    )
   }
 
   getRecentMatriculas() {
@@ -61,6 +53,7 @@ export class PagosComponent implements OnInit {
     this.pagoService.listar().subscribe(
       res => {
         this.pagos = res;
+        this.createDataTable2();
       }
     )
   }
@@ -78,13 +71,22 @@ export class PagosComponent implements OnInit {
 
     $(function () {
       $("#ex1").DataTable({
-        "responsive": false, "lengthChange": false, "autoWidth": false, "pageLength": 1,
-        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+        "responsive": false, "lengthChange": false, "autoWidth": false, "pageLength": 3,
         "order": [[0, 'desc']]
       }).buttons().container().appendTo('#ex1_wrapper .col-md-6:eq(0)');
-      /*    
-         $('#example1').dataTable().fnClearTable();
-         $('#example1').dataTable().fnDestroy(); */
+
+
+    });
+
+  }
+
+  createDataTable2(){
+    $(function () {
+      $("#ex2").DataTable({
+        "responsive": false, "lengthChange": false, "autoWidth": false, "pageLength": 3,
+        "order": [[0, 'desc']]
+      }).buttons().container().appendTo('#ex1_wrapper .col-md-6:eq(0)');
+
 
     });
 
@@ -98,7 +100,6 @@ export class PagosComponent implements OnInit {
     this.toastService.info('Generando PDF...', 'Generando');
     setTimeout(() => {
       if (factura) {
-        
         let docDefinition = this.reportService.getFacturaPDF(factura);
         let pdf = pdfMake.createPdf(docDefinition);
         pdf.open();
@@ -106,8 +107,6 @@ export class PagosComponent implements OnInit {
       } else {
         this.toastService.error('Error', 'Ocurrio un error, intentelo denuevo');
       }
-
-
     }, 900);
   }
 

@@ -37,6 +37,16 @@ import { DetalleMatriculaComponent } from './operaciones/lista-matriculas/detall
 import { PagosComponent } from './operaciones/pagos/pagos.component';
 import { CronogramaPagosEstudianteComponent } from './operaciones/pagos/cronograma-pagos-estudiante/cronograma-pagos-estudiante.component';
 import { RegisterPagoComponent } from './operaciones/pagos/cronograma-pagos-estudiante/register-pago/register-pago.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { AnularPagoComponent } from './operaciones/pagos/anular-pago/anular-pago.component';
+import { DetallePagoComponent } from './operaciones/pagos/detalle-pago/detalle-pago.component';
+import { UsuariosComponent } from './usuarios/usuarios.component';
+import { AdministrarUsuarioComponent } from './usuarios/administrar-usuario/administrar-usuario.component';
+import { ReportesGananciasComponent } from './reportes/reportes-ganancias/reportes-ganancias.component';
+import { ReportesEspecializacionesComponent } from './reportes/reportes-especializaciones/reportes-especializaciones.component';
+import { ChartsModule } from 'ng2-charts';
+import { NgxPrintModule } from 'ngx-print';
+
 
 
 
@@ -69,6 +79,12 @@ import { RegisterPagoComponent } from './operaciones/pagos/cronograma-pagos-estu
     PagosComponent,
     CronogramaPagosEstudianteComponent,
     RegisterPagoComponent,
+    AnularPagoComponent,
+    DetallePagoComponent,
+    UsuariosComponent,
+    AdministrarUsuarioComponent,
+    ReportesGananciasComponent,
+    ReportesEspecializacionesComponent,
   ],
   exports: [
     NopagefoundComponent,
@@ -88,11 +104,14 @@ import { RegisterPagoComponent } from './operaciones/pagos/cronograma-pagos-estu
     ReactiveFormsModule,
     ToastrModule.forRoot(),
     ToastNoAnimationModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NgxChartsModule, 
+    ChartsModule,
+    NgxPrintModule
     
   ],
   providers:[
-    DatePipe
+    DatePipe,
   ]
 
 })

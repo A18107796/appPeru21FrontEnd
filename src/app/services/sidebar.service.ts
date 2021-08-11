@@ -36,13 +36,28 @@ export class SidebarService {
       submenu: [
         { titulo: 'Matricular', url: 'matricular' },
         { titulo: 'Pagos', url: 'pagos-inicio' },
-     
+        { titulo: 'Anular Pagos', url: 'anular-pagos' },
+
       ]
     },
     {
       titulo: 'Matriculas',
       icono: 'fas fa-list',
       url: 'matriculas',
+      submenu: []
+    },
+    {
+      titulo: 'Reportes y Graficas',
+      icono: 'fas fa-file',
+      submenu: [
+        { titulo: 'Ganancias', url: 'reportes-ganancias' },
+        { titulo: 'Especializaciones', url: 'reportes-especializaciones' },
+      ]
+    },
+    {
+      titulo: 'Usuarios',
+      icono: 'fas fa-user',
+      url: 'usuarios',
       submenu: []
     }
   ];

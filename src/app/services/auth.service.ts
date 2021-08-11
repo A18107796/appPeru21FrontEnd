@@ -55,9 +55,12 @@ export class AuthService {
     return this.http.post<any>(this.urlAuth, params.toString(), { headers: httpHeaders }).pipe(
       catchError(
         err => {
-          if (err.error.error === "invalid_grant") {
-            return throwError({ error: { error: 'Incorrecto', error_description: 'Clave o Contraseña Erronea' } })
-          } else {
+          if (err.error.error_description === "Bad credentials") {
+            return throwError({ error: { error: 'Incorrecto', error_description: 'USUARIO O CONTRASEÑA ERRONEA' } })
+          } else if (err.error.error_description === "User is disabled") {
+            return throwError({ error: { error: 'Usuario', error_description: 'USUARIO INACTIVO' } })
+          }
+          else {
             return throwError(err);
           }
         }

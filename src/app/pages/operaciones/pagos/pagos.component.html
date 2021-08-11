@@ -9,7 +9,7 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <label>DNI</label>
+                            <label>Num Doc.</label>
                             <div class="input-group mb-3">
                                 <input type="text" class="form-control" placeholder="Ingrese Num. Documento" name="dni"
                                     [(ngModel)]="dni" maxlength="11" minlength="8">
@@ -44,7 +44,8 @@
                                 <tbody>
                                     <tr *ngFor="let m of recentMatriculas">
                                         <td class="text-center align-middle">
-                                            <button type="button" class="btn btn-sm bg-primary btn-block">
+                                            <button type="button" class="btn btn-sm bg-primary btn-block"
+                                                [routerLink]="['cronograma-pagos-estudiante',m.estudiante.num_doc]">
                                                 <strong> {{ m.id }}</strong>
                                             </button>
                                         </td>
@@ -85,7 +86,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table id="ex1" class="table mt-2 table-hover table-bordered border">
+                            <table id="ex2" class="table mt-2 table-hover table-bordered border">
                                 <thead>
                                     <tr class="text-center bg-pink">
                                         <th>COD</th>
@@ -130,8 +131,11 @@
                                             </span>
                                         </td>
                                         <td class="text-center align-middle">
-                                            <button type="button" class="btn btn-sm btn-outline-primary pl-5 pr-5 mt-2"
+                                            <button type="button"
+                                                class="btn btn-xs btn-outline-primary pl-5 pr-5 btn-block"
                                                 (click)="generatePDF(p)"><i class="fas fa-print"></i></button>
+                                            <button class="btn btn-xs bg-indigo pl-4 pr-4 btn-block"
+                                                [routerLink]="['detalle',p.id]"><i class="fa fa-eye"></i></button>
                                         </td>
                                     </tr>
                                 </tbody>

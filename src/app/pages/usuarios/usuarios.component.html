@@ -1,0 +1,44 @@
+<section class="content">
+    <div class="container-fluid animate__animated">
+        <div class="card card-indigo card-outline">
+            <div class="card-header ui-sortable-handle" style="cursor: move;">
+                <h3 class="card-title">
+                    <i class="fas fa-user  mr-2"></i>
+                    <strong>Usuarios</strong>
+                </h3>
+            </div>
+            <div class="card-body">
+
+                <table id="ex1"
+                    class="table mt-2 table-hover table-bordered border animate__animated animate__lightSpeedInRight ">
+                    <thead>
+                        <tr class="text-center bg-indigo">
+                            <th>COD</th>
+                            <th>USUARIO</th>
+                            <th>ESTADO</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let u of usuarios">
+                            <td class="text-center">
+                                {{ u.id }}
+                            </td>
+                            <td>
+                                {{ u.email}}
+                            </td>
+                            <td class="text-center">
+                                <span class="badge bg-success" *ngIf="u.enabled"
+                                    (click)="updateStado(u.id,false)">ACTIVO</span>
+                                <span class="badge bg-danger" *ngIf="!u.enabled"
+                                    (click)="updateStado(u.id,true)">INACTIVO</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+
+
+    </div>
+</section>

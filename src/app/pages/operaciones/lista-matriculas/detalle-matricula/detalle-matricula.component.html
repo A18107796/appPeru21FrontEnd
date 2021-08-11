@@ -5,17 +5,18 @@
                 <h5 class="card-title m-0"><strong>Detalle Matricula</strong></h5>
             </div>
             <div class="card-body">
-                <div class="invoice p-3 mb-3 border">
-                    <div class="ribbon-wrapper ribbon-lg">
-                        <div class="ribbon  text-lg" [ngClass]="
-                        [matricula.estado === 'ACTIVO'?'bg-success':'',
-                        matricula.estado === 'TERMINADO'?'bg-indigo':'',
-                        matricula.estado === 'PENDIENTE'?'bg-warning text-light':'',
-                        matricula.estado === 'RETIRADO'?'bg-danger':'']">
-                            
-                            {{ matricula.estado}}
-                        </div>
+                <div class="ribbon-wrapper ribbon-lg">
+                    <div class="ribbon  text-lg" [ngClass]="
+                    [matricula.estado === 'ACTIVO'?'bg-success':'',
+                    matricula.estado === 'TERMINADO'?'bg-indigo':'',
+                    matricula.estado === 'PENDIENTE'?'bg-warning text-light':'',
+                    matricula.estado === 'ANULADO'?'bg-danger':'']">
+
+                        {{ matricula.estado }}
                     </div>
+                </div>
+                <div class="invoice p-3 mb-3 border-0">
+
                     <!-- title row -->
                     <div class="row">
                         <div class="col-12">
@@ -33,7 +34,8 @@
                         <div class="col-sm-4 invoice-col">
                             <strong>Empleado:</strong>
                             <address>
-                                <strong>{{matricula.empleado.nombres + ' ' + matricula.empleado.apellidos}}</strong><br>
+                                <strong>{{(matricula.empleado.nombres + ' ' +
+                                    matricula.empleado.apellidos)}}</strong><br>
                                 {{matricula.empleado.num_doc}}<br>
                             </address>
                         </div>
@@ -141,6 +143,7 @@
             <div class="overlay" *ngIf="cargando">
                 <i class="fas fa-2x fa-sync fa-spin"></i>
             </div>
+
         </div>
     </div>
 </section>

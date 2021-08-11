@@ -19,6 +19,14 @@ import { DetalleMatriculaComponent } from './operaciones/lista-matriculas/detall
 import { PagosComponent } from './operaciones/pagos/pagos.component';
 import { CronogramaPagosEstudianteComponent } from './operaciones/pagos/cronograma-pagos-estudiante/cronograma-pagos-estudiante.component';
 import { RegisterPagoComponent } from './operaciones/pagos/cronograma-pagos-estudiante/register-pago/register-pago.component';
+import { AnularPagoComponent } from './operaciones/pagos/anular-pago/anular-pago.component';
+import { PagoDetalle } from '../models/pago-detalle';
+import { DetallePagoComponent } from './operaciones/pagos/detalle-pago/detalle-pago.component';
+import { UsuariosComponent } from './usuarios/usuarios.component';
+import { ReportsService } from '../services/reports.service';
+import { ReportesGananciasComponent } from './reportes/reportes-ganancias/reportes-ganancias.component';
+import { ReportesEspecializacionesComponent } from './reportes/reportes-especializaciones/reportes-especializaciones.component';
+import { RoleGuard } from '../guards/role.guard';
 
 
 export const routes: Routes = [
@@ -26,28 +34,137 @@ export const routes: Routes = [
         path: 'sistema',
         component: PagesComponent,
         children: [
-            { path: 'dashboard', component: DashboardComponent, data: { titulo: 'Dashboard' } },
-            { path: 'especializaciones', component: EspecializacionesComponent, data: { titulo: 'Especializaciones' } },
-            { path: 'matricular', component: MatriculasComponent, data: { titulo: 'Matricular Estudiante' } },
-            { path: 'matriculas', component: ListaMatriculasComponent, data: { titulo: 'Matriculas' } },
-            { path: 'pagos-inicio', component: PagosComponent, data: { titulo: 'Pagos - Inicio' } },
-            { path: 'pagos-inicio/cronograma-pagos-estudiante/:dni', component: CronogramaPagosEstudianteComponent, data: { titulo: 'Cronograma de Pagos' } },
-            { path: 'pagos-inicio/pagar', component: RegisterPagoComponent, data: { titulo: 'Cronograma de Pagos' } },
-            { path: 'matriculas/detalle/:id', component: DetalleMatriculaComponent, data: { titulo: 'Detalle Matricula' } },
-            { path: 'especializaciones/edit/:id', component: EditEspecializacionesComponent, data: { titulo: 'Formulario Especializaciones' } },
-            { path: 'cursos/edit', component: FormCursosComponent, data: { titulo: 'Formulario Cursos' } },
-            { path: 'cursos/edit/:id', component: FormCursosComponent, data: { titulo: 'Formulario Cursos' } },
-            { path: 'periodos', component: PeriodosComponent, data: { titulo: 'Periodos' } },
-            { path: 'periodos/detalle/:id', component: DetallePeriodoComponent, data: { titulo: 'Detalle de Periodo' } },
-            { path: 'empleados', component: EmpleadosComponent, data: { titulo: 'Empleados' } },
-            { path: 'empleados/form', component: FormEmpleadoComponent, data: { titulo: 'Formulario Empleados' } },
-            { path: 'empleados/form/:id', component: FormEmpleadoComponent, data: { titulo: 'Formulario Empleados' } },
-            { path: 'estudiantes', component: EstudiantesComponent, data: { titulo: 'Estudiantes' } },
-            { path: 'estudiantes/form', component: FormEstudiantesComponent, data: { titulo: 'Formulario Estudiantes' } },
-            { path: 'estudiantes/form/:id', component: FormEstudiantesComponent, data: { titulo: 'Formulario Estudiantes' } },
-            { path: 'inicio', component: InicioComponent, data: { titulo: 'Inicio' } },
-            { path: 'cursos', component: CursosComponent, data: { titulo: 'Cursos' } },
-            { path: '', redirectTo: '/sistema/dashboard', pathMatch: 'full' },
+            {
+                path: 'dashboard', component: DashboardComponent, data:
+                    { data: 'ROLE_EMPLEADO', titulo: 'Dashboard' },
+                canActivate: [RoleGuard]
+            },
+            {
+                path: 'especializaciones', component: EspecializacionesComponent, data:
+                    { data: 'ROLE_CORDINACIONACADEMICA', titulo: 'Especializaciones' },
+                canActivate: [RoleGuard]
+            },
+            {
+                path: 'matricular', component: MatriculasComponent, data:
+                    { data: 'ROLE_SECRETARIA', titulo: 'Matricular Estudiante' },
+                canActivate: [RoleGuard]
+            },
+            {
+                path: 'matriculas', component: ListaMatriculasComponent, data:
+                    { data: 'ROLE_SECRETARIA', titulo: 'Matriculas' },
+                canActivate: [RoleGuard]
+            },
+            {
+                path: 'anular-pagos', component: AnularPagoComponent, data:
+                    { data: 'ROLE_CAJA', titulo: 'Pagos - Anular' },
+                canActivate: [RoleGuard]
+            },
+            {
+                path: 'pagos-inicio', component: PagosComponent, data:
+                    { data: 'ROLE_CAJA', titulo: 'Pagos - Inicio' },
+                canActivate: [RoleGuard]
+            },
+            {
+                path: 'pagos-inicio/detalle/:id', component: DetallePagoComponent, data:
+                    { data: 'ROLE_CAJA', titulo: 'Pago Detalle' },
+                canActivate: [RoleGuard]
+            },
+            {
+                path: 'pagos-inicio/cronograma-pagos-estudiante/:dni', component: CronogramaPagosEstudianteComponent, data:
+                    { data: 'ROLE_CAJA', titulo: 'Cronograma de Pagos' },
+                canActivate: [RoleGuard]
+            },
+            {
+                path: 'pagos-inicio/pagar', component: RegisterPagoComponent, data:
+                    { data: 'ROLE_CAJA', titulo: 'Registrar Pago' },
+                canActivate: [RoleGuard]
+            },
+            {
+                path: 'matriculas/detalle/:id', component: DetalleMatriculaComponent, data:
+                    { data: 'ROLE_SECRETARIA', titulo: 'Detalle Matricula' },
+                canActivate: [RoleGuard]
+            },
+            {
+                path: 'especializaciones/edit/:id', component: EditEspecializacionesComponent, data:
+                    { data: 'ROLE_CORDINACIONACADEMICA', titulo: 'Formulario Especializaciones' },
+                canActivate: [RoleGuard]
+            },
+            {
+                path: 'cursos/edit', component: FormCursosComponent, data:
+                    { data: 'ROLE_CORDINACIONACADEMICA', titulo: 'Formulario Cursos' },
+                canActivate: [RoleGuard]
+            },
+            {
+                path: 'cursos/edit/:id', component: FormCursosComponent, data:
+                    { data: 'ROLE_CORDINACIONACADEMICA', titulo: 'Formulario Cursos' },
+                canActivate: [RoleGuard]
+            },
+            {
+                path: 'periodos', component: PeriodosComponent, data:
+                    { data: 'ROLE_CORDINACIONACADEMICA', titulo: 'Periodos' },
+                canActivate: [RoleGuard]
+            },
+            {
+                path: 'periodos/detalle/:id', component: DetallePeriodoComponent, data:
+                    { data: 'ROLE_CORDINACIONACADEMICA', titulo: 'Detalle de Periodo' },
+                canActivate: [RoleGuard]
+            },
+            {
+                path: 'empleados', component: EmpleadosComponent, data:
+                    { data: 'ROLE_CORDINACIONACADEMICA', titulo: 'Empleados' },
+                canActivate: [RoleGuard]
+            },
+            {
+                path: 'empleados/form', component: FormEmpleadoComponent, data:
+                    { data: 'ROLE_CORDINACIONACADEMICA', titulo: 'Formulario Empleados' },
+                canActivate: [RoleGuard]
+            },
+            {
+                path: 'empleados/form/:id', component: FormEmpleadoComponent, data:
+                    { data: 'ROLE_CORDINACIONACADEMICA', titulo: 'Formulario Empleados' },
+                canActivate: [RoleGuard]
+            },
+            {
+                path: 'estudiantes', component: EstudiantesComponent, data:
+                    { data: 'ROLE_INFORMES', titulo: 'Estudiantes' },
+                canActivate: [RoleGuard]
+            },
+            {
+                path: 'estudiantes/form', component: FormEstudiantesComponent, data:
+                    { data: 'ROLE_INFORMES', titulo: 'Formulario Estudiantes' },
+                canActivate: [RoleGuard]
+            },
+            {
+                path: 'estudiantes/form/:id', component: FormEstudiantesComponent, data:
+                    { data: 'ROLE_INFORMES', titulo: 'Formulario Estudiantes' },
+                canActivate: [RoleGuard]
+            },
+            {
+                path: 'inicio', component: InicioComponent, data:
+                    { data: 'ROLE_EMPLEADO', titulo: 'Inicio' },
+                canActivate: [RoleGuard]
+            },
+            {
+                path: 'cursos', component: CursosComponent, data:
+                    { data: 'ROLE_CORDINACIONACADEMICA', titulo: 'Cursos' },
+                canActivate: [RoleGuard]
+            },
+            {
+                path: 'usuarios', component: UsuariosComponent, data:
+                    { data: 'ROLE_ADMIN', titulo: 'Usuarios' },
+                canActivate: [RoleGuard]
+            },
+            {
+                path: 'reportes-ganancias', component: ReportesGananciasComponent, data:
+                    { data: 'ROLE_CORDINACIONACADEMICA', titulo: 'Reportes Ganancias' },
+                canActivate: [RoleGuard]
+            },
+            {
+                path: 'reportes-especializaciones', component: ReportesEspecializacionesComponent, data:
+                    { data: 'ROLE_CORDINACIONACADEMICA', titulo: 'Reportes Especializaciones' },
+                canActivate: [RoleGuard]
+            },
+            { path: '', redirectTo: '/sistema/dashboard', pathMatch: 'full'},
         ]
     }
 ]

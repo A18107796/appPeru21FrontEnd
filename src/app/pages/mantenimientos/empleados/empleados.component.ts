@@ -13,21 +13,39 @@ declare var $: any;
 })
 export class EmpleadosComponent implements OnInit {
   empleados: Empleado[] = [];
-
-
+  cargando = false;
+  public activo = Estado.ACTIVO;
+  public inactivo = Estado.INACTIVO;
+  public ALL = Estado.ALL;
   constructor(private empService: EmpleadoService, private toast: ToastrService) { }
 
   ngOnInit(): void {
-    this.listar();
+    this.listar(Estado.ALL);
   }
 
-  listar() {
-    this.empService.listar().subscribe(res => {
-      this.empleados = res;
-      this.createDataTable();
-    })
-  }
+  listar(estado: Estado) {
+    this.empleados = [];
+    this.deleteTable();
+    this.cargando = true;
+    if (estado === Estado.ALL) {
+      this.empService.listar().subscribe(res => {
+        setTimeout(() => {
+          this.empleados = res;
+          this.cargando = false;
+          this.createDataTable();
+        }, 200);
+      });
+    } else {
+      this.empService.getByStatus(estado).subscribe(res => {
+        setTimeout(() => {
+          this.empleados = res;
+          this.cargando = false;
+          this.createDataTable();
+        }, 200);
+      });
+    }
 
+  }
   inactive(emp: any) {
     Swal.fire({
       title: '¿Estas seguro que deseas desactivar a este empleado?',
@@ -50,6 +68,28 @@ export class EmpleadosComponent implements OnInit {
       }
     })
 
+  }
+
+  delete(boolean: boolean, est: Empleado) {
+    if (boolean) {
+      this.empService.changeStatus(est, Estado.INACTIVO).subscribe(
+        res => {
+          window.location.reload();
+        },
+        err => {
+          console.log(err);
+        }
+      )
+    } else {
+      this.empService.changeStatus(est, Estado.ACTIVO).subscribe(
+        res => {
+          window.location.reload();
+        },
+        err => {
+          console.log(err);
+        }
+      )
+    }
   }
 
   createDataTable() {

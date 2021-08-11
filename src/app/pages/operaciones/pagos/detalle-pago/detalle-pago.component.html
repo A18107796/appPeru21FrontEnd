@@ -1,0 +1,136 @@
+<section class="content">
+    <div class="container-fluid">
+        <div class="card border">
+            <div class="card-body ">
+
+                <div class="ribbon-wrapper ribbon-lg">
+                    <div class="ribbon  text-lg" [ngClass]="
+                            [pago.estado === 'PAGADO'?'bg-success':'',
+                            pago.estado === 'TERMINADO'?'bg-indigo':'',
+                            pago.estado === 'PENDIENTE'?'bg-warning text-light':'',
+                            pago.estado === 'ANULADO'?'bg-danger':'']">
+
+                        {{ pago.estado }}
+                    </div>
+                </div>
+                <div class="invoice p-3 mb-3 border-0">
+
+
+                    <div class="row mb-2">
+                        <div class="col-12">
+                            <h4>
+                                <img src="/assets/dist/img/peru21logo.jpg" class="border mr-2" width="120px"
+                                    height="120px">CORPORACIÓN EDUCATIVA PERÚ 21
+                                <br>
+                                <small class="float-left">
+                                    <strong>Fecha Registro:</strong>
+                                    {{ pago.fecha_reg |date:'yyyy-MM-dd' }}</small>
+                                <small class="float-right" *ngIf="pago.npago">
+                                    <strong class="bg-indigo pr-3 pl-3">#
+                                        {{pagoS.getNumRuc((pago.npago))}}</strong>
+                                </small>
+                            </h4>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- info row -->
+                    <div class="row invoice-info mt-5">
+                        <div class="col-sm-4 invoice-col">
+                            <strong>Empleado:</strong><br>
+                            {{ pago.empleado.nombres + ' ' + pago.empleado.apellidos }}
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-sm-4 invoice-col">
+                            <strong>Estudiante:</strong><br>
+                            {{ pago.estudiante.nombres + ' ' + pago.estudiante.apellidos }} <br>
+                            <strong>Doc:</strong> {{ pago.estudiante.num_doc}} <br>
+                            <strong>Sede:</strong> {{ pago.estudiante.sede.nombre}} <br>
+
+
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-sm-4 invoice-col">
+                            <b>Moenda:</b> {{pago.moneda.nombre}}<br>
+                            <b>Tipo Pago:</b> {{pago.tipo_pago.nombre}}<br>
+                            <b>Tipo Comprobante:</b> {{pago.tipo_comprobante.nombre}}<br>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+                    <hr>
+                    <div class="text-center mb-4">
+                        <h4>Detalles:</h4>
+                    </div>
+                    <!-- Table row -->
+                    <div class="row">
+                        <div class="col-12 table-responsive">
+                            <table class="table table-bordered">
+                                <thead class="bg-indigo text-center">
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Descripción</th>
+                                        <th>Cantidad</th>
+                                        <th>Subtotal</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let p of pago.pagoDetalles" class="text-center">
+                                        <td>{{p.id}}</td>
+                                        <td class="text-left">{{p.pago.pension.descripcion}}</td>
+                                        <td>{{p.cantidad}}</td>
+                                        <td>S/. {{p.subtotal | number:'1.2-2'}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+
+                    <div class="row">
+                        <!-- accepted payments column -->
+                        <div class="col-6">
+
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-6">
+
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <tbody>
+                                        <tr>
+                                            <th class="bg-purple" style="width:50%">Subtotal:</th>
+                                            <td class="text-right"><b>S/. {{this.total | number:'1.2-2'}}</b>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th class="bg-purple">Total:</th>
+                                            <td class="text-right"><b>S/. {{this.total | number:'1.2-2'}}</b>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+
+                    <!-- this row will not appear when printing -->
+                    <div class="row no-print">
+                        <div class="col-12">
+                            <button type="button" class="btn btn-danger float-right pr-4 pl-4" (click)="anularPago()"
+                                *ngIf="pago.estado !== 'ANULADO'"><i class="fa fa-times"></i> ANULAR PAGO
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div> 
+            <div class="overlay" *ngIf="cargando">
+                <i class="fas fa-2x fa-sync fa-spin"></i>
+            </div>
+        </div>
+        <!-- /.invoice -->
+    </div><!-- /.col -->
+</section>

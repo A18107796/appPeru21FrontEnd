@@ -171,11 +171,49 @@ export class ReportsService {
     }
   }
 
+  getCanva(data: any): any {
+
+    return {
+      pageSize: 'A4',
+      pageOrientation: 'landscape',
+      content: [
+        {
+          columns: [
+            [
+              {
+                text: 'CORPORACIÓN EDUCATIVA \n PERU 21',
+                fontSize: 25,
+                bold: true,
+                color: '#900C3F',
+                characterSpacing: 5,
+                margin: [0, 0, 0, 0]
+              }
+            ],
+          ]
+        },
+        {
+          text: 'Reporte de Especializaciones',
+          style: 'sectionHeader',
+          bold: true,
+          decoration: 'underline',
+          margin: [0, 30, 0, 15]
+        },
+        {
+          chart: 'pie',
+          data: [10, 20, 30, 40],
+          colors: ['red', 'green', 'blue', 'black'],
+          position: [20, 30],
+          size: [80, 100]
+        }
+      ],
+    }
+  }
+
   getFacturaPDF(factura: Pago): any {
     console.log(factura.fecha_reg);
     console.log(factura.tipo_comprobante);
     console.log(factura);
-    
+
     if (factura) {
       return {
         pageSize: 'A4',
@@ -229,7 +267,7 @@ export class ReportsService {
               ],
               [
                 {
-                  text: [{ text: 'Fecha: ', bold: true }, factura.fecha_reg ],
+                  text: [{ text: 'Fecha: ', bold: true }, factura.fecha_reg],
                   alignment: 'right'
                 },
                 {

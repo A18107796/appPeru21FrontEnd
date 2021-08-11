@@ -93,7 +93,7 @@
                             <div class="form-group">
                                 <label>Sede: <strong class="text-danger">*</strong></label>
                                 <select class="custom-select rounded-2" formControlName="sede"
-                                [ngClass]="{'is-invalid': this.formService.campoNoValido('sede', formMatricula, formSubmited)}">
+                                    [ngClass]="{'is-invalid': this.formService.campoNoValido('sede', formMatricula, formSubmited)}">
                                     <option [ngValue]="null">
                                         <-- SELECCIONE SEDE -->
                                     </option>
@@ -110,7 +110,7 @@
                             <div class="form-group">
                                 <label>Turno: <strong class="text-danger">*</strong></label>
                                 <select class="custom-select rounded-2" formControlName="turno"
-                                [ngClass]="{'is-invalid': this.formService.campoNoValido('turno', formMatricula, formSubmited)}">
+                                    [ngClass]="{'is-invalid': this.formService.campoNoValido('turno', formMatricula, formSubmited)}">
                                     <option [ngValue]="null">
                                         <-- SELECCIONE TURNO -->
                                     </option>
@@ -124,7 +124,7 @@
                             <div class="form-group">
                                 <label>Numero de Cuotas: <strong class="text-danger">*</strong></label>
                                 <select class="custom-select rounded-2" formControlName="num_cuotas"
-                                [ngClass]="{'is-invalid': this.formService.campoNoValido('num_cuotas', formMatricula, formSubmited)}">
+                                    [ngClass]="{'is-invalid': this.formService.campoNoValido('num_cuotas', formMatricula, formSubmited)}">
                                     <option [ngValue]="null">
                                         <-- SELECCIONE NUMERO DE CUOTAS -->
                                     </option>
@@ -140,7 +140,7 @@
                             <div class="form-group">
                                 <label>Periodo: <strong class="text-danger">*</strong></label>
                                 <select class="custom-select rounded-2" formControlName="periodo"
-                                [ngClass]="{'is-invalid': this.formService.campoNoValido('periodo', formMatricula, formSubmited)}">
+                                    [ngClass]="{'is-invalid': this.formService.campoNoValido('periodo', formMatricula, formSubmited)}">
                                     <option [ngValue]="null">
                                         <-- SELECCIONE PERIODO -->
                                     </option>
@@ -155,7 +155,7 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="form-group">
-                                <label>Detalles: <strong class="text-danger">*</strong></label>
+                                <label>Detalles: </label>
                                 <input type="text"
                                     class="form-control animate__animated animate__fadeInUp animate__faster"
                                     placeholder="Detalles de matricula" formControlName="detalles">

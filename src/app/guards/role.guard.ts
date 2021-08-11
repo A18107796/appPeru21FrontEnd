@@ -17,16 +17,23 @@ export class RoleGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    let role = route.data['role'] as string;
-
-    if (this.authService.hasRole(role)) {
-      return true;
-    } else {
-      Swal.fire('Acceso denegado', 'No tienes acceso.', 'warning');
-      this.router.navigate(['sistema'])
+    let role = route.data['data'] as string;
+      console.log(this.authService.hasRole(role));
+    
+    if (!this.authService.hasRole(role)) {
+      Swal.fire('Acceso denegado', 'No tienes acceso a este recurso!!', 'warning');
+      this.router.navigate(['/dashboard']);
       return false;
+    } else {
+      return true;
     }
+
 
   }
 
+
+
+
 }
+
+

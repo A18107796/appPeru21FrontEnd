@@ -7,8 +7,8 @@
                         <h5 class="card-title m-0">Cronograma de Pagos</h5>
                     </div>
                     <div class="card-header border border-secondary ">
-                        <select class="custom-select rounded-2" (change)="$event">
-                            <option *ngFor="let m of matriculas" [ngValue]="m.periodo.id">{{m.periodo.nombre}}</option>
+                        <select class="custom-select rounded-2" (change)="change($event)">
+                            <option *ngFor="let m of matriculas" [ngValue]="m" [attr.data-value]="m.periodo.id">{{m.periodo.nombre}}</option>
                         </select>
                     </div>
                     <div class="card-body">
@@ -73,7 +73,7 @@
                                         <td class="text-center">
                                             <span class="badge" [ngClass]="
                                                 [p.estado === 'PAGADO'?'bg-success':'',
-                                                p.estado === 'VENCIDO'?'bg-warning':'',
+                                                p.estado === 'VENCIDO'?'bg-danger':'',
                                                 p.estado === 'PENDIENTE'?'bg-warning':'']">
                                                 {{p.estado}}
                                             </span>
@@ -135,7 +135,8 @@
 
                                 <div class="info-box-content">
                                     <span class="info-box-text">Total Pendiente:</span>
-                                    <span class="info-box-number" *ngIf="date">S/. {{ this.totalPendiente | number:'1.2-2' }}</span>
+                                    <span class="info-box-number" *ngIf="date">S/. {{ this.totalPendiente |
+                                        number:'1.2-2' }}</span>
                                 </div>
                                 <!-- /.info-box-content -->
                             </div>
@@ -148,6 +149,8 @@
                                 </div>
                                 <!-- /.info-box-content -->
                             </div>
+                            <button class="btn btn-block btn-danger" *ngIf="mostrarBoton()"
+                                (click)="anularMatricula()">ANULAR MATRICULA</button>
                         </div>
                     </div>
                 </div>

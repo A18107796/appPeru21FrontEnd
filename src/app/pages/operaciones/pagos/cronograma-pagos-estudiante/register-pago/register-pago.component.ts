@@ -139,10 +139,13 @@ export class RegisterPagoComponent implements OnInit {
           setTimeout(() => {
             this.pagoService.create(this.pago).subscribe(
               res => {
+                const id = res.id;
                 this.pagoService.getEntity(res.id).subscribe(
                   pago => {
                     this.cargando = false;
-                    this.generatePDF(pago.pago);
+                    const pagoBD = pago.pago;
+                    console.log(pagoBD);
+                    this.generatePDF(pagoBD);
                     Swal.fire({
                       title: 'Registrado',
                       text: "Pago Registrado Correctamente",
@@ -193,7 +196,7 @@ export class RegisterPagoComponent implements OnInit {
 
   generatePDF(pago: Pago) {
     console.log("Generando");
-    let docDefinition = this.reportService.getFacturaPDF(this.pago);
+    let docDefinition = this.reportService.getFacturaPDF(pago);
     let pdf = pdfMake.createPdf(docDefinition);
     pdf.open();
   }

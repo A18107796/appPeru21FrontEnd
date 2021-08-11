@@ -1,6 +1,7 @@
 import { Empleado } from "./empleado";
+import { GenericEntity } from "./generic-entity";
 
-export class Usuario {
+export class Usuario implements GenericEntity{
     id_usuario!: number;
     email!: string;
     password!: string;
@@ -11,4 +12,6 @@ export class Usuario {
     constructor() {
         this.roles = [];
     }
+    id!: number;
+    nombre!: string;
 }

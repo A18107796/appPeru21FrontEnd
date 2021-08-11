@@ -57,5 +57,9 @@ export class PagoService extends CommonServiceStatusService<Pago>{
     return retNumber;
   }
 
+  anularPago(idPago: number): Observable<any> {
+    return this.httpClient.put(`${this.baseEndPoint}/anular-pago/${idPago}`, null);
+  }
+
 
 }

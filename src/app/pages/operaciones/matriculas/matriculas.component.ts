@@ -98,6 +98,7 @@ export class MatriculasComponent implements OnInit {
           err => {
             this._toastService.error(err.error.message, 'No encontrado');
             this.spinnerDNI = false;
+            this.formMatricula.get('estudiante')?.reset();
           }
         );
       }, 1000)
