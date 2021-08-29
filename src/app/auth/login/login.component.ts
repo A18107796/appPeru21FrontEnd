@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['sistema']);
     }
     this.createFormLogin();
-   
+
   }
 
 
@@ -64,6 +64,6 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  
+
 
 }

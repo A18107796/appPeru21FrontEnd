@@ -19,9 +19,10 @@ import { ReportsService } from 'src/app/services/reports.service';
 import { SedeService } from 'src/app/services/sede.service';
 import * as pdfMake from "pdfmake/build/pdfmake";
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+(<any>pdfMake).vfs = pdfFonts.pdfMake.vfs;
 import Swal from 'sweetalert2';
 import { Location } from '@angular/common';
-(<any>pdfMake).vfs = pdfFonts.pdfMake.vfs;
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-matriculas',
@@ -53,6 +54,7 @@ export class MatriculasComponent implements OnInit {
     private _toastService: ToastrService,
     private _authService: AuthService,
     private _reportS: ReportsService,
+    private router: Router,
     private location: Location) { }
 
   ngOnInit(): void {
@@ -128,7 +130,14 @@ export class MatriculasComponent implements OnInit {
   }
 
   listarPeriodos() {
-    this._periodoS.getByStatus(Estado.INSCRIPCION_ABIERTA).subscribe(res => this.periodos = res);
+    this._periodoS.getByStatus(Estado.INSCRIPCION_ABIERTA).subscribe(
+      res => {
+        this.periodos = res
+        if (this.periodos.length === 0) {
+            Swal.fire('Alerta','No existen periodos en estado de INSCRIPCIÓN, comunique al area de coordinación academica!','info');
+            this.router.navigateByUrl("/sistema/dashboard");
+        }
+      });
   }
 
 
@@ -215,7 +224,6 @@ export class MatriculasComponent implements OnInit {
   }
 
   generatePDF(matricula: Matricula) {
-    console.log("Generando");
     let docDefinition = this._reportS.getFichaMatriculaPDF(matricula);
     let pdf = pdfMake.createPdf(docDefinition);
     pdf.open();

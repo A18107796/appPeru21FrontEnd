@@ -19,6 +19,8 @@ export class ThemeService {
     console.log(this.globalTheme);
   }
 
+  
+
   getTheme() {
     this.globalTheme = localStorage.getItem("theme") as Theme || Theme.Light;
   }

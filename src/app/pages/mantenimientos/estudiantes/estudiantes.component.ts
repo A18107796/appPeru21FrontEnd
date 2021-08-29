@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { Estado } from 'src/app/enums/estado';
 import { Estudiante } from 'src/app/models/estudiante';
 import { EstudianteService } from 'src/app/services/estudiante.service';
+import { ReportsService } from 'src/app/services/reports.service';
 declare var $: any;
 
 
@@ -19,7 +20,8 @@ export class EstudiantesComponent implements OnInit {
   public activo = Estado.ACTIVO;
   public inactivo = Estado.INACTIVO;
   public ALL = Estado.ALL;
-  constructor(private _estS: EstudianteService) { }
+
+  constructor(private _estS: EstudianteService, private _reportS: ReportsService) { }
 
 
   ngOnInit(): void {
@@ -71,6 +73,12 @@ export class EstudiantesComponent implements OnInit {
       )
     }
   }
+
+  createPDFStudents() {
+    let doc = this._reportS.getStudentsPDF(this.estudiantes);
+    this._reportS.openPDF(doc);
+  }
+
 
 
 

@@ -13,6 +13,8 @@ import * as pdfMake from "pdfmake/build/pdfmake";
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import { ReportsService } from 'src/app/services/reports.service';
 (<any>pdfMake).vfs = pdfFonts.pdfMake.vfs;
+import { jsPDF } from "jspdf";
+import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-reportes-especializaciones',
@@ -115,12 +117,23 @@ export class ReportesEspecializacionesComponent implements OnInit {
 
 
   generatePDF() {
-    
-    console.log("Generando");
-    let docDefinition = this.reportS.getCanva(this.data);
-    let pdf = pdfMake.createPdf(docDefinition);
-    pdf.open();
+    // printDiv is the html element which has to be converted to PDF
+    let grafico: any = document.querySelector("#print-section");
+    html2canvas(grafico).then(canvas => {
+      let width = canvas.width;
+      let height = canvas.height;
+      console.log(canvas);
+      console.log(grafico);
+      console.log(width);
+      console.log(height);
+      var pdfFile = new jsPDF('p', 'pt', [width, height]);
+      var imgData = canvas.toDataURL("image/jpeg", 1.0);
+      pdfFile.addImage(imgData, 0, 0, width - width / 2, height - height / 2);
+      pdfFile.save('sample.pdf');
+    });
   }
+
+
 
 
   createDataTable() {

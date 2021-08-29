@@ -3,6 +3,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Estado } from 'src/app/enums/estado';
 import { Empleado } from 'src/app/models/empleado';
 import { EmpleadoService } from 'src/app/services/empleado.service';
+import { ReportsService } from 'src/app/services/reports.service';
 import Swal from 'sweetalert2';
 declare var $: any;
 
@@ -16,8 +17,8 @@ export class EmpleadosComponent implements OnInit {
   cargando = false;
   public activo = Estado.ACTIVO;
   public inactivo = Estado.INACTIVO;
-  public ALL = Estado.ALL;
-  constructor(private empService: EmpleadoService, private toast: ToastrService) { }
+  public all = Estado.ALL;
+  constructor(private empService: EmpleadoService, private toast: ToastrService, private _reportS: ReportsService) { }
 
   ngOnInit(): void {
     this.listar(Estado.ALL);
@@ -46,6 +47,12 @@ export class EmpleadosComponent implements OnInit {
     }
 
   }
+
+  createPDFStudents() {
+    let doc = this._reportS.getEmpleadosPDF(this.empleados);
+    this._reportS.openPDF(doc);
+  }
+
   inactive(emp: any) {
     Swal.fire({
       title: '¿Estas seguro que deseas desactivar a este empleado?',
@@ -95,11 +102,11 @@ export class EmpleadosComponent implements OnInit {
   createDataTable() {
 
     $(function () {
-      $("#ex1").DataTable({
+      $("#empleados").DataTable({
         "responsive": true, "lengthChange": false, "autoWidth": false,
         "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
-        "order": [[0,'desc']]
-      }).buttons().container().appendTo('#ex1_wrapper .col-md-6:eq(0)');
+        "order": [[0, 'desc']]
+      }).buttons().container().appendTo('#empleados_wrapper .col-md-6:eq(0)');
       /*    
          $('#example1').dataTable().fnClearTable();
          $('#example1').dataTable().fnDestroy(); */
@@ -109,7 +116,7 @@ export class EmpleadosComponent implements OnInit {
   }
 
   deleteTable() {
-    $('#ex1').dataTable().fnDestroy();
+    $('#empleados').dataTable().fnDestroy();
   }
 
 }

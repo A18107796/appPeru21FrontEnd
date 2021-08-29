@@ -8,6 +8,8 @@ import { ModalPeriodoService } from 'src/app/services/modal-periodo.service';
 import { ModalService } from 'src/app/services/modal.service';
 import { PeriodoService } from 'src/app/services/periodo.service';
 import Swal from 'sweetalert2';
+import { isUndefined } from 'util';
+import { ListaMatriculasComponent } from '../../operaciones/lista-matriculas/lista-matriculas.component';
 
 @Component({
   selector: 'app-periodos',
@@ -26,7 +28,6 @@ export class PeriodosComponent implements OnInit {
 
   ngOnInit(): void {
     this.listar();
-    this.checkPeriodo();
   }
 
   abrirModal() {
@@ -47,7 +48,7 @@ export class PeriodosComponent implements OnInit {
     this.modalPeriodo.abrirModal();
   }
 
-  redirigirDetalle(id: number){
+  redirigirDetalle(id: number) {
     this.router.navigateByUrl("/sistema/periodos/detalle/" + id);
   }
 
@@ -83,7 +84,32 @@ export class PeriodosComponent implements OnInit {
   listar() {
     this._sPeriodo.listar().subscribe(
       res => {
-        this.periodos = res;
+        const lista: Periodo[] = res;
+        let cont = 0;
+        lista.forEach(p => {
+          if (p.estado == Estado.INSCRIPCION_ABIERTA) {
+            cont += 1;
+          }
+        })
+        if (cont > 1) {
+          Swal.fire({
+            title: 'Mensaje',
+            text: 'Existe dos periodo en estado de inscripción\n Tiene que sincronizar las fechas',
+            icon: 'info',
+            showConfirmButton: true,
+            confirmButtonText: `Si`,
+            denyButtonText: `Revisar`,
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this.sincronizar();
+            }
+          })
+        } else if (cont === 0) {
+          this.periodos = res;
+          this.checkPeriodo();
+        } else {
+          this.periodos = res;
+        }
       }
     )
   }
@@ -91,31 +117,35 @@ export class PeriodosComponent implements OnInit {
   checkPeriodo() {
     this._sPeriodo.checkPeriodo().subscribe(
       res => {
-        console.log(res);
-        Swal.fire({
-          title: 'Mensaje',
-          text: 'Existe un periodo para entrar en estado de inscripción\n ¿Desea cambiar estado?',
-          icon: 'info',
-          showDenyButton: true,
-          showCancelButton: true,
-          confirmButtonText: `Si`,
-          denyButtonText: `Revisar`,
-        }).then((result) => {
-          /* Read more about isConfirmed, isDenied below */
-          if (result.isConfirmed) {
-            this._sPeriodo.updateEstado(res.id, Estado.INSCRIPCION_ABIERTA).subscribe(
-              res => {
-                Swal.fire('Listo','Se actualizo el calendario academico, las inscripciones estan abiertas','success');
-                window.location.reload();
-              },
-              err => {
-                Swal.fire('Error','Ocurrio un error, intentelo denuevo :(','error');
-              } 
-            );
-          } else if (result.isDenied) {
-            this.redirigirDetalle(res.id);
-          }
-        })
+        if (res) {
+          Swal.fire({
+            title: 'Mensaje',
+            text: 'Existe un periodo para entrar en estado de inscripción\n ¿Desea cambiar estado?',
+            icon: 'info',
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: `Si`,
+            denyButtonText: `Revisar`,
+          }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+              this._sPeriodo.updateEstado(res.id, Estado.INSCRIPCION_ABIERTA).subscribe(
+                res => {
+                  Swal.fire('Listo', 'Se actualizo el calendario academico, las inscripciones estan abiertas', 'success');
+                  window.location.reload();
+
+                },
+                err => {
+                  Swal.fire('Error', 'Ocurrio un error, intentelo denuevo :(', 'error');
+
+                }
+              );
+            } else if (result.isDenied) {
+              this.redirigirDetalle(res.id);
+
+            }
+          })
+        }
       },
       err => {
         console.log(err);

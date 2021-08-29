@@ -1,8 +1,15 @@
+import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Estudiante } from '../models/estudiante';
 import { Matricula } from '../models/matricula';
 import { Pago } from '../models/pago';
+import * as pdfMake from "pdfmake/build/pdfmake";
+import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+import { Estado } from '../enums/estado';
+import { Empleado } from '../models/empleado';
+(<any>pdfMake).vfs = pdfFonts.pdfMake.vfs;
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +17,7 @@ import { Pago } from '../models/pago';
 export class ReportsService {
 
   imageToShow: any;
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private datePipe: DatePipe) {
     this.getImage()
   }
 
@@ -32,6 +39,10 @@ export class ReportsService {
     );
   }
 
+  private transFormDate(date: Date): any {
+    return this.datePipe.transform(date, 'yyyy-MM-dd');
+  }
+
   createImageFromBlob(image: Blob) {
     let reader = new FileReader();
     reader.addEventListener("load", () => {
@@ -41,6 +52,11 @@ export class ReportsService {
     if (image) {
       reader.readAsDataURL(image);
     }
+  }
+
+  openPDF(docDefinition: any) {
+    let pdf = pdfMake.createPdf(docDefinition);
+    pdf.open();
   }
 
   getFichaMatriculaPDF(matricula: Matricula): any {
@@ -171,6 +187,16 @@ export class ReportsService {
     }
   }
 
+  getColorByStatus(estado: Estado): string {
+    if (estado === Estado.MATRICULADO || estado === Estado.ACTIVO) {
+      return "#77D7BB";
+    } else if (estado === Estado.PENDIENTE) {
+      return "#F09007";
+    } else {
+      return "#E43D2C";
+    }
+  }
+
   getCanva(data: any): any {
 
     return {
@@ -210,10 +236,6 @@ export class ReportsService {
   }
 
   getFacturaPDF(factura: Pago): any {
-    console.log(factura.fecha_reg);
-    console.log(factura.tipo_comprobante);
-    console.log(factura);
-
     if (factura) {
       return {
         pageSize: 'A4',
@@ -226,7 +248,7 @@ export class ReportsService {
                   text: 'CORPORACIÓN EDUCATIVA \n PERU 21',
                   fontSize: 25,
                   bold: true,
-                  color: '#900C3F',
+                  color: '#5806F0',
                   characterSpacing: 5,
                   margin: [0, 0, 0, 0]
                 }
@@ -267,7 +289,7 @@ export class ReportsService {
               ],
               [
                 {
-                  text: [{ text: 'Fecha: ', bold: true }, factura.fecha_reg],
+                  text: [{ text: 'Fecha: ', bold: true }, this.transFormDate(factura.fecha_reg)],
                   alignment: 'right'
                 },
                 {
@@ -309,6 +331,116 @@ export class ReportsService {
           }
         ]
       }
+    }
+  }
+
+  getStudentsPDF(list: Estudiante[]): any {
+    return {
+      pageSize: 'A4',
+      content: [
+        {
+          columns: [
+            [
+              {
+                text: 'CORPORACIÓN EDUCATIVA \n PERU 21',
+                fontSize: 25,
+                bold: true,
+                color: '#900C3F',
+                characterSpacing: 5,
+                margin: [0, 40, 0, 0]
+              }
+            ],
+            [
+              {
+                image: this.imageToShow,
+                width: 100,
+                alignment: 'right',
+                opacity: 0.5
+              }
+            ]
+          ]
+        },
+        {
+          text: 'Lista de Estudiantes'.toUpperCase(),
+          style: 'sectionHeader',
+          bold: true,
+          fontSize: 18,
+          decoration: 'underline',
+          alignment: 'center',
+          margin: [0, 15, 0, 15]
+        },
+        {
+          table: {
+            headerRows: 1,
+            widths: ['auto', '*', 'auto', 'auto'],
+            body: [
+              [
+                //Columnas
+                { text: 'COD', alignment: 'center', fillColor: '#000000', color: '#FFFFFF' },
+                { text: 'NOMBRE COMPLETO', alignment: 'center', fillColor: '#000000', color: '#FFFFFF' },
+                { text: 'NUM DOC', alignment: 'center', fillColor: '#000000', color: '#FFFFFF' },
+                { text: 'ESTADO', alignment: 'center', fillColor: '#000000', color: '#FFFFFF' }
+              ],
+              ...list.map(p => ([{ text: p.id, alignment: 'center' }, p.nombres + " " + p.apellidos, { text: p.num_doc, alignment: 'center' }, { text: p.estado, alignment: 'center', fillColor: this.getColorByStatus(p.estado) }])),
+            ]
+          },
+        }
+      ]
+    }
+  }
+
+  getEmpleadosPDF(list: Empleado[]): any {
+    return {
+      pageSize: 'A4',
+      content: [
+        {
+          columns: [
+            [
+              {
+                text: 'CORPORACIÓN EDUCATIVA \n PERU 21',
+                fontSize: 25,
+                bold: true,
+                color: '#900C3F',
+                characterSpacing: 5,
+                margin: [0, 40, 0, 0]
+              }
+            ],
+            [
+              {
+                image: this.imageToShow,
+                width: 100,
+                alignment: 'right',
+                opacity: 0.5
+              }
+            ]
+          ]
+        },
+        {
+          text: 'Lista de Empleados'.toUpperCase(),
+          style: 'sectionHeader',
+          bold: true,
+          fontSize: 18,
+          decoration: 'underline',
+          alignment: 'center',
+          margin: [0, 15, 0, 15]
+        },
+        {
+          table: {
+            headerRows: 1,
+            widths: ['auto', '*', 'auto', 'auto'],
+            body: [
+              [
+                //Columnas
+                { text: 'COD', alignment: 'center', fillColor: '#000000', color: '#FFFFFF' },
+                { text: 'NOMBRE COMPLETO', alignment: 'center', fillColor: '#000000', color: '#FFFFFF' },
+                { text: 'NUM DOC', alignment: 'center', fillColor: '#000000', color: '#FFFFFF' },
+                { text: 'ESTADO', alignment: 'center', fillColor: '#000000', color: '#FFFFFF' }
+              ],
+              ...list.map(p => ([{ text: p.id, alignment: 'center' }, p.nombres + " " + p.apellidos, { text: p.num_doc, alignment: 'center' }, { text: p.estado, alignment: 'center', fillColor: this.getColorByStatus(p.estado) }])),
+            ]
+          },
+        }
+      ]
     }
   }
 

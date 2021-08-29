@@ -10,5 +10,6 @@ export enum Estado {
     ALL = "ALL",
     TERMINADO = "TERMINADO",
     PAGADO = "PAGADO",
-    VENCIDO = "VENCIDO"
+    VENCIDO = "VENCIDO",
+    CULMINADO = "CULMINADO"
 }

@@ -62,6 +62,7 @@
                                             <span class="badge" [ngClass]="
                                                 [p.estado === 'ACTIVO'?'bg-success':'',
                                                 p.estado === 'INSCRIPCION_ABIERTA'?'bg-info':'',
+                                                p.estado === 'CULMINADO'?'bg-indigo':'',
                                                 p.estado === 'PENDIENTE'?'bg-warning':'']">
                                                 {{p.estado}}
                                             </span>

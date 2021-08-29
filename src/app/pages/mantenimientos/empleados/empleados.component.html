@@ -10,21 +10,24 @@
                     <button class="btn btn-app bg-green animate__animated animate__fadeInLeft" routerLink="form">
                         <i class="fas fa-plus"></i> NUEVO
                     </button>
+                    <button class="btn btn-app bg-pink animate__animated animate__fadeInLeft"
+                        (click)="createPDFStudents()">
+                        <i class="fas fa-file"></i> PDF
+                    </button>
                     <button class="btn btn-app bg-indigo" (click)="listar(activo)">
                         <i class="fas fa-check-circle"></i> ACTIVOS
                     </button>
                     <button class="btn btn-app bg-danger" (click)="listar(inactivo)">
                         <i class="fas fa-times-circle"></i> INACTIVOS
                     </button>
-                    <button class="btn btn-app bg-primary" (click)="listar(ALL)">
+                    <button class="btn btn-app bg-primary" (click)="listar(all)">
                         <i class="fab fa-canadian-maple-leaf"></i> TODO
                     </button>
                 </div>
             </div>
             <div class="card-body">
 
-                <table id="ex1"
-                    class="table mt-2 table-hover table-bordered border animate__animated animate__lightSpeedInRight ">
+                <table id="empleados" class="table mt-2 table-hover table-bordered border">
                     <thead>
                         <tr class="text-center bg-indigo">
                             <th>COD</th>
@@ -37,12 +40,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="text-center" *ngIf="empleados.length <= 0">
+                        <tr class="text-center" *ngIf="cargando">
                             <th colspan="6">
                                 <i class="fas fa-2x fa-sync-alt fa-spin"></i>
                             </th>
                         </tr>
-                        <tr *ngFor="let empleado of empleados">
+                        <tr *ngFor="let empleado of empleados"
+                            class="animate__animated animate__fadeIn animate__faster">
                             <td class="text-center">
                                 {{ empleado.id }}
                             </td>

@@ -41,17 +41,13 @@ export class ModalCursosEspecializacionesComponent implements OnInit {
   }
 
   setOption(obj: Curso, evt: any) {
+    console.log(obj);
     let id = evt.target.id;
     if (evt.target.checked) {
       this.key.set(id, obj);
-
     } else {
       this.key.delete(id)
     }
-
-
-
-
   }
 
 

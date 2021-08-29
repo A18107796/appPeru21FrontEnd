@@ -10,6 +10,9 @@
                     <button class="btn btn-app bg-green animate__animated animate__fadeInLeft" routerLink="form">
                         <i class="fas fa-plus"></i> NUEVO
                     </button>
+                    <button class="btn btn-app bg-pink animate__animated animate__fadeInLeft" (click)="createPDFStudents()">
+                        <i class="fas fa-file"></i> PDF
+                    </button>
                     <button class="btn btn-app bg-indigo" (click)="listar(activo)">
                         <i class="fas fa-check-circle"></i> ACTIVOS
                     </button>
@@ -21,7 +24,7 @@
                     </button>
                 </div>
                 <table id="estudiantes"
-                    class="table mt-2 table-hover table-bordered border animate__animated animate__lightSpeedInLeft">
+                    class="table mt-2 table-hover table-bordered border">
                     <thead>
                         <tr class="text-center bg-indigo">
                             <th>COD</th>
@@ -39,7 +42,7 @@
                                 <i class="fas fa-2x fa-sync-alt fa-spin"></i>
                             </th>
                         </tr>
-                        <tr *ngFor="let estudiante of estudiantes">
+                        <tr *ngFor="let estudiante of estudiantes"  class="animate__animated animate__fadeIn animate__faster">
                             <td class="text-center">
                                 {{ estudiante.id }}
                             </td>

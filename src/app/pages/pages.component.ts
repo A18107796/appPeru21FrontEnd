@@ -17,11 +17,6 @@ export class PagesComponent implements OnInit {
     if (!authService.isAuthenticated()) {
       this.router.navigate(['login']);
     }
-
-    console.log(new Date().getTime());
-    
-
- 
   }
 
   ngOnInit(): void {
