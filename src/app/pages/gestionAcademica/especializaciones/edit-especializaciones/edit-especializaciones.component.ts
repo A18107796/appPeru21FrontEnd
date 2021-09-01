@@ -24,6 +24,7 @@ export class EditEspecializacionesComponent implements OnInit {
   tipos: EspecializacionTipo[] = [];
   myEvent = new EventEmitter<Curso[]>();
   cursosToModal!: Curso[];
+  public cargando = false;
   constructor(
     private _espService: EspecializacionService,
     private toast: ToastrService,
@@ -63,7 +64,7 @@ export class EditEspecializacionesComponent implements OnInit {
   }
 
 
-  
+
   listarTipos() {
     this._espService.getTipoEspecializaciones().subscribe(
       res => {
@@ -115,8 +116,64 @@ export class EditEspecializacionesComponent implements OnInit {
     this.listarCursos();
   }
 
+  mapEspecializacion() {
+    let nombre = this.especializacionForm.get('especializacion')?.value;
+    let tipo: any = this.especializacionForm.get('tipo')?.value;
+    if (nombre !== this.especializacionBD.nombre || tipo.id !== this.especializacionBD.tipo_especializacion.id) {
+      this.especializacionBD.nombre = nombre;
+      this.especializacionBD.tipo_especializacion = tipo;
+      this.cargando = true;
+      this.toast.info('Info', 'Guardando cambios')
+      setTimeout(() => {
+        this._espService.update(this.especializacionBD).subscribe(
+          res => {
+            this._espService.saveChanges(this.especializacionBD).subscribe(
+              res => {
+                setTimeout(() => {
+                  this.cargando = false;
+                  this.toast.success('Datos guardados correctamente');
+                }, 300);
+              },
+              err => {
+                console.log(err);
+                this.toast.error('Error, intentelo denuevo.');
+              }
+            );
+          },
+          err => {
+            this.toast.error('Error, intentelo denuevo.');
+            setTimeout(() => {
+              window.location.reload();
+            }, 500);
+          }
+        )
+      }, 400);
+    } else {
+      this.cargando = true;
+      this.toast.info('Info', 'Guardando cambios')
+      setTimeout(() => {
+        this._espService.saveChanges(this.especializacionBD).subscribe(
+          res => {
+            setTimeout(() => {
+              this.cargando = false;
+              this.toast.success('Datos guardados correctamente');
+            }, 300);
+          },
+          err => {
+            this.toast.error('Error, intentelo denuevo.');
+          }
+        );
+      }, 400);
+    }
+
+  }
+
   guardar() {
-    this._espService.saveChanges(this.especializacionBD).subscribe(
+    this.formSubmited = true;
+    if (this.especializacionForm.valid) {
+      this.mapEspecializacion();
+    }
+    /* this._espService.saveChanges(this.especializacionBD).subscribe(
       res => {
         console.log(res);
         this.toast.success('Datos guardados correctamente');
@@ -125,7 +182,7 @@ export class EditEspecializacionesComponent implements OnInit {
         console.log(err);
         this.toast.error('Error, intentelo denuevo.');
       }
-    );
+    ); */
   }
 
 }

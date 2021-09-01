@@ -24,8 +24,8 @@ export class UsuarioService extends CommonService<Usuario>{
     return this.httpClient.put<any>(`${this.baseEndPoint}/${id}/save-changes`, roles);
   }
 
-  getRoles(): Observable<Rol> {
-    return this.httpClient.get<Rol>(`${this.baseEndPoint}/roles`);
+  getRoles(): Observable<Rol[]> {
+    return this.httpClient.get<Rol[]>(`${this.baseEndPoint}/roles`);
   }
 
 }

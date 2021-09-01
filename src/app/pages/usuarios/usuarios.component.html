@@ -16,6 +16,7 @@
                             <th>COD</th>
                             <th>USUARIO</th>
                             <th>ESTADO</th>
+                            <th>ACCIONES</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -27,11 +28,14 @@
                                 {{ u.email}}
                             </td>
                             <td class="text-center">
-                                <span class="badge bg-success" *ngIf="u.enabled"
-                                    (click)="updateStado(u.id,false)">ACTIVO</span>
-                                <span class="badge bg-danger" *ngIf="!u.enabled"
-                                    (click)="updateStado(u.id,true)">INACTIVO</span>
+                                <button class="btn btn-xs btn-block bg-success" *ngIf="u.enabled"
+                                    (click)="updateStado(u.id,false)">ACTIVO</button>
+                                <button class="btn btn-xs btn-block bg-danger" *ngIf="!u.enabled"
+                                    (click)="updateStado(u.id,true)">INACTIVO</button>
                             </td>
+                            <th class="text-center">
+                                <button class="btn btn-xs bg-indigo" [routerLink]="['administrar', u.id]">Administrar</button>
+                            </th>
                         </tr>
                     </tbody>
                 </table>

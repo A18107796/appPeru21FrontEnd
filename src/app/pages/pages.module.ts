@@ -46,6 +46,8 @@ import { ReportesGananciasComponent } from './reportes/reportes-ganancias/report
 import { ReportesEspecializacionesComponent } from './reportes/reportes-especializaciones/reportes-especializaciones.component';
 import { ChartsModule } from 'ng2-charts';
 import { NgxPrintModule } from 'ngx-print';
+import { ReportesEstudiantesComponent } from './reportes/reportes-estudiantes/reportes-estudiantes.component';
+import { SearchComponent } from './search/search.component';
 
 
 
@@ -85,6 +87,8 @@ import { NgxPrintModule } from 'ngx-print';
     AdministrarUsuarioComponent,
     ReportesGananciasComponent,
     ReportesEspecializacionesComponent,
+    ReportesEstudiantesComponent,
+    SearchComponent,
   ],
   exports: [
     NopagefoundComponent,

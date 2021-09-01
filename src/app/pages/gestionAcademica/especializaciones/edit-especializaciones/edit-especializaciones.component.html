@@ -73,12 +73,16 @@
                                 </tbody>
                             </table>
                             <div class="container text-right">
-                                <button type="button" routerLink="/sistema/especializaciones" class="mr-2 btn btn-outline-danger">Cancelar</button>
+                                <button type="button" routerLink="/sistema/especializaciones"
+                                    class="mr-2 btn btn-outline-danger">Cancelar</button>
                                 <button type="submit" class="btn btn-success">Guardar</button>
                             </div>
                         </div>
                     </div>
 
+                </div>
+                <div class="overlay" *ngIf="cargando">
+                    <i class="fas fa-2x fa-sync fa-spin"></i>
                 </div>
             </div>
         </form>

@@ -10,49 +10,51 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-lg-10">
-                        <table id="example1" class="table table-hover border">
-                            <thead>
-                                <tr class="text-center bg-indigo">
-                                    <th>CODIGO</th>
-                                    <th>ESPECIALIZACION</th>
-                                    <th>ESTADO</th>
-                                    <th>ACCIONES</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="text-center" *ngIf="cargando">
-                                    <th colspan="6">
-                                        <i class="fas fa-2x fa-sync-alt fa-spin"></i>
-                                    </th>
-                                </tr>
-                                <tr *ngFor="let curso of cursos"
-                                    class="animate__animated animate__fadeIn animate__faster">
-                                    <td class="text-center">
-                                        {{ curso.id }}
-                                    </td>
-                                    <td>
-                                        {{ curso.nombre}}
-                                    </td>
-                                    <td class="text-center">
-                                        <span class="badge pl-4 pr-4"
-                                            [ngClass]="curso.estado === 'ACTIVO'?'bg-success':'badge-danger'">
-                                            {{curso.estado}}
-                                        </span>
-                                    </td>
-                                    <td class="text-center ">
-                                        <button type="button" class="btn bg-purple btn-xs  mr-2 pl-4 pr-4 "
-                                            [routerLink]="['edit', curso.id]"> <i class="fas fa-edit mr-1"></i>
-                                            Editar</button>
-                                        <button type="button" class="btn bg-danger btn-xs pl-4 pr-4 "
-                                            *ngIf="curso.estado == 'ACTIVO'" (click)="eliminar(curso)">
-                                            <i class="fas fa-trash-alt mr-1"></i> Eliminar</button>
-                                        <button type="button" class="btn bg-success btn-xs pl-4 pr-4"
-                                            *ngIf="curso.estado == 'INACTIVO'" (click)="activar(curso)">
-                                            <i class="fas fa-check-circle mr-1"></i> Activar</button>
-                                    </td>
-                                </tr>       
-                            </tbody>
-                        </table>
+                        <div class="table-responsive">
+                            <table id="example1" class="table table-hover border">
+                                <thead>
+                                    <tr class="text-center bg-indigo">
+                                        <th>CODIGO</th>
+                                        <th>ESPECIALIZACION</th>
+                                        <th>ESTADO</th>
+                                        <th>ACCIONES</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="text-center" *ngIf="cargando">
+                                        <th colspan="6">
+                                            <i class="fas fa-2x fa-sync-alt fa-spin"></i>
+                                        </th>
+                                    </tr>
+                                    <tr *ngFor="let curso of cursos"
+                                        class="animate__animated animate__fadeIn animate__faster">
+                                        <td class="text-center align-middle">
+                                            {{ curso.id }}
+                                        </td>
+                                        <td class="align-middle">
+                                            {{ curso.nombre}}
+                                        </td>
+                                        <td class="text-center align-middle">
+                                            <span class="badge pl-4 pr-4"
+                                                [ngClass]="curso.estado === 'ACTIVO'?'bg-success':'badge-danger'">
+                                                {{curso.estado}}
+                                            </span>
+                                        </td>
+                                        <td class="text-center">
+                                            <button type="button" class="btn bg-purple btn-xs  mr-2 pl-4 pr-4 "
+                                                [routerLink]="['edit', curso.id]"> <i class="fas fa-edit mr-1"></i>
+                                                Editar</button>
+                                            <button type="button" class="btn bg-danger btn-xs pl-4 pr-4 "
+                                                *ngIf="curso.estado == 'ACTIVO'" (click)="eliminar(curso)">
+                                                <i class="fas fa-trash-alt mr-1"></i> Eliminar</button>
+                                            <button type="button" class="btn bg-success btn-xs pl-4 pr-4"
+                                                *ngIf="curso.estado == 'INACTIVO'" (click)="activar(curso)">
+                                                <i class="fas fa-check-circle mr-1"></i> Activar</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                     <div class="col-lg-2">
                         <div class="text-left pr-2">

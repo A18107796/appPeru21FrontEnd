@@ -17,7 +17,7 @@ export class EstudiantesComponent implements OnInit {
   public estudiantes: Estudiante[] = [];
   public subEst!: Subscription;
   public cargando = false;
-  public activo = Estado.ACTIVO;
+  public activo = Estado.MATRICULADO;
   public inactivo = Estado.INACTIVO;
   public ALL = Estado.ALL;
 
@@ -88,7 +88,7 @@ export class EstudiantesComponent implements OnInit {
 
     $(function () {
       $("#estudiantes").DataTable({
-        "responsive": true, "lengthChange": false, "autoWidth": false,
+        "responsive": false, "lengthChange": false, "autoWidth": false,
         "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
       }).buttons().container().appendTo('#estudiantes_wrapper .col-md-6:eq(0)');
       /*    

@@ -140,7 +140,7 @@ export class ReportesEspecializacionesComponent implements OnInit {
 
     $(function () {
       $("#estudiantes").DataTable({
-        "responsive": true, "lengthChange": false, "autoWidth": false,
+        "responsive": false, "lengthChange": false, "autoWidth": false,
         "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
       }).buttons().container().appendTo('#estudiantes_wrapper .col-md-6:eq(0)');
       /*    

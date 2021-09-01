@@ -36,4 +36,10 @@ export class EspecializacionService extends CommonServiceStatusService<Especiali
     );
   }
 
+  
+
+  getEspecializacionByPeriodo(idPeriodo: number): Observable<any> {
+    return this.httpClient.get(`${this.baseEndPoint}/periodos/${idPeriodo}`);
+  }
+
 }

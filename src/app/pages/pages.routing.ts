@@ -27,6 +27,8 @@ import { ReportsService } from '../services/reports.service';
 import { ReportesGananciasComponent } from './reportes/reportes-ganancias/reportes-ganancias.component';
 import { ReportesEspecializacionesComponent } from './reportes/reportes-especializaciones/reportes-especializaciones.component';
 import { RoleGuard } from '../guards/role.guard';
+import { AdministrarUsuarioComponent } from './usuarios/administrar-usuario/administrar-usuario.component';
+import { SearchComponent } from './search/search.component';
 
 
 export const routes: Routes = [
@@ -155,6 +157,11 @@ export const routes: Routes = [
                 canActivate: [RoleGuard]
             },
             {
+                path: 'usuarios/administrar/:id', component: AdministrarUsuarioComponent, data:
+                    { data: 'ROLE_ADMIN', titulo: 'Administrar Usuario' },
+                canActivate: [RoleGuard]
+            },
+            {
                 path: 'reportes-ganancias', component: ReportesGananciasComponent, data:
                     { data: 'ROLE_CORDINACIONACADEMICA', titulo: 'Reportes Ganancias' },
                 canActivate: [RoleGuard]
@@ -164,7 +171,12 @@ export const routes: Routes = [
                     { data: 'ROLE_CORDINACIONACADEMICA', titulo: 'Reportes Especializaciones' },
                 canActivate: [RoleGuard]
             },
-            { path: '', redirectTo: '/sistema/dashboard', pathMatch: 'full'},
+            {
+                path: 'buscar/:term', component: SearchComponent, data:
+                    { data: 'ROLE_EMPLEADO', titulo: 'Buscar' },
+                canActivate: [RoleGuard]
+            },
+            { path: '', redirectTo: '/sistema/dashboard', pathMatch: 'full' },
         ]
     }
 ]

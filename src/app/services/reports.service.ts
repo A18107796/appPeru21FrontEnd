@@ -63,7 +63,6 @@ export class ReportsService {
     if (matricula) {
       return {
         pageSize: 'A3',
-        pageOrientation: 'landscape',
         content: [
 
           {
@@ -116,7 +115,7 @@ export class ReportsService {
               ],
               [
                 {
-                  text: [{ text: 'Fecha: ', bold: true }, matricula.fecha_reg],
+                  text: [{ text: 'Fecha: ', bold: true }, this.datePipe.transform(matricula.fecha_reg, 'yyyy-MM-dd')],
                   alignment: 'right'
                 }
               ]
@@ -169,6 +168,29 @@ export class ReportsService {
               ]
             }
           },
+          ,
+          {
+            text: 'Detalles de Especializacion',
+            style: 'sectionHeader',
+            bold: true,
+            decoration: 'underline',
+            alignment: 'center',
+            margin: [0, 15, 0, 15]
+          },
+          {
+            table: {
+              headerRows: 1,
+              widths: ['auto', '*'],
+              body: [
+                [
+                  //Columnas
+                  { text: 'COD', alignment: 'center', fillColor: '#000000', color: '#FFFFFF' },
+                  { text: 'CURSO', alignment: 'center', fillColor: '#000000', color: '#FFFFFF' },
+                ],
+                ...matricula.especializacion.cursos.map(p => ([{ text: p.id, alignment: 'center' }, p.nombre]))
+              ]
+            }
+          },
           {
             text: 'Detalles Adicionales',
             style: 'sectionHeader',
@@ -176,7 +198,7 @@ export class ReportsService {
           },
           {
             columns: [
-              [{ qr: `${matricula.estudiante.num_doc}`, fit: '50' }],
+              [{ qr: `${matricula.estudiante.num_doc}` }],
               [{ text: 'Signature', alignment: 'right', italics: true }],
 
             ]

@@ -1,3 +1,4 @@
+import { StringMap } from '@angular/compiler/src/compiler_facade_interface';
 import { Injectable } from '@angular/core';
 declare var jQuery: any;
 declare var $: any;
@@ -73,6 +74,30 @@ export class SidebarService {
     }, 1500);
 
   }
+
+  public searchItem(searchParam: string) {
+    let menu = this.menu;
+    let responseItem: { titulo: string, url: string }[] = [];
+    menu.forEach(itemMenu => {
+
+      if (itemMenu.submenu.length > 0) {
+        let subMenuArr: any[] = itemMenu.submenu;
+        subMenuArr.forEach(sub => {
+          let titulo: string = sub.titulo;
+          if (titulo.toLowerCase().includes(searchParam.toLocaleLowerCase())) {
+            responseItem.push({ titulo: sub.titulo, url: sub.url });
+          }
+        });
+      } else {
+        let titulo: string = itemMenu.titulo;
+        if (titulo.toLowerCase().includes(searchParam.toLocaleLowerCase())) {
+          responseItem.push({ titulo: itemMenu.titulo, url: itemMenu.url });
+        }
+      }
+    })
+    return responseItem;
+  }
+
 
   /*   const navs = document.getElementsByClassName("nav-link nav-event");
   for (let index = 0; index < navs.length; index++) {

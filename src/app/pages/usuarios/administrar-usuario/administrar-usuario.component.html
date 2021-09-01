@@ -1,1 +1,56 @@
-<p>administrar-usuario works!</p>
+<section class="content">
+    <div class="container-fluid ">
+        <div class="card card-indigo card-outline">
+            <div class="card-header text-center">
+                <h5 class="card-title m-0"><strong>ADMINISTRAR USUARIOS <i class="fas fa-user-alt"></i></strong></h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <!-- text input -->
+                        <div class="form-group">
+                            <label>Email:</label>
+                            <input type="text" class="form-control animate__animated animate__fadeInUp animate__faster"
+                                [value]="usuario.empleado.email" disabled>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Cargo:</label>
+                            <input type="text" class="form-control animate__animated animate__fadeInUp animate__faster"
+                                [value]="usuario.empleado.cargo.nombre" disabled>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <h4>Roles:</h4>
+                <div class="row border p-3">
+                    <div class="col-sm-4" *ngFor="let r of roles">
+                        <!-- text input -->
+                        <div class="form-group">
+                            <div class="custom-control custom-checkbox">
+                                <input class="custom-control-input" type="checkbox" (change)="setOption(r,$event)"
+                                    [checked]="hasRole(r.nombre)" [id]="r.id" [value]="r.id">
+                                <label [for]="r.id" class="custom-control-label">{{r.nombre}}</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-sm-12">
+                        <div class="text-center font-weight-bold">
+                            <button class="btn btn-success font-weight-bold pl-5 pr-5" type="button" (click)="save()">
+                                GUARDAR CAMBIOS<i class="fa fa-save ml-2"></i></button>
+                            <a class="btn btn-danger ml-3 pr-5 pl-5" routerLink="/sistema/usuarios">
+                                VOLVER <i class="fa fa-arrow-left ml-2"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="overlay" *ngIf="cargando">
+                <i class="fas fa-2x fa-sync fa-spin"></i>
+            </div>
+        </div>
+    </div>
+</section>

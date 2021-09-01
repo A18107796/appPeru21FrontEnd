@@ -10,7 +10,8 @@
                     <button class="btn btn-app bg-green animate__animated animate__fadeInLeft" routerLink="form">
                         <i class="fas fa-plus"></i> NUEVO
                     </button>
-                    <button class="btn btn-app bg-pink animate__animated animate__fadeInLeft" (click)="createPDFStudents()">
+                    <button class="btn btn-app bg-pink animate__animated animate__fadeInLeft"
+                        (click)="createPDFStudents()">
                         <i class="fas fa-file"></i> PDF
                     </button>
                     <button class="btn btn-app bg-indigo" (click)="listar(activo)">
@@ -23,64 +24,65 @@
                         <i class="fab fa-canadian-maple-leaf"></i> TODO
                     </button>
                 </div>
-                <table id="estudiantes"
-                    class="table mt-2 table-hover table-bordered border">
-                    <thead>
-                        <tr class="text-center bg-indigo">
-                            <th>COD</th>
-                            <th>NOMBRES</th>
-                            <th>NUM DOC</th>
-                            <th>DISTRITO</th>
-                            <th>SEDE</th>
-                            <th>ESTADO</th>
-                            <th>ACCIONES</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="text-center" *ngIf="cargando">
-                            <th colspan="6">
-                                <i class="fas fa-2x fa-sync-alt fa-spin"></i>
-                            </th>
-                        </tr>
-                        <tr *ngFor="let estudiante of estudiantes"  class="animate__animated animate__fadeIn animate__faster">
-                            <td class="text-center">
-                                {{ estudiante.id }}
-                            </td>
-                            <td>
-                                {{ estudiante.nombres + ' ' + estudiante.apellidos}}
-                            </td>
-                            <td class="text-center">
-                                <strong>{{ estudiante.num_doc}}</strong>
-                            </td>
-                            <td class="text-left">
-                                {{ estudiante.distrito.nombre}}
-                            </td>
-                            <td class="text-left">
-                                {{ estudiante.sede.nombre}}
-                            </td>
-                            <td class="text-center">
-                                <span class="badge" [ngClass]="
+                <div class="table-responsive">
+                    <table id="estudiantes" class="table mt-2 table-hover table-bordered border">
+                        <thead>
+                            <tr class="text-center bg-indigo">
+                                <th>COD</th>
+                                <th>NOMBRES</th>
+                                <th>NUM DOC</th>
+                                <th>DISTRITO</th>
+                                <th>SEDE</th>
+                                <th>ESTADO</th>
+                                <th>ACCIONES</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="text-center" *ngIf="cargando">
+                                <th colspan="6">
+                                    <i class="fas fa-2x fa-sync-alt fa-spin"></i>
+                                </th>
+                            </tr>
+                            <tr *ngFor="let estudiante of estudiantes"
+                                class="animate__animated animate__fadeIn animate__faster">
+                                <td class="text-center align-middle">
+                                    {{ estudiante.id }}
+                                </td>
+                                <td class="align-middle">
+                                    {{ estudiante.nombres + ' ' + estudiante.apellidos}}
+                                </td>
+                                <td class="text-center align-middle">
+                                    <strong>{{ estudiante.num_doc}}</strong>
+                                </td>
+                                <td class="text-left align-middle">
+                                    {{ estudiante.distrito.nombre}}
+                                </td>
+                                <td class="text-left align-middle">
+                                    {{ estudiante.sede.nombre}}
+                                </td>
+                                <td class="text-center align-middle">
+                                    <span class="badge" [ngClass]="
                                 [estudiante.estado === 'ACTIVO' || estudiante.estado === 'MATRICULADO' ?'bg-success':'',
                                 estudiante.estado === 'INACTIVO'?'bg-danger':'',
                                 estudiante.estado === 'PENDIENTE'?'bg-warning':'']">
-                                    {{estudiante.estado}}
-                                </span>
-                            </td>
-                            <td class="text-center">
-                                <button type="button" class="btn bg-primary btn-xs  mr-2 pl-4 pr-4"
-                                    [routerLink]="['form',estudiante.id]"><i class="fas fa-edit"></i> Modificar
-                                </button>
-                                <button type="button" class="btn bg-danger btn-xs pl-4 pr-4 "
-                                    *ngIf="estudiante.estado == 'PENDIENTE'" (click)="delete(true,estudiante)">
-                                    <i class="fas fa-trash-alt mr-1"></i> Eliminar</button>
-                                <button type="button" class="btn bg-success btn-xs pl-4 pr-4"
-                                    *ngIf="estudiante.estado == 'INACTIVO'" (click)="delete(false, estudiante)">
-                                    <i class="fas fa-check-circle mr-1"></i> Activar</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-
+                                        {{estudiante.estado}}
+                                    </span>
+                                </td>
+                                <td class="text-center">
+                                    <button type="button" class="btn bg-primary btn-xs  mr-2 btn-block"
+                                        [routerLink]="['form',estudiante.id]"><i class="fas fa-edit"></i> Modificar
+                                    </button>
+                                    <button type="button" class="btn bg-danger btn-xs btn-block "
+                                        *ngIf="estudiante.estado == 'PENDIENTE'" (click)="delete(true,estudiante)">
+                                        <i class="fas fa-trash-alt mr-1"></i> Eliminar</button>
+                                    <button type="button" class="btn bg-success btn-xs btn-block"
+                                        *ngIf="estudiante.estado == 'INACTIVO'" (click)="delete(false, estudiante)">
+                                        <i class="fas fa-check-circle mr-1"></i> Activar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
         </div>

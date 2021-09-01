@@ -43,4 +43,14 @@ export class MatriculaService extends CommonServiceStatusService<Matricula>{
     );
   }
 
+
+  getMatriculasByPeriodo(idPeriodo: number): Observable<any> {
+    return this.httpClient.get(`${this.baseEndPoint}/periodo/${idPeriodo}`);
+  }
+
+
+  getMatriculasByPeriodoAndEspecializacion(idPeriodo: number, idEsp: number): Observable<any> {
+    return this.httpClient.get(`${this.baseEndPoint}/periodo/${idPeriodo}/especializacion/${idEsp}`)
+  }
+
 }

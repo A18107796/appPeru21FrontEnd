@@ -6,6 +6,7 @@ import { url_spring } from 'src/environments/environment';
 import { Estudiante } from '../models/estudiante';
 import { CommonServiceStatusService } from './common-service-status.service';
 import { CommonService } from './common.service';
+import { PeriodoService } from './periodo.service';
 
 @Injectable({
   providedIn: 'root'
@@ -33,5 +34,7 @@ export class EstudianteService extends CommonServiceStatusService<Estudiante> {
   verifyEmail(email: string): Observable<any> {
     return this.httpClient.get(this.baseEndPoint + "/email/" + email);
   }
+
+
 
 }
